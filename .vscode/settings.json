@@ -1,4 +1,0 @@
-{
-    "appService.defaultWebAppToDeploy": "/subscriptions/6fc7ff90-947b-41ce-871b-a32d220688f1/resourceGroups/rg-analyse-data-norwayeast/providers/Microsoft.Web/sites/fokus-gpt",
-    "appService.deploySubpath": "."
-}
