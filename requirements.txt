@@ -1,5 +1,7 @@
-flask
+flask==2.3.2
 requests
-azure.identity
-azure.keyvault.secrets
-azure.storage.queue
+azure.identity==1.9.0
+azure.keyvault.secrets==4.3.0
+azure.storage.blob==12.9.0 
+pandas==1.4.2
+Flask-Limiter==3.3.1

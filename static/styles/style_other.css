@@ -8,10 +8,5 @@ body {
     font-family: Nunito, sans-serif;
   }
  
-label {
-    display:grid;
-    grid-template-columns: max-content max-content;
-    grid-gap:5px;
-}
 
    

@@ -1,27 +1,20 @@
 #!/usr/bin/python
 
 # Import packages
-from urllib.request import urlopen
 from flask import Flask, request, session, render_template, url_for, redirect
 import uuid
-import datetime
 from datetime import timedelta
 from sources.blobs import get_data
-from flask_login import LoginManager
 import logging
-from azure.storage.blob import BlobServiceClient
-import os
 import pandas as pd
 from sources.blobs import get_data
-import gc
-from io import BytesIO
 from azure.storage.blob import BlobServiceClient
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
 import openai
-import streamlit as st
-from streamlit_chat import message
 from fokus_gpt import get_response
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 app = Flask(__name__)
 
 uid_secret_key = str(uuid.uuid4())
@@ -34,6 +27,10 @@ logging.basicConfig(level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
+limiter = Limiter(
+    get_remote_address,
+    app=app
+)
 
 # Suppress info from blob storage logger
 
@@ -120,7 +117,9 @@ def fokus_gpt():
     # Return answer as JSON
     return render_template('gpt_test.html', prompt=prompt_done)
 
+
 @app.route('/get', methods=['GET', 'POST'])
+@limiter.limit("10/hour")
 def gpt_response():
     userText = request.args.get('msg')
     return str(get_response(userText, openai.api_key))
