@@ -50,7 +50,7 @@ STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
 STORAGESTRING = client.get_secret('storageAnalyseString').value
 CONTAINERNAME = '***CONTAINER***'
 
-openai.api_type = "azure"
+openai.api_type = 'azure'
 openai.api_key = client.get_secret('fokusGPT').value
 openai.api_base = client.get_secret('gptendpoint').value
 openai.api_version = client.get_secret('gptversion').value
@@ -118,11 +118,12 @@ def prompt():
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
     # Return answer as JSON
-    return render_template('gpt_test.html')
+    return render_template('gpt_test.html', prompt=prompt_done)
 
-@app.rout('/get', methods=['GET', 'POST'])
+@app.route('/get', methods=['GET', 'POST'])
 def gpt_response():
-    return str(get_response(prompt_done), openai.api_key)
+    userText = request.args.get('msg')
+    return str(get_response(userText, openai.api_key))
 
 
     # if request.method == 'POST':

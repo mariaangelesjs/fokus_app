@@ -1,0 +1,17 @@
+:root {
+    --body-bg: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
+  }
+
+body {
+    color:white;
+    background-image: var(--body-bg);
+    font-family: Nunito, sans-serif;
+  }
+ 
+label {
+    display:grid;
+    grid-template-columns: max-content max-content;
+    grid-gap:5px;
+}
+
+   

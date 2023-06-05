@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--# from https://github.com/josebenitezg/flaskGPT/blob/main/templates/index.html -->
+<!--# from https://github.com/josebenitezg/flaskGPT/blob/main/templates/index.html and own -->
 <head>
     <meta charset="UTF-8">
     <title>Bas Fokus - ChatGPT</title>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="msg-text">
-                        Hi, welcome to chatGPT3.5 TURBO! Say something crazy. 😄
+                        Hi, welcome to chatGPT3.5 TURBO! Send your personalised prompt 😄
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
         </main>
 
         <form class="msger-inputarea">
-            <input type="text" class="msger-input" id="textInput" placeholder="Enter your message...">
+            <input type="text" class="msger-input" id="textInput" value="{{ prompt }}">{{ prompt }}</input>
             <button type="submit" class="msger-send-btn">Send</button>
         </form>
 

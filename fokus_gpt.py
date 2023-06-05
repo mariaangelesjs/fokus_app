@@ -1,4 +1,4 @@
-# From https://github.com/josebenitezg/flaskGPT/blob/main/chatgpt.py
+# From https://github.com/josebenitezg/flaskGPT/blob/main/chatgpt.py and own
 import os
 import sys
 import time
@@ -22,7 +22,7 @@ def get_response(incoming_msg,  key):
     messages.extend(data)
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            engine='gpt-test',
             messages=messages,
             stop=['<|im_end|>']
         )
