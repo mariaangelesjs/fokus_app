@@ -21,7 +21,7 @@ from azure.identity import DefaultAzureCredential
 import openai
 import streamlit as st
 from streamlit_chat import message
-
+from fokus_gpt import get_response
 app = Flask(__name__)
 
 uid_secret_key = str(uuid.uuid4())
@@ -117,21 +117,13 @@ def prompt():
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
-    if 'variable' not in session:
-        return redirect(url_for('prompt'))
-
-    output = openai.ChatCompletion.create(
-        engine='gpt-test',
-        messages=[{"role": "system", "content": "I am Bas AI assistant"},
-                  {"role": "user", "content": prompt_done}],
-        max_tokens=800,
-        stop=['<|im_end|>'])
-
-    answer = output["choices"][0]["message"]["content"].replace(
-        '\n', '').replace(' .', '.').strip()
-
     # Return answer as JSON
-    return render_template('fokus_gpt.html', answer=answer, prompt=prompt_done)
+    return render_template('gpt_test.html')
+
+@app.rout('/get', methods=['GET', 'POST'])
+def gpt_response():
+    return str(get_response(prompt_done))
+
 
     # if request.method == 'POST':
 if __name__ == '__main__':
