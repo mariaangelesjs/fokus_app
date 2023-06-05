@@ -6,7 +6,6 @@ import pickle
 from azure.storage.blob import BlobServiceClient
 import logging
 import datetime
-import bz2file as bz2
 import pickle
 
 
