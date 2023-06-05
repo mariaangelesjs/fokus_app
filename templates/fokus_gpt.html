@@ -1,0 +1,17 @@
+<!doctype html>
+<head>
+    <title>Fokus Personalised GPT, powered by Azure OpenAI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/css/bootstrap.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<html>
+   <body>
+     <main>
+        <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" alt="Bas Logo" width="192" height="192"/>
+        <h1 class="display-6 fw-bold text-primary">Your prompt is:</h1>
+        <h2 class="display-6 fw-bold text-primary">{{ prompt }}</h2>       
+        <h1 class="display-6 fw-bold text-primary">Your answer is:</h1>
+        <h2 class="display-6 fw-bold text-primary">{{ answer }}</h2>
+        </td>
+</body>
+</html>
