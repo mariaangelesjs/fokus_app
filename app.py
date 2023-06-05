@@ -127,5 +127,5 @@ def gpt_response():
 
     # if request.method == 'POST':
 if __name__ == '__main__':
-    app.config['PROPAGATE_EXCEPTIONS'] = True
-    app.run(debug=True)
+    from waitress import serve
+    serve(app, host="0.0.0.0", port=8080)
