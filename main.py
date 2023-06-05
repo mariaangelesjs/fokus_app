@@ -122,7 +122,7 @@ def fokus_gpt():
 
 @app.rout('/get', methods=['GET', 'POST'])
 def gpt_response():
-    return str(get_response(prompt_done))
+    return str(get_response(prompt_done), openai.api_key)
 
 
     # if request.method == 'POST':
