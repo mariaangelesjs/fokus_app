@@ -15,6 +15,7 @@ import openai
 from fokus_gpt import get_response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from waitress import serve
 app = Flask(__name__)
 
 uid_secret_key = str(uuid.uuid4())
@@ -127,5 +128,4 @@ def gpt_response():
 
     # if request.method == 'POST':
 if __name__ == '__main__':
-    from waitress import serve
     serve(app, host="0.0.0.0", port=8080)
