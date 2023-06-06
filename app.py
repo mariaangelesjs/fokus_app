@@ -124,7 +124,7 @@ def gpt_response():
     userText = request.args.get('msg')
     messages.append(userText)
     if len(messages) > 5:
-        return redirect(url_for('fokus_end'))
+        return redirect('/end')
     else:
         return (str(get_response(userText, openai.api_key)))
         
