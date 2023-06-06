@@ -11,7 +11,6 @@ from sources.blobs import get_data
 from azure.storage.blob import BlobServiceClient
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
-import numpy
 import openai
 from fokus_gpt import get_response
 from flask_limiter import Limiter
@@ -42,6 +41,7 @@ blob_logger.setLevel(logging.WARNING)
 # Get environment variables
 KVUri = f'https://bas-analyse.vault.azure.net'
 credential = DefaultAzureCredential()
+global client
 client = SecretClient(vault_url=KVUri, credential=credential)
 STORAGEACCOUNTURL = client.get_secret('storageAccountURL').value
 STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
@@ -126,11 +126,16 @@ def gpt_response():
         userText = request.args.get('msg')
         messages.append(userText)
         if len(messages)> 5:
-            del client
-            del openai
-            return render_template('fokus_gpt_end.html')
+            return redirect(url_for('fokus_end'))
         else:
             return (str(get_response(userText, openai.api_key)))
+
+@app.route('/end', methods=['GET', 'POST'])  
+def fokus_end():
+    del openai
+    del client
+    return render_template('fokus_gpt_end.html')   
+
 
 
     # if request.method == 'POST':
