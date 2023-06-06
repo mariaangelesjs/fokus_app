@@ -11,6 +11,7 @@ from sources.blobs import get_data
 from azure.storage.blob import BlobServiceClient
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
+import numpy
 import openai
 from fokus_gpt import get_response
 from flask_limiter import Limiter
