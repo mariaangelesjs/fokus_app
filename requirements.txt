@@ -9,3 +9,5 @@ fastparquet==0.5.0
 pyarrow==4.0.0
 requests
 numpy
+openai[embeddings]
+openai[datalib]
