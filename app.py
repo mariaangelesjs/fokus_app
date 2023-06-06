@@ -125,6 +125,8 @@ def gpt_response():
         userText = request.args.get('msg')
         messages.append(userText)
         if len(messages)> 5:
+            del client
+            del openai
             return render_template('fokus_gpt_end.html')
         else:
             return (str(get_response(userText, openai.api_key)))
