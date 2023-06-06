@@ -117,12 +117,21 @@ def fokus_gpt():
     # Return answer as JSON
     return render_template('gpt_test.html', prompt=prompt_done)
 
-
+messages = [] 
 @app.route('/get', methods=['GET', 'POST'])
 @limiter.limit("10/hour")
 def gpt_response():
-    userText = request.args.get('msg')
-    return str(get_response(userText, openai.api_key))
+    while True:
+        userText = request.args.get('msg')
+        messages.append(userText)
+        print(str(get_response(userText, openai.api_key)))
+        if len(messages) > 5:
+            return redirect(url_for('fokus_end'))
+        
+@app.route('/end', methods=['GET', 'POST'])  
+def fokus_end():
+    return render_template('fokus_gpt_end.html')   
+
 
 
     # if request.method == 'POST':
