@@ -121,12 +121,12 @@ messages = []
 @app.route('/get', methods=['GET', 'POST'])
 @limiter.limit("10/hour")
 def gpt_response():
-    while True:
-        userText = request.args.get('msg')
-        messages.append(userText)
-        print(str(get_response(userText, openai.api_key)))
-        if len(messages) > 5:
-            return redirect(url_for('fokus_end'))
+    userText = request.args.get('msg')
+    messages.append(userText)
+    if len(messages) > 5:
+        return redirect(url_for('fokus_end'))
+    else:
+        return (str(get_response(userText, openai.api_key)))
         
 @app.route('/end', methods=['GET', 'POST'])  
 def fokus_end():
