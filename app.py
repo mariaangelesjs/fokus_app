@@ -84,11 +84,11 @@ def welcome():
                           'catProbability', 'internationalTravel',
                           'introvertProbability',
                           'disposableIncomeIndividual', 'disposableIncomeFamily']
-        global person
         if session['phone'].startswith('+47'):
             session['phone'] = session['phone'].replace('+47','')
         else:
-            if fokus['KR_Phone_Mobile'].str.contains(session['phone']) == True:
+            global person
+            if int(session['phone']) in fokus['KR_Phone_Mobile']:
                 person = fokus[fokus['KR_Phone_Mobile'] ==
                             int(session['phone'])][fokus_segments]
             else:
@@ -101,13 +101,12 @@ def welcome():
 # Creating person based on who the person is
 
 @app.route('/prompt_generation', methods=['GET', 'POST'])
-def prompt():
+def prompt(person):
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
         session['product'] = request.form.get('product')
         global prompt_done
-        global person
         value = person[session['variable']].replace(
             {'Lav': 'Low', 'Middels': 'Mild', 'Høy': 'High'}).values[0]
         prompt_done = str(
@@ -122,12 +121,12 @@ def prompt():
             session['industry']).replace('_', ' ')
         # redirect to GPT fokus
         return redirect(url_for('fokus_gpt'))
+    
     return render_template('select_columns.html', columns=person.columns.values, person=person)
 
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
-def fokus_gpt():
-    global prompt_done
+def fokus_gpt(prompt_done):
     # run the bot
     return render_template('gpt_test.html', prompt=prompt_done)
 
