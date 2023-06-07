@@ -62,6 +62,11 @@ openai.api_version = client.get_secret('gptversion').value
 
 @app.route('/', methods=['GET', 'POST'])
 def welcome():
+    get_person()
+    move_to_prompt()
+    return render_template('form.html')
+
+def get_person():
     if request.method == 'POST':
         # getting input with name = fname in HTML form
         session['name'] = request.form.get('name')
@@ -90,20 +95,25 @@ def welcome():
                            int(session['phone'])][fokus_segments]
         except:
             person = fokus.sample(1, random_state=42)[fokus_segments]
-        return redirect(url_for('prompt'))
-    return render_template('form.html')
+        return person
+    
+def move_to_prompt():
+    return redirect(url_for('prompt'))
 
 
 # Creating person based on who the person is
 
 @app.route('/prompt_generation', methods=['GET', 'POST'])
-def prompt():
+def prompt(person):
+    get_prompt()
+    move_to_bot()
+    return render_template('select_columns.html', columns=person.columns.values, person=person)
+
+def get_prompt():
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
         session['product'] = request.form.get('product')
-        global prompt_done
-        global person
         value = person[session['variable']].replace(
             {'Lav': 'Low', 'Middels': 'Mild', 'Høy': 'High'}).values[0]
         prompt_done = str(
@@ -117,13 +127,14 @@ def prompt():
             session['work-position'] + ' in ' +
             session['industry']).replace('_', ' ')
         # redirect to GPT fokus
+        return prompt_done
+    
+def move_to_bot():
+    # redirect to GPT fokus
         return redirect(url_for('fokus_gpt'))
-    return render_template('select_columns.html', columns=person.columns.values, person=person)
-
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
-def fokus_gpt():
-    global prompt_done
+def fokus_gpt(prompt_done):
     # run the bot
     return render_template('gpt_test.html', prompt=prompt_done)
 
@@ -142,6 +153,7 @@ def gpt_response():
         else:
             return (str(get_response(userText, openai.api_key)))
 
+# End bot with this message
 @app.route('/end', methods=['GET', 'POST'])  
 def fokus_end():
     del openai
