@@ -62,9 +62,6 @@ openai.api_version = client.get_secret('gptversion').value
 
 @app.route('/', methods=['GET', 'POST'])
 def welcome():
-    return render_template('form.html')
-
-def get_person():
     if request.method == 'POST':
         # getting input with name = fname in HTML form
         session['name'] = request.form.get('name')
@@ -93,21 +90,20 @@ def get_person():
                            int(session['phone'])][fokus_segments]
         except:
             person = fokus.sample(1, random_state=42)[fokus_segments]
-        return person
-    
-def do_redirect():    
-    return redirect(url_for('prompt'))
+        return redirect(url_for('prompt'))
+    return render_template('form.html')
+
+
 # Creating person based on who the person is
 
 @app.route('/prompt_generation', methods=['GET', 'POST'])
-def prompt(person):
-    return render_template('select_columns.html', columns=person.columns.values, person=person)
-
-def get_prompt():
+def prompt():
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
         session['product'] = request.form.get('product')
+        global prompt_done
+        global person
         value = person[session['variable']].replace(
             {'Lav': 'Low', 'Middels': 'Mild', 'Høy': 'High'}).values[0]
         prompt_done = str(
@@ -121,13 +117,13 @@ def get_prompt():
             session['work-position'] + ' in ' +
             session['industry']).replace('_', ' ')
         # redirect to GPT fokus
-        return prompt_done
+        return redirect(url_for('fokus_gpt'))
+    return render_template('select_columns.html', columns=person.columns.values, person=person)
 
-def redirect_to_gptbot():
-    return redirect(url_for('fokus_gpt'))
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
-def fokus_gpt(prompt_done):
+def fokus_gpt():
+    global prompt_done
     # run the bot
     return render_template('gpt_test.html', prompt=prompt_done)
 
