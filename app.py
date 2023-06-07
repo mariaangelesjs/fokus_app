@@ -97,6 +97,7 @@ def prompt():
         session['words'] = request.form.get('words')
         session['product'] = request.form.get('product')
         global prompt_done
+        global person
         value = person[session['variable']].replace(
             {'Lav': 'Low', 'Middels': 'Mild', 'Høy': 'High'}).values[0]
         prompt_done = str(
@@ -115,6 +116,7 @@ def prompt():
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
+    global prompt_done
     # Return answer as JSON
     return render_template('gpt_test.html', prompt=prompt_done)
 
