@@ -150,6 +150,7 @@ messages = []
 @limiter.limit("10/hour")
 
 def gpt_response():
+        messages = [] 
         # get the response
         userText = request.args.get('msg')
         messages.append(userText)
