@@ -18,6 +18,8 @@ from flask_limiter.util import get_remote_address
 
 # Get app
 app = Flask(__name__)
+
+# Add cookie configuration
 app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
