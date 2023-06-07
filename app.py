@@ -41,6 +41,9 @@ blob_logger.setLevel(logging.WARNING)
 # Get environment variables
 KVUri = f'https://bas-analyse.vault.azure.net'
 credential = DefaultAzureCredential()
+
+# Assign client
+
 global client
 client = SecretClient(vault_url=KVUri, credential=credential)
 STORAGEACCOUNTURL = client.get_secret('storageAccountURL').value
@@ -48,6 +51,7 @@ STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
 STORAGESTRING = client.get_secret('storageAnalyseString').value
 CONTAINERNAME = '***CONTAINER***'
 
+# Setting up openai client
 openai.api_type = 'azure'
 openai.api_key = client.get_secret('fokusGPT').value
 openai.api_base = client.get_secret('gptendpoint').value
