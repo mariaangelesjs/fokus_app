@@ -105,6 +105,7 @@ def welcome():
 
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
+    global person
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
