@@ -16,19 +16,9 @@ from fokus_gpt import get_response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
+
 # Get app
 app = Flask(__name__)
-
-# Add cookie configuration
-app.config.update(
-    SESSION_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE='Lax',
-)
-
-uid_secret_key = str(uuid.uuid4())
-
-app.secret_key = uid_secret_key
 
 # Start logger
 
@@ -51,6 +41,13 @@ blob_logger.setLevel(logging.WARNING)
 KVUri = f'https://bas-analyse.vault.azure.net'
 credential = DefaultAzureCredential()
 
+# Add cookie configuration
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax',
+)
+
 # Assign client
 
 global client
@@ -60,7 +57,13 @@ STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
 STORAGESTRING = client.get_secret('storageAnalyseString').value
 CONTAINERNAME = '***CONTAINER***'
 
+# assign app key
+
+uid_secret_key = client.get_secret('gptFokusFlask').value
+app.secret_key = uid_secret_key
+
 # Setting up openai client
+
 openai.api_type = 'azure'
 openai.api_key = client.get_secret('fokusGPT').value
 openai.api_base = client.get_secret('gptendpoint').value
