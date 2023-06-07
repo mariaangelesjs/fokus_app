@@ -15,6 +15,8 @@ import openai
 from fokus_gpt import get_response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+
+# Get app
 app = Flask(__name__)
 
 uid_secret_key = str(uuid.uuid4())
