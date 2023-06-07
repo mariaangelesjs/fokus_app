@@ -93,6 +93,7 @@ def welcome():
         return redirect(url_for('prompt'))
     return render_template('form.html')
 
+# Creating person based on who the person is
 
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
@@ -114,6 +115,7 @@ def prompt():
             session['variable'] + ' that works as ' +
             session['work-position'] + ' in ' +
             session['industry']).replace('_', ' ')
+        # redirect to GPT fokus
         return redirect(url_for('fokus_gpt'))
     return render_template('select_columns.html', columns=person.columns.values, person=person)
 
@@ -121,7 +123,7 @@ def prompt():
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
     global prompt_done
-    # Return answer as JSON
+    # run the bot
     return render_template('gpt_test.html', prompt=prompt_done)
 
 messages = [] 
@@ -129,8 +131,11 @@ messages = []
 @limiter.limit("10/hour")
 
 def gpt_response():
+        # get the response
         userText = request.args.get('msg')
         messages.append(userText)
+
+        # send last request when more than 5
         if len(messages)> 5:
             return redirect(url_for('fokus_end'))
         else:
