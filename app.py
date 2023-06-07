@@ -96,16 +96,17 @@ def welcome():
                         int(session['phone'])][fokus_segments]
         else:
             person = fokus.sample(1, random_state=42)[fokus_segments]
+        session['data-person'] = person.to_json()
         return redirect(url_for('prompt'))
     return render_template('form.html')
-
-
 
 # Creating person based on who the person is
 
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
-    global person
+    person_data = session.get('data')
+    person = pd.read_json(person_data, dtype=False)
+    print(person)
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
@@ -113,7 +114,7 @@ def prompt():
         global prompt_done
         value = person[session['variable']].replace(
             {'Lav': 'Low', 'Middels': 'Mild', 'Høy': 'High'}).values[0]
-        prompt_done = str(
+        session ['prompt_done'] = str(
             'Write a ' +
             session['words'] +
             ' article selling ' +
@@ -123,6 +124,7 @@ def prompt():
             session['variable'] + ' that works as ' +
             session['work-position'] + ' in ' +
             session['industry']).replace('_', ' ')
+            
         # redirect to GPT fokus
         return redirect(url_for('fokus_gpt'))
     return render_template('select_columns.html', columns=person.columns.values, person=person)
@@ -131,8 +133,7 @@ def prompt():
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
     # run the bot
-    global prompt_done
-    return render_template('gpt_test.html', prompt=prompt_done)
+    return render_template('gpt_test.html', prompt=session['prompt_done'])
 
 messages = [] 
 @app.route('/get', methods=['GET', 'POST'])
