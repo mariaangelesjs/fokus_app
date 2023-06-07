@@ -85,11 +85,14 @@ def welcome():
                           'introvertProbability',
                           'disposableIncomeIndividual', 'disposableIncomeFamily']
         global person
-        try:
-            person = fokus[fokus['KR_Phone_Mobile'] ==
-                           int(session['phone'])][fokus_segments]
-        except:
-            person = fokus.sample(1, random_state=42)[fokus_segments]
+        if session['phone'].startswith('+47'):
+            session['phone'] = session['phone'].replace('+47','')
+        else:
+            if fokus['KR_Phone_Mobile'].str.contains(session['phone']) == True:
+                person = fokus[fokus['KR_Phone_Mobile'] ==
+                            int(session['phone'])][fokus_segments]
+            else:
+                person = fokus.sample(1, random_state=42)[fokus_segments]
         return redirect(url_for('prompt'))
     return render_template('form.html')
 
