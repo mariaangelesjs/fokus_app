@@ -83,6 +83,7 @@ stages:
             displayName: 'Deploy Azure Web App : fokus-gpt'
             inputs:
               azureSubscription: $(azureServiceConnectionId)
+              appType: webAppLinux
               appName: $(webAppName)
               package: $(Pipeline.Workspace)/drop/$(Build.BuildId).zip
               deploymentMethod: zipDeploy
