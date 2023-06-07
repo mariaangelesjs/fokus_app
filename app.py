@@ -104,8 +104,8 @@ def welcome():
 
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
-    person_data = session.get('data')
-    person = pd.read_json(person_data, dtype=False)
+    person_data = session.get('data-person')
+    person = pd.read_json(person_data)
     print(person)
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
