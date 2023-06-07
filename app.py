@@ -18,6 +18,11 @@ from flask_limiter.util import get_remote_address
 
 # Get app
 app = Flask(__name__)
+app.config.update(
+    SESSION_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    SESSION_COOKIE_SAMESITE='Lax',
+)
 
 uid_secret_key = str(uuid.uuid4())
 
