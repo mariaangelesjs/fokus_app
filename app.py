@@ -15,10 +15,11 @@ import openai
 from fokus_gpt import get_response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-
+from flask_cors import CORS
 
 # Get app
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 
 # Start logger
 
