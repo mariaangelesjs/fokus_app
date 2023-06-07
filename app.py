@@ -145,7 +145,7 @@ def fokus_gpt():
     # run the bot
     return render_template('gpt_test.html', prompt=session['prompt_done'])
 
-messages = [] 
+
 @app.route('/get', methods=['GET', 'POST'])
 @limiter.limit("10/hour")
 
