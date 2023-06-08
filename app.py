@@ -130,7 +130,7 @@ def prompt():
             session['product'] +
             ' til en person med ' +
             str(value) + ' in ' +
-            session['variable'] + ' som er' +
+            session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
             
