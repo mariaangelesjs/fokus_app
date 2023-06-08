@@ -155,7 +155,7 @@ def gpt_response():
         messages.append(userText)
         content, data = get_response(userText, openai.api_key,
                                       session['prompt_done'])
-        if len(data) > 10:
+        if len(data) > 9:
             redirect(url_for('end'))
         else:
             return content

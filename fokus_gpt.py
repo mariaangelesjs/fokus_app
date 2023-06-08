@@ -36,5 +36,5 @@ def get_response(incoming_msg,  key, prompt):
         return str(content), data
     except openai.error.RateLimitError as e:
         print(e)
-        return ""
+        return "The demo is done", data
    
