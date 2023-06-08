@@ -102,6 +102,7 @@ def welcome():
             session['phone'] = session['phone'].replace('+47','')
         else:
             session['phone'] = session['phone'].replace(' ','')
+
         if int(session['phone']) in fokus['KR_Phone_Mobile']:
             person = fokus[fokus['KR_Phone_Mobile'] ==
                         int(session['phone'])][fokus_segments]
@@ -110,6 +111,8 @@ def welcome():
         session['data-person'] = person.to_json()
         return redirect(url_for('prompt'))
     return render_template('form.html')
+
+
 
 # Creating person based on who the person is
 
