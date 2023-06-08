@@ -122,7 +122,7 @@ def prompt():
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
         session['product'] = request.form.get('product')
-        value = person[session['variable']]
+        value = person[session['variable']].values[0]
         session ['prompt_done'] = str(
             'Skriv ' +
             session['words'] +
