@@ -33,8 +33,8 @@ def get_response(incoming_msg,  key, prompt):
             stop=['<|im_end|>']
         )
         content = response["choices"][0]["message"]["content"]
-        return str(content)
+        return str(content), data
     except openai.error.RateLimitError as e:
         print(e)
-        return ""
+        return "The demo is done", data
    
