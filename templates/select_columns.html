@@ -1,40 +1,63 @@
 <html>
+
 <head>
     <title>Create your unique prompt</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
 </head>
+
 <body>
     <div class="container">
-      <h1>Lag din unike forespørsel</h1>
-      <br>
-      <form action="{{url_for('prompt')}}", method="POST">
-            <label for="word_amount" class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Antall ord:</label>
+        <h1>Lag din unike forespørsel</h1>
+        <br>
+        <form action="{{url_for('prompt')}}" , method="POST">
+            <label for="word_amount"
+                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Antall ord:</label>
+            <br>
+            <br>
             <select name="words">
                 <option value="No_words">Velg hvor mange ord du ønsker å ha </option>
                 <option value="100 ord">100 ord</option>
                 <option value="300 ord">300 ord</option>
                 <option value="500 ord">500 words</option>
             </select>
-            <br> 
-            <label for="variable_name" class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Bas Fokus variabel:</label>
+            <br>
+            <br>
+            <label for="variable_name"
+                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Bas Fokus
+                variabel:</label>
+            <br>
+            <br>
             <select name="variable">
                 <option value="None">Velg variabel</option>
                 {%for i in columns:%}
-                    <option value="{{ i }}">{{ i }}</option>
-            {% endfor %}
+                <option value="{{ i }}">{{ i }}</option>
+                {% endfor %}
             </select>
-            <br> 
-            <label for="product" class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Produktet du er interessert i:</label>
-                <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
-                <input type="text" class="form-control" id="product" name="product" style="max-width: 256px;">
+            <br>
+            <br>
+            <label for="product"
+                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Produktet du er
+                interessert i:</label>
+            <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
+            <input type="text" class="form-control" id="product" name="product" style="max-width: 256px;">
             </td>
             <td>
-            <br>
+                <br>
+                <br>
+                
                 <form action="{{url_for('fokus_gpt')}}">
-                    <input type="submit" value="Create prompt" />
+                    <script>
+                        function thunderGif(){
+                      document.getElementById("gif").src="static/images/loading.gif"
+                 //assuming thunder.gif animation length is 3 seconds
+          }
+                      </script>
+                <img id="gif"/>
+                <input type="submit" id="button" value="Lag prompt" onclick="thunderGif()" />
                 </form>
             </td>
         </form>
-     </div>  
+    </div>
 </body>
+
 </html>

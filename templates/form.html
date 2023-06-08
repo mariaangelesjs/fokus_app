@@ -1,62 +1,68 @@
 <!doctype html>
+
 <head>
-    <title>Fokus - GPT Demo</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <title>Fokus - GPT Demo</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <html>
-   <body>
-     <main>
-        <div class="px-4 py-3 my-2 text-center">
-            <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" alt="Bas Logo" width="192" height="192"/>
-            <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-            <h1 class="display-6 fw-bold text-primary">Velkommen til Fokus - GPT, powered by Azure</h1>            
-          </div>
-          
-        <form method="post" action="{{url_for('welcome')}}">
-            <div class="col-md-6 mx-auto text-center">
-                <label for="name" class="form-label fw-bold fs-5">Navn:</label>
-                <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
-                    <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
-                  </div>
-                  <br> 
-                <label for="Phone" class="form-label fw-bold fs-5">Mobilnr (uten +47):</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-2">
-                    <input type="text" class="form-control" id="phone" name="phone" style="max-width: 256px;">
-                  </div>
-                  <br>
-                <label for="e-post" class="form-label fw-bold fs-5">E-post:</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">
-                    <input type="text" class="form-control" id="e-post" name="e-post" style="max-width: 256px;">
-                  </div>
-                  <br>
-                <label for="work-position" class="form-label fw-bold fs-5">Stilling:</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-4">
-                    <input type="text" class="form-control" id="work-position" name="work-position" style="max-width: 256px;">
-                  </div>
-                  <br>
-                <label for="industry" class="form-label fw-bold fs-5">Industri:</label>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-5">
-                    <input type="text" class="form-control" id="industry" name="industry" style="max-width: 256px;">
-                  </div>
-                  <br>
-                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-                
-                  <form action="{{url_for('prompt')}}">
-                    <script>
-                      function preloader(){
-                                  document.getElementById("loading").style.display = "none";
-                                  document.getElementById("content").style.display = "block";
-                              } 
-                     </script> 
-                    <input type="submit" value="Submit" on click="preloader()" />
-                    
-                   </form>
-                   <!--  http://web.archive.org/web/20181023063601/http://www.netavatar.co.in/2011/05/31/how-to-show-a-loading-gif-image-while-a-page-loads-using-javascript-and-css/-->
-                </div>            
-            </div>
-        </form>
-     </main>      
-   </body>
+
+<body>
+  <main>
+    <div class="px-4 py-3 my-2 text-center">
+      <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" alt="Bas Logo"
+        width="192" height="192" />
+      <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+      <h1 class="display-6 fw-bold text-primary">Velkommen til Fokus - GPT, powered by Azure</h1>
+    </div>
+
+    <form method="post" action="{{url_for('welcome')}}">
+      <div class="col-md-6 mx-auto text-center">
+        <label for="name" class="form-label fw-bold fs-5">Navn:</label>
+        <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
+          <input type="text" class="form-control" id="name" name="name" style="max-width: 256px;">
+        </div>
+        <br>
+        <label for="Phone" class="form-label fw-bold fs-5">Mobilnr (uten +47):</label>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-2">
+          <input type="text" class="form-control" id="phone" name="phone" style="max-width: 256px;">
+        </div>
+        <br>
+        <label for="e-post" class="form-label fw-bold fs-5">E-post:</label>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">
+          <input type="text" class="form-control" id="e-post" name="e-post" style="max-width: 256px;">
+        </div>
+        <br>
+        <label for="work-position" class="form-label fw-bold fs-5">Stilling:</label>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-4">
+          <input type="text" class="form-control" id="work-position" name="work-position" style="max-width: 256px;">
+        </div>
+        <br>
+        <label for="industry" class="form-label fw-bold fs-5">Industri:</label>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-5">
+          <input type="text" class="form-control" id="industry" name="industry" style="max-width: 256px;">
+        </div>
+        <br>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+
+          <form action="{{url_for('prompt')}}">
+            <script>
+              function thunderGif(){
+            document.getElementById("gif").src="static/images/loading.gif"
+       //assuming thunder.gif animation length is 3 seconds
+}
+            </script>
+            <input type="submit" id="button" value="Submit" onclick="thunderGif()"/>
+            <br>
+            <br>
+            <img id="gif"  />
+          </form>
+          <!--  http://web.archive.org/web/20181023063601/http://www.netavatar.co.in/2011/05/31/how-to-show-a-loading-gif-image-while-a-page-loads-using-javascript-and-css/-->
+        </div>
+      </div>
+    </form>
+  </main>
+</body>
+
 </html>
