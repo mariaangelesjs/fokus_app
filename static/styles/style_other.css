@@ -8,5 +8,17 @@ body {
     font-family: Nunito, sans-serif;
   }
  
+div#content {
+    display: none;
+    }
 
-   
+div#loading {
+    top: 200 px;
+    margin: auto;
+    position: absolute;
+    z-index: 1000;
+    width: 160px;
+    height: 24px;
+    background: url("static/images/loading.gif") no-repeat;
+    cursor: wait;
+    }
