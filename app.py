@@ -144,18 +144,17 @@ def fokus_gpt():
     # run the bot
     return render_template('gpt_test.html', prompt=session['prompt_done'])
 
-
+messages = [] 
 @app.route('/get', methods=['GET', 'POST'])
-@limiter.limit("10/hour")
+
 
 def gpt_response():
-        messages = [] 
         # get the response
         userText = request.args.get('msg')
         messages.append(userText)
-        content, data = get_response(userText, openai.api_key,
+        content = get_response(userText, openai.api_key,
                                       session['prompt_done'])
-        if len(data) > 9:
+        if len(messages) > 9:
             redirect(url_for('end'))
         else:
             return content
