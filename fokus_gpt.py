@@ -7,7 +7,7 @@ import openai
 
 systemPrompt = {
     "role": "system",
-    "content": "Du er en hjelpsom assistent som bruker"
+    "content": "Jeg er en hjelpsom assistent som bruker"
       " Bas Fokus til å generere en forespørsel og som er "
       " et produkt av Bas Kommunikasjon (https://bas.no/)) ."}
 data = []
