@@ -101,7 +101,7 @@ def welcome():
         if session['phone'].startswith('+47'):
             session['phone'] = session['phone'].replace('+47','')
         else:
-            pass
+            session['phone'] = session['phone'].replace(' ','')
         if int(session['phone']) in fokus['KR_Phone_Mobile']:
             person = fokus[fokus['KR_Phone_Mobile'] ==
                         int(session['phone'])][fokus_segments]
@@ -121,18 +121,16 @@ def prompt():
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
         session['product'] = request.form.get('product')
-        global prompt_done
-        value = person[session['variable']].replace(
-            {'Lav': 'Low', 'Middels': 'Mild', 'Høy': 'High'}).values[0]
+        value = person[session['variable']]
         session ['prompt_done'] = str(
-            'Write a ' +
+            'Skriv ' +
             session['words'] +
-            ' article selling ' +
+            ' en artikel ' +
             session['product'] +
-            ' for a person with ' +
+            ' til en person med ' +
             str(value) + ' in ' +
-            session['variable'] + ' that works as ' +
-            session['work-position'] + ' in ' +
+            session['variable'] + ' som er' +
+            session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
             
         # redirect to GPT fokus
@@ -154,8 +152,8 @@ def gpt_response():
         # get the response
         userText = request.args.get('msg')
         messages.append(userText)
-
-        content, data = get_response(userText, openai.api_key, session['prompt_done'])
+        content, data = get_response(userText, openai.api_key,
+                                      session['prompt_done'])
         if len(data) > 10:
             redirect(url_for('end'))
         else:
