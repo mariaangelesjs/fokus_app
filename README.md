@@ -42,7 +42,7 @@ Here we created a Flask APP that runs from Azure Web Services.
 
 ## Run Bas Fokus GPT 
 
-### Develop
+### Develop - Local
 
 ```
 $ python webapp/run.py
@@ -55,7 +55,7 @@ Swagger document page:  `http://127.0.0.1:5000/api`
 ### Run flask for production
 
 **Run with gunicorn**
-Our startup command is pre-defined in our deployment:
+Our startup command is pre-defined in our Azure Pipeline deployment:
 
 ```
 gunicorn --bind=0.0.0.0 --workers=4 --timeout 600 app:app
