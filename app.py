@@ -112,8 +112,6 @@ def welcome():
         return redirect(url_for('prompt'))
     return render_template('form.html')
 
-
-
 # Creating person based on who the person is
 
 @app.route('/prompt_generation', methods=['GET', 'POST'])
