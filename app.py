@@ -155,11 +155,11 @@ def gpt_response():
         userText = request.args.get('msg')
         messages.append(userText)
 
-        # send last request when more than 5
-        if len(messages)> 5:
-            return redirect(url_for('fokus_end'))
+        content, data = get_response(userText, openai.api_key, session['prompt_done'])
+        if len(data) > 10:
+            redirect(url_for('end'))
         else:
-            return (str(get_response(userText, openai.api_key)))
+            return content
 
 # End bot with this message
 @app.route('/end', methods=['GET', 'POST'])  

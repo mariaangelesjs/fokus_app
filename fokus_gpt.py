@@ -7,19 +7,21 @@ import openai
 
 systemPrompt = {
     "role": "system",
-    "content": "You are a helpful assistant that uses Bas Fokus to generate a prompt."}
+    "content": "Du er en hjelpsom assistent som bruker Bas Fokus til å generere en forespørsel."}
 data = []
 
 
-def get_response(incoming_msg,  key):
+def get_response(incoming_msg,  key, prompt):
     if incoming_msg == "clear":
         data.clear()
-        data.append({"role": "assistant", "content": 'Hello'})
+        data.append({"role": "user", "content": 'Hei'})
+        data.append({"role":"user", "content": prompt})
     else:
-        data.append({"role": "assistant", "content": incoming_msg})
+        data.append({"role": "user", "content": incoming_msg})
 
     messages = [systemPrompt]
     messages.extend(data)
+    
     try:
         response = openai.ChatCompletion.create(
             engine='gpt-test',
@@ -27,7 +29,8 @@ def get_response(incoming_msg,  key):
             stop=['<|im_end|>']
         )
         content = response["choices"][0]["message"]["content"]
-        return content
+        return str(content), data
     except openai.error.RateLimitError as e:
         print(e)
         return ""
+   
