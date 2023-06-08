@@ -14,6 +14,7 @@ data = []
 
 
 def get_response(incoming_msg,  key, prompt):
+    # Get proper messages
     if incoming_msg == "clear":
         data.clear()
         data.append({"role": "user", "content": 'Hei'})
