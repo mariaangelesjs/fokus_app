@@ -160,7 +160,7 @@ def gpt_response():
         else:
             return content
 
-# End bot with this message
+# End bot with this message after 9 messages (before cut)
 @app.route('/end', methods=['GET', 'POST'])  
 def fokus_end():
     del openai
