@@ -156,7 +156,7 @@ def gpt_response():
         content, data = get_response(userText, openai.api_key,
                                       session['prompt_done'])
         if len(data) > 9:
-            redirect(url_for('fokus_end'))
+            return redirect(url_for('fokus_end'))
         else:
             return content
 
