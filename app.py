@@ -99,13 +99,13 @@ def welcome():
                           'introvertProbability',
                           'disposableIncomeIndividual', 'disposableIncomeFamily']
         if session['phone'].startswith('+47'):
-            session['phone'] = session['phone'].replace('+47','')
+            session['phone'] = session['phone'].replace('+47', '')
         else:
-            session['phone'] = session['phone'].replace(' ','')
+            session['phone'] = session['phone'].replace(' ', '')
 
         if int(session['phone']) in fokus['KR_Phone_Mobile']:
             person = fokus[fokus['KR_Phone_Mobile'] ==
-                        int(session['phone'])][fokus_segments]
+                           int(session['phone'])][fokus_segments]
         else:
             person = fokus.sample(1, random_state=42)[fokus_segments]
         session['data-person'] = person.to_json()
@@ -114,16 +114,62 @@ def welcome():
 
 # Creating person based on who the person is
 
+
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
     person = pd.read_json(session['data-person'])
     print(person)
+    fokus_variables_norwegian = {'miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
+                                 'nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
+                                 'nivå av kultur': 'Grad av verdsattelse og verdsetting av kultur og kunst',
+                                 'gi til veldedighet': 'Frekvensen med hvilken personen donerer til ulike typer veldedige formål',
+                                 'gi til barneveldedighet': 'Frekvensen med hvilken personen donerer til veldedige organisasjoner som gagner barn',
+                                 'gi til katastrofe': 'Frekvensen med hvilken personen donerer til veldedige organisasjoner som responderer på naturkatastrofer og andre katastrofer',
+                                 'prisbevisst': 'Grad av prisbevissthet når personen gjør kjøp',
+                                 'søker lav pris': 'Grad av aktiv søken etter lavest mulig pris når personen gjør kjøp',
+                                 'søker tilbud': 'Grad av aktiv søken etter rabatter og kampanjer når personen gjør kjøp',
+                                 'nivå av følelsesstyring': 'Grad av beslutninger som tas basert på følelser i stedet for logikk',
+                                 'sannsynlighet for flytting': 'Sannsynligheten for at personen vil flytte til et nytt sted i nær fremtid',
+                                 'kjøp bil 6 mnd': 'Sannsynligheten for at personen vil kjøpe en bil innen de neste 6 månedene',
+                                 'nivå av mobilitet': 'Grad av verdsattelse og verdsetting av mobilitet og bevegelsesfrihet',
+                                 'nivå av åpenhet': 'Grad av åpenhet for nye erfaringer og ideer',
+                                 'nivå av sosial konformitet': 'Grad av overholdelse av sosiale normer og forventninger',
+                                 'sannsynlighet for hund': 'Sannsynligheten for at personen eier eller vil eie en hund',
+                                 'sannsynlighet for katt': 'Sannsynligheten for at personen eier eller vil eie en katt',
+                                 'internasjonal reise': 'Grad av verdsattelse og verdsetting av internasjonal reise',
+                                 'sannsynlighet for introvert': 'Grad av identifisering som introvert',
+                                 'disponibel inntekt individ': 'Mengden disponibel inntekt tilgjengelig for individet',
+                                 'disponibel inntekt familie': 'Mengden disponibel inntekt tilgjengelig for personens familie'}
+    fokus_real_new = {'environmentFriendly': 'miljøvennlig',
+                      'levelOfImpulsivity': 'nivå av impulsivitet',
+                      'levelOfCulture': 'nivå av kultur',
+                      'giveToCharity': 'gi til veldedighet',
+                      'giveToChildrenCharity': 'gi til barneveldedighet',
+                      'giveToCatastrophe': 'gi til katastrofe',
+                      'priceConscious': 'prisbevisst',
+                      'lowPriceSeeker': 'lavpris-søker',
+                      'offerSeeker': 'tilbudssøker',
+                      'levelOfFeelingsDriven': 'nivå av følelsesdrevet atferd',
+                      'movingProbability': 'sannsynlighet for å flytte',
+                      'buyCar6m': 'kjøp bil de neste 6 månedene',
+                      'levelOfMovility': 'nivå av bevegelighet',
+                      'levelOfOpenness': 'nivå av åpenhet',
+                      'levelOfSocialConformity': 'nivå av sosial konformitet',
+                      'dogProbability': 'sannsynlighet for å ha hund',
+                      'catProbability': 'sannsynlighet for å ha katt',
+                      'internationalTravel': 'internasjonal reise',
+                      'introvertProbability': 'sannsynlighet for å være introvert',
+                      'disposableIncomeIndividual': 'disponibel inntekt for enkeltpersoner',
+                      'disposableIncomeFamily': 'disponibel inntekt for familier'}
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
         session['product'] = request.form.get('product')
-        value = person[session['variable']].values[0]
-        session ['prompt_done'] = str(
+        for key, value in fokus_real_new.items():
+            if session['variable'] == value:
+                fokus_real_variable = key
+        value = person[fokus_real_variable].values[0]
+        session['prompt_done'] = str(
             'Skriv ' +
             session['words'] +
             ' en artikel ' +
@@ -133,10 +179,10 @@ def prompt():
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
-            
+
         # redirect to GPT fokus
         return redirect(url_for('fokus_gpt'))
-    return render_template('select_columns.html', columns=person.columns.values, person=person)
+    return render_template('select_columns.html', columns=fokus_variables_norwegian)
 
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
@@ -147,26 +193,26 @@ def fokus_gpt():
 
 @app.route('/get', methods=['GET', 'POST'])
 @limiter.limit("10/hour")
-
 def gpt_response():
-        messages = [] 
-        # get the response
-        userText = request.args.get('msg')
-        messages.append(userText)
-        content, data = get_response(userText, openai.api_key,
-                                      session['prompt_done'])
-        if len(data) > 9:
-            return redirect(url_for('fokus_end'))
-        else:
-            return content
+    messages = []
+    # get the response
+    userText = request.args.get('msg')
+    messages.append(userText)
+    content, data = get_response(userText, openai.api_key,
+                                 session['prompt_done'])
+    if len(data) > 9:
+        return redirect(url_for('fokus_end'))
+    else:
+        return content
 
 # End bot with this message after 9 messages (before cut)
-@app.route('/end', methods=['GET', 'POST'])  
+
+
+@app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
     del openai
     del client
-    return render_template('fokus_gpt_end.html')   
-
+    return render_template('fokus_gpt_end.html')
 
 
     # if request.method == 'POST':

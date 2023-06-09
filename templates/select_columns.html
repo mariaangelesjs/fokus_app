@@ -27,10 +27,16 @@
                 variabel:</label>
             <br>
             <br>
-            <select name="variable">
+            <script type=text/javascript>
+             $ function getValue() {
+                document.getElementById("new-value").className = "show"
+              }
+               </script>
+            <select name="variable" id="selected-variable" onchange="getValue()">
                 <option value="None">Velg variabel</option>
-                {%for i in columns:%}
-                <option value="{{ i }}">{{ i }}</option>
+                {%for key,value in columns.items():%}
+                <option value="{{ key }}" >{{ key }}</option>
+                      <div id="new-value" class="hide" value="{{ value }}"> {{ value }}</div>
                 {% endfor %}
             </select>
             <br>
@@ -44,18 +50,18 @@
             <td>
                 <br>
                 <br>
-                
+
                 <form action="{{url_for('fokus_gpt')}}">
                     <script>
-                        function thunderGif(){
-                      document.getElementById("gif").src="static/images/loading.gif"
-                 //assuming thunder.gif animation length is 3 seconds
-          }
-                      </script>
-                <input type="submit" id="button" value="Lag prompt" onclick="thunderGif()" />
-                <br>
-                <br>
-                <img id="gif"/>
+                        function thunderGif() {
+                            document.getElementById("gif").src = "static/images/loading.gif"
+                            //assuming thunder.gif animation length is 3 seconds
+                        }
+                    </script>
+                    <input type="submit" id="button" value="Lag prompt" onclick="thunderGif()" />
+                    <br>
+                    <br>
+                    <img id="gif" />
                 </form>
             </td>
         </form>

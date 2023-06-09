@@ -21,5 +21,10 @@ input[type=submit] {
     text-align: center;
     cursor: wait;
     }
-
+.hide{
+      display:none;
+    }
+.show{
+      display:block;
+    }
   
