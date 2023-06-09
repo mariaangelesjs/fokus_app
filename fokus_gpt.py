@@ -18,7 +18,6 @@ def get_response(incoming_msg,  key, prompt):
     if incoming_msg == "clear":
         data.clear()
         data.append({"role": "user", "content": 'Hei'})
-        data.append({"role":"user", "content": prompt})
     elif {"role":"user", "content": prompt} not in data:
         data.append({"role":"user", "content": prompt})
     else:
