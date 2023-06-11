@@ -18,6 +18,9 @@ body {
     font-size: 18px;
     -webkit-text-stroke: 0.25px black
   }
+h3 {
+  font-size: 5px;
+  }
 
 input[type=text] {
   color: black;
