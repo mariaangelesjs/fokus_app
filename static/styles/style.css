@@ -26,7 +26,7 @@
     background-image: var(--body-bg);
     font-family: Nunito, sans-serif;
   }
-  
+ 
   div[class="col-md-6 mx-auto text-center"] {
     color: white
   }

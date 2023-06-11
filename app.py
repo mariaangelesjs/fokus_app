@@ -118,7 +118,9 @@ def welcome():
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
     person = pd.read_json(session['data-person'])
-    print(person)
+    person_table = person.reset_index(drop=True).T
+    person_table.rename_axis('Fokus variabel', axis='index',inplace=True)
+    person_table.columns = ['Verdi']
     # Pretty variables and description
 
     fokus_variables_norwegian = {'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
@@ -188,9 +190,8 @@ def prompt():
     return render_template(
         'select_columns.html',
         columns=fokus_variables_norwegian,
-        tables=[person.reset_index(drop=True).T.to_html(
-            classes='data', header="false",columns=None)],
-              titles= ['Fokus variabel', 'Verdi'])
+        tables=[person_table.reset_index().to_html(
+            classes='data', header="false",columns=None)])
 
 
 @app.route('/unique_ad', methods=['GET', 'POST'])

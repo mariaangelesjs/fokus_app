@@ -4,26 +4,45 @@
     <title>Create your unique prompt</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js" integrity="sha512-m7x59G4+NdYoUUKUscYq2qKkineVwmjXA/7WfXm8pukxYiFavrh9uFImpPtbmZGAnHR0rouVWWk+dgcHNurQ5g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href= "{{ url_for('static', filename='styles/select2.css') }}" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"
+        integrity="sha512-m7x59G4+NdYoUUKUscYq2qKkineVwmjXA/7WfXm8pukxYiFavrh9uFImpPtbmZGAnHR0rouVWWk+dgcHNurQ5g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link href="{{ url_for('static', filename='styles/select2.css') }}" rel="stylesheet" />
 </head>
 
 <body>
     <div class="container">
         <h1>Lag din unike forespørsel</h1>
+        <h3> Du er kvalifisert som: </h3>
+        <script>
+            $(document).ready(function () {
+                $("#table").hide();
+                $("#button-table").click(function () {
+                    $("#table").show();
+                    return false;
+                });
+
+            });
+        </script>
+        <button class="button" id="button-table">Dine Fokus verdier</button>
+        <table id="table">
+            {% for table in tables %}
+            {{ table|safe }}
+            {% endfor %}
+        </table>
         <br>
         <script>
-            $(function(){
-            $("select").select2({
-                templateResult: formatOption
-            });
-            
-            function formatOption (option) {
-                var $option = $(
-                '<div><strong>' + option.text + '</strong></div><div>' + option.title + '</div>'
-                );
-                return $option;
-            };
+            $(function () {
+                $("select").select2({
+                    templateResult: formatOption
+                });
+
+                function formatOption(option) {
+                    var $option = $(
+                        '<div><strong>' + option.text + '</strong></div><div>' + option.title + '</div>'
+                    );
+                    return $option;
+                };
             });
         </script>
         <form action="{{url_for('prompt')}}" , method="POST">

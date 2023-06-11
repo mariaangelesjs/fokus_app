@@ -1,10 +1,18 @@
 :root {
     --body-bg: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
   }
+
+table {
+    font-size: 15px;
+    vertical-align: left;
+
+    }
+  
 html {
     display: table;
     margin: auto;
 }
+
 
 body {
     display: table-cell;
@@ -17,9 +25,6 @@ body {
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     -webkit-text-stroke: 0.25px black
-  }
-h3 {
-  font-size: 5px;
   }
 
 input[type=text] {
