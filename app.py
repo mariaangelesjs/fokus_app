@@ -185,7 +185,12 @@ def prompt():
 
         # redirect to GPT fokus
         return redirect(url_for('fokus_gpt'))
-    return render_template('select_columns.html', columns=fokus_variables_norwegian)
+    return render_template(
+        'select_columns.html',
+        columns=fokus_variables_norwegian,
+        tables=[person.reset_index(drop=True).T.to_html(
+            classes='data', header="false",columns=None)],
+              titles= ['Fokus variabel', 'Verdi'])
 
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
