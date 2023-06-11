@@ -1,23 +1,44 @@
 :root {
     --body-bg: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
   }
+html {
+    display: table;
+    margin: auto;
+}
 
 body {
+    display: table-cell;
+    vertical-align: middle;
+    margin: 10px;
     color:white;
+    justify-content: center;
+    align-items: center;
     background-image: var(--body-bg);
-    font-family: Nunito, sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    -webkit-text-stroke: 0.25px black
   }
- 
 
+input[type=text] {
+  color: black;
+  vertical-align: middle;
+  z-index: 1000;
+  width: 160px;
+  height: 24px;
+  background-color: white;
+  text-align: center;
+  cursor: wait;
+  }
 input[type=submit] {
     color: white;
     top: 200 px;
     margin: auto;
     position: absolute;
+    font-size: 16px;
     z-index: 1000;
     width: 160px;
     height: 24px;
-    background-color: var(--body-bg);
+    background-color:  #FF3CAC;
     text-align: center;
     cursor: wait;
     }
@@ -27,4 +48,4 @@ input[type=submit] {
 .show{
       display:block;
     }
-  
+
