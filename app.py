@@ -119,6 +119,8 @@ def welcome():
 def prompt():
     person = pd.read_json(session['data-person'])
     print(person)
+    # Pretty variables and description
+
     fokus_variables_norwegian = {'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
                                  'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
                                  'Nivå av kultur': 'Grad av verdsattelse og verdsetting av kultur og kunst',
@@ -140,6 +142,7 @@ def prompt():
                                  'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
                                  'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                                  'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}
+    # Real names and pretty variable
     fokus_real_new = {'environmentFriendly': 'Miljøvennlig',
                       'levelOfImpulsivity': 'Nivå av impulsivitet',
                       'levelOfCulture': 'Nivå av kultur',
