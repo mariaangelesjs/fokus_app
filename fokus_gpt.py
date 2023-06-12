@@ -5,11 +5,6 @@ import time
 import openai
 from flask import  url_for, redirect
 
-systemPrompt = {
-    "role": "system",
-    "content": "Jeg er en hjelpsom assistent som bruker"
-      " Bas Fokus til å generere en forespørsel og som er "
-      " et produkt av Bas Kommunikasjon (https://bas.no/)) ."}
 data = []
 
 
@@ -22,14 +17,11 @@ def get_response(incoming_msg,  key, prompt):
         data.append({"role":"user", "content": prompt})
     else:
         data.append({"role": "user", "content": incoming_msg})
-
-    messages = [systemPrompt]
-    messages.extend(data)
     
     try:
         response = openai.ChatCompletion.create(
             engine='gpt-test',
-            messages=messages,
+            messages=data,
             stop=['<|im_end|>']
         )
         content = response["choices"][0]["message"]["content"]
