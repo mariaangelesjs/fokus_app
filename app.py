@@ -214,10 +214,12 @@ def gpt_response():
     # get the response
     userText = request.args.get('msg')
     messages.append(userText)
-    content = get_response(userText, openai.api_key,
+    content, data = get_response(userText, openai.api_key,
                                  session['prompt_done'])
-    
-    return content
+    if len(data) > 9:
+        return redirect(url_for('fokus_end'))
+    else:
+        return content
 
 # End bot with this message after 9 messages (before cut)
 
