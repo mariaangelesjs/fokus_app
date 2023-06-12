@@ -119,12 +119,6 @@ def welcome():
 def prompt():
     person = pd.read_json(session['data-person'])
 
-    # Get transpose for front-end form 
-
-    person_table = person.reset_index(drop=True).T
-    person_table.rename_axis('Fokus variabel', axis='index',inplace=True)
-    person_table.columns = ['Verdi']
-    person_table.reset_index(inplace=True)
 
     # Pretty variables and description
 
@@ -172,12 +166,14 @@ def prompt():
                       'disposableIncomeIndividual': 'Disponibel inntekt for enkeltpersoner',
                       'disposableIncomeFamily': 'Disponibel inntekt for familier'}
     
-    # Transform for table
-
-    person_table.replace(columns=fokus_real_new, inplace=True)
+    
+    # Get transpose for front-end form 
+    person_table = person.rename(columns=fokus_real_new).reset_index(drop=True).T
+    person_table.rename_axis('Fokus variabel', axis='index',inplace=True)
+    person_table.columns = ['Verdi']
 
     # Get values for prompt 
-    
+
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
@@ -202,7 +198,7 @@ def prompt():
     return render_template(
         'select_columns.html',
         columns=fokus_variables_norwegian,
-        tables=person_table.reset_index().to_dict(orient='records' ))
+        tables=person_table.reset_index().to_dict(orient='records'))
 
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
