@@ -14,18 +14,20 @@ th {
 }
   
 html {
-    display: table;
+    display: inline-table;
     margin: auto;
-}
+    vertical-align: middle;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    }
+    
+
 
 
 body {
-    display: table-cell;
-    vertical-align: middle;
-    margin: 10px;
+    display:inline-table;
     color:white;
-    justify-content: center;
-    align-items: center;
     background-image: var(--body-bg);
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
