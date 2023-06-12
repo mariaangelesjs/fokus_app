@@ -31,7 +31,11 @@ body {
     font-size: 18px;
     -webkit-text-stroke: 0.25px black
   }
-
+#button-table {
+  font-size: 16px;
+  background-color:  #FF3CAC;
+  color:white
+}
 input[type=text] {
   color: black;
   vertical-align: middle;
