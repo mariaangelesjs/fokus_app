@@ -118,9 +118,14 @@ def welcome():
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
     person = pd.read_json(session['data-person'])
+
+    # Get transpose for front-end form 
+
     person_table = person.reset_index(drop=True).T
     person_table.rename_axis('Fokus variabel', axis='index',inplace=True)
     person_table.columns = ['Verdi']
+    person_table.reset_index(inplace=True)
+
     # Pretty variables and description
 
     fokus_variables_norwegian = {'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
@@ -166,6 +171,13 @@ def prompt():
                       'introvertProbability': 'Sannsynlighet for å være introvert',
                       'disposableIncomeIndividual': 'Disponibel inntekt for enkeltpersoner',
                       'disposableIncomeFamily': 'Disponibel inntekt for familier'}
+    
+    # Transform for table
+
+    person_table.replace(columns=fokus_real_new, inplace=True)
+
+    # Get values for prompt 
+    
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
         session['words'] = request.form.get('words')
