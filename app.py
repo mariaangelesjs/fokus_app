@@ -218,8 +218,6 @@ def gpt_response():
 
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
-    del openai
-    del client
     return render_template('fokus_gpt_end.html')
 
 

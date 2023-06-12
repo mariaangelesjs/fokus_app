@@ -46,6 +46,9 @@ input[type=text] {
   text-align: center;
   cursor: wait;
   }
+img {
+  vertical-align: middle
+}
 input[type=submit] {
     color: white;
     top: 200 px;
