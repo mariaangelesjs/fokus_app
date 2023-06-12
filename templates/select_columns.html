@@ -20,8 +20,7 @@
         <script>
             let tableFromJson = () => {
                 // the json data.
-                const myData = {{ tables | tojson | safe
-            }}
+                const myData = {{ tables | tojson | safe}}
             // Get headers
             let col = [];
             for (let i = 0; i < myData.length; i++) {
