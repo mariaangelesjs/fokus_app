@@ -14,22 +14,58 @@
     <div class="container">
         <h1>Lag din unike forespørsel</h1>
         <h3> Du er kvalifisert som: </h3>
+        <button class="button" id="button-table" onclick="tableFromJson()">Dine Fokus verdier</button>
+        <br>
+        <p id="table-fokus"></p>
         <script>
-            $(document).ready(function () {
-                $("#table").hide();
-                $("#button-table").click(function () {
-                    $("#table").show();
-                    return false;
-                });
+            let tableFromJson = () => {
+                // the json data.
+                const myData = {{ tables | tojson | safe
+            }}
+            // Get headers
+            let col = [];
+            for (let i = 0; i < myData.length; i++) {
+                for (let key in myData[i]) {
+                    if (col.indexOf(key) === -1) {
+                        col.push(key);
+                    }
+                }
+            }
 
+            // Create table.
+            const table = document.createElement("table");
+
+            // Create table header row using the extracted headers above.
+            let tr = table.insertRow(-1);                   // table row.
+
+            for (let i = 0; i < col.length; i++) {
+                let th = document.createElement("th");      // table header.
+                th.innerHTML = col[i];
+                tr.appendChild(th);
+            }
+
+            // add json data to the table as rows.
+            for (let i = 0; i < myData.length; i++) {
+
+                tr = table.insertRow(-1);
+
+                for (let j = 0; j < col.length; j++) {
+                    let tabCell = tr.insertCell(-1);
+                    tabCell.innerHTML = myData[i][col[j]];
+                }
+            }
+
+            // Now, add the newly created table with json data, to a container.
+            const divShowData = document.getElementById("table-fokus");
+            divShowData.innerHTML = "";
+            divShowData.appendChild(table);
+            }
+            $(document).ready(function () {
+                $("#button-table").click(function () {
+                    $("#table-fokus").toggle();
+                });
             });
         </script>
-        <button class="button" id="button-table">Dine Fokus verdier</button>
-        <table id="table">
-            {% for table in tables %}
-            {{ table|safe }}
-            {% endfor %}
-        </table>
         <br>
         <script>
             $(function () {
@@ -47,7 +83,8 @@
         </script>
         <form action="{{url_for('prompt')}}" , method="POST">
             <label for="word_amount"
-                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Antall ord:</label>
+                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Antall
+                ord:</label>
             <br>
             <br>
             <select name="words">
@@ -59,7 +96,8 @@
             <br>
             <br>
             <label for="variable_name"
-                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Bas Fokus
+                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Bas
+                Fokus
                 variabel:</label>
             <br>
             <br>
@@ -73,7 +111,8 @@
             <br>
             <br>
             <label for="product"
-                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Produktet du er
+                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Produktet
+                du er
                 interessert i:</label>
             <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
             <input type="text" class="form-control" id="product" name="product" style="max-width: 256px;">

@@ -2,11 +2,16 @@
     --body-bg: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
   }
 
-table {
-    font-size: 15px;
-    vertical-align: left;
-
-    }
+table, th, td 
+{
+    border: solid 1px #ddd;
+    border-collapse: collapse;
+    padding: 2px 3px;
+    text-align: center;
+}
+th { 
+    font-weight:bold;
+}
   
 html {
     display: table;

@@ -190,8 +190,7 @@ def prompt():
     return render_template(
         'select_columns.html',
         columns=fokus_variables_norwegian,
-        tables=[person_table.reset_index().to_html(
-            classes='data', header="false",columns=None)])
+        tables=person_table.reset_index().to_dict(orient='records' ))
 
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
