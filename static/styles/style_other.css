@@ -2,6 +2,15 @@
     --body-bg: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
   }
 
+h1 {
+    text-align:center ;
+    position:relative;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    }  
 table, th, td 
 {
     border: solid 1px #ddd;
@@ -14,20 +23,32 @@ th {
 }
   
 html {
-    display: inline-table;
+    display: flex;
+    position:relative;
     margin: auto;
     vertical-align: middle;
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
+    width: 50%;
+    height:100%;
+    margin:0 auto;
+    padding: 0;
     }
-    
 
-
+#bas-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
 
 body {
-    display:inline-table;
+    margin-left: auto;
+    margin-right: auto;
+    display:block;
     color:white;
+    width: 50%;
     background-image: var(--body-bg);
     font-family: 'Open Sans', sans-serif;
     font-size: 18px;
@@ -38,24 +59,31 @@ body {
   background-color:  #FF3CAC;
   color:white
 }
+
+div {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  position: relative;
+}
 input[type=text] {
   color: black;
-  vertical-align: middle;
+  display:block;
   z-index: 1000;
   width: 160px;
   height: 24px;
   background-color: white;
-  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   cursor: wait;
   }
-img {
-  vertical-align: middle
-}
+
 input[type=submit] {
     color: white;
     top: 200 px;
-    margin: auto;
-    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
     font-size: 16px;
     z-index: 1000;
     width: 160px;

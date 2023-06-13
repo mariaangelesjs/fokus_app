@@ -9,10 +9,14 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="{{ url_for('static', filename='styles/select2.css') }}" rel="stylesheet" />
 </head>
-
+<br>
+        <br>
+<h1>Lag din unike forespørsel</h1>
 <body>
+        <br>
     <div class="container">
-        <h1>Lag din unike forespørsel</h1>
+        <br>
+        <br>
         <h3> Du er kvalifisert som: </h3>
         <button class="button" id="button-table" onclick="tableFromJson()">Dine Fokus verdier</button>
         <br>
@@ -67,6 +71,7 @@
         </script>
         <br>
         <script>
+
             $(function () {
                 $("select").select2({
                     templateResult: formatOption
@@ -81,45 +86,49 @@
             });
         </script>
         <form action="{{url_for('prompt')}}" , method="POST">
-            <label for="word_amount"
-                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Antall
-                ord:</label>
-            <br>
-            <br>
-            <select name="words">
-                <option value="No_words">Velg hvor mange ord du ønsker å ha </option>
-                <option value="100 ord">100 ord</option>
-                <option value="300 ord">300 ord</option>
-                <option value="500 ord">500 ord</option>
-            </select>
-            <br>
-            <br>
-            <label for="variable_name"
-                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Bas
-                Fokus
-                variabel:</label>
-            <br>
-            <br>
-            <select name="variable" id="selected-variable">
-                <option value="None">Velg variabel</option>
-                {%for key,value in columns.items():%}
-                <option style="color: black" value="{{ key }}" title="{{ value }}">{{ key }}</option>
-                {% endfor %}
-            </select>
-            <span id="fokus-description">{{ value }}</span>
-            <br>
-            <br>
-            <label for="product"
-                class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-3">Produktet
-                du er
-                interessert i:</label>
-            <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
-            <input type="text" class="form-control" id="product" name="product" style="max-width: 256px;">
-            </td>
-            <td>
+            <div id="words_total">
+                <label for="word_amount">Antall
+                    ord:</label>
                 <br>
                 <br>
-
+                    <select name="words">
+                        <option value="No_words">Velg hvor mange ord du ønsker å ha </option>
+                        <option value="100 ord">100 ord</option>
+                        <option value="300 ord">300 ord</option>
+                        <option value="500 ord">500 ord</option>
+                    </select>
+            </div>
+            <br>
+            <br>
+            <div id="fokus_variables">
+                <label for="variable_name">Bas
+                    Fokus
+                    variabel:</label>
+                    <br>
+                    <br>
+                    <select name="variable" id="selected-variable">
+                        <option value="None">Velg variabel</option>
+                        {%for key,value in columns.items():%}
+                        <option style="color: black" value="{{ key }}" title="{{ value }}">{{ key }}</option>
+                        {% endfor %}
+                    </select>
+                    <span id="fokus-description">{{ value }}</span>
+                    <br>
+                    <br>
+           </div>
+           <div id="posible_product">
+                <label for="product">Produktet
+                    du er
+                    interessert i:</label>
+                    <br>
+                <br>
+                    <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
+                    <input type="text" class="form-control" id="product" name="product" style="max-width: 256px;">
+                    </td>
+                    <td>
+                <br>
+                <br>
+            </div>
                 <form action="{{url_for('fokus_gpt')}}">
                     <script>
                         function thunderGif() {
