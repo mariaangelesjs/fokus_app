@@ -29,7 +29,6 @@ Here we created a Flask APP that runs from Azure Web Services.
 |──────sources/
 | |────blobs.py
 |──────static/
-| |────css/
 | |────images/
 | |────styles/
 |──────templates/
