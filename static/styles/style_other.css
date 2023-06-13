@@ -17,6 +17,8 @@ table, th, td
     border-collapse: collapse;
     padding: 2px 3px;
     text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 th { 
     font-weight:bold;

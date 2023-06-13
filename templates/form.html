@@ -7,8 +7,9 @@
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <link
     rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    href="{{url_for('static', filename='styles/animate.min.css') }}"
   />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
 </head>
 <html>
 
@@ -55,12 +56,16 @@
             <script>
               function thunderGif(){
             document.getElementById("gif").src="static/images/loading.gif"
+            const element = document.getElementById("charging");
+            element.style.display = "block"
+            element.classList.add("animate__animated", "animate__heartBeat","animate__infinite");
        //assuming thunder.gif animation length is 3 seconds
 }
             </script>
             <input type="submit" id="button" value="Submit" onclick="thunderGif()"/>
             <br>
             <br>
+            <h3 id="charging"> Loading </h3>
             <img id="gif"  />
           </form>
           <!--  http://web.archive.org/web/20181023063601/http://www.netavatar.co.in/2011/05/31/how-to-show-a-loading-gif-image-while-a-page-loads-using-javascript-and-css/-->
