@@ -1,16 +1,21 @@
 <!doctype html>
 
 <head>
+<meta name="forisde" content="width=device-width, initial-scale=1.0">
   <title>Fokus - GPT Demo</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 </head>
 <html>
 
 <body>
   <main>
     <div class="px-4 py-3 my-2 text-center">
-      <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" alt="Bas Logo"
+      <img id="bas-logo" class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" alt="Bas Logo"
         width="192" height="192" />
       <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
       <h1 class="display-6 fw-bold text-primary">Velkommen til Fokus - GPT, powered by Azure</h1>
