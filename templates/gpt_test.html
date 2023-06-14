@@ -44,7 +44,7 @@
             </div>
 
         </main>
-        <h3 id="charging"></h3>
+        <h3 id="charging_gpt"></h3>
         <form class="msger-inputarea">
             
             <input type="text" class="msger-input" id="textInput" value="{{ prompt }}">{{ prompt }}</input>
@@ -112,7 +112,7 @@
 
         }
         function getAnimation(){
-            const element = document.getElementById("charging");
+            const element = document.getElementById("charging_gpt");
             element.textContent = "Loading";
             element.style.display = "block";
             element.classList.add("animate__animated", "animate__lightSpeedInRight","animate__infinite")
