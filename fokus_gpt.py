@@ -32,7 +32,7 @@ systemPrompt = {
     "'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',"
     "'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',"
     "'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}"
-    " Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i teksten'"}
+    " Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen'"}
 data = []
 
 
@@ -41,8 +41,6 @@ def get_response(incoming_msg,  key, prompt):
     if incoming_msg == "clear":
         data.clear()
         data.append({"role": "user", "content": 'Hei'})
-    elif {"role": "user", "content": prompt} not in data:
-        data.append({"role": "user", "content": prompt})
     else:
         data.append({"role": "user", "content": incoming_msg})
 
