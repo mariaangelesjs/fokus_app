@@ -31,7 +31,8 @@ systemPrompt = {
     "'Internasjonal reise': 'Grad av verdsattelse og verdsetting av internasjonal reise',"
     "'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',"
     "'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',"
-    "'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}"}
+    "'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}"
+    " Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i teksten'"}
 data = []
 
 

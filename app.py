@@ -188,7 +188,7 @@ def prompt():
             ' en artikel ' +
             session['product'] +
             ' til en person med ' +
-            str(value) +'(ikke nevne dette i teksten)' + ' i ' +
+            str(value) + ' i ' +
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
