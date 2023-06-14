@@ -36,7 +36,7 @@ systemPrompt = {
 data = []
 
 
-def get_response(incoming_msg,  key, prompt):
+def get_response(incoming_msg):
     # Get proper messages
     if incoming_msg == "clear":
         data.clear()

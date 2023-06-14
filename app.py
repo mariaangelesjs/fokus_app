@@ -214,8 +214,7 @@ def gpt_response():
     # get the response
     userText = request.args.get('msg')
     messages.append(userText)
-    content, data = get_response(userText, openai.api_key,
-                                 session['prompt_done'])
+    content, data = get_response(userText)
     if len(data) > 9:
         return redirect(url_for('fokus_end'))
     else:
