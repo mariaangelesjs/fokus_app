@@ -4,10 +4,18 @@ import sys
 import time
 import openai
 from flask import url_for, redirect
+from langchain.prompts import (
+    ChatPromptTemplate, 
+    MessagesPlaceholder, 
+    SystemMessagePromptTemplate, 
+    HumanMessagePromptTemplate
+)
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
+from langchain.chains import ConversationChain
+from langchain.chat_models import ChatOpenAI
+from langchain.memory import ConversationBufferMemory
 
-systemPrompt = {
-    "role": "system",
-    "content": "Jeg er en hjelpsom assistent som bruker"
+systemPrompt = SystemMessagePromptTemplate.from_template("Jeg er en hjelpsom assistent som bruker"
     " Bas Fokus til å generere en forespørsel og som er "
     " et produkt av Bas Kommunikasjon (https://bas.no/))."
     " Bas Fokus er et produkt av Bas Kommunikasjon som inneholder disse variablene:"
@@ -32,28 +40,25 @@ systemPrompt = {
     "'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',"
     "'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',"
     "'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}"
-    " Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen'"}
+    " Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen'")
+humanPrompt = HumanMessagePromptTemplate.from_template("{input}")
 data = []
 
 
-def get_response(incoming_msg):
-    # Get proper messages
-    if incoming_msg == "clear":
-        data.clear()
-        data.append({"role": "user", "content": 'Hei'})
-    else:
-        data.append({"role": "user", "content": incoming_msg})
-
-    messages = [systemPrompt]
-    messages.extend(data)
-
+def get_response(incoming_msg, key):
+    prompt = systemPrompt, humanPrompt
+    llm = ChatOpenAI(temperature=0, openai_api_key=key, streaming=True, callbacks=[StreamingStdOutCallbackHandler()])
+    memory = ConversationBufferMemory(return_messages=True)
+    conversation = ConversationChain(memory=memory, prompt=prompt, llm=llm)
+   
+    
     try:
         response = openai.ChatCompletion.create(
             engine='gpt-test',
             messages=messages,
             stop=['<|im_end|>']
         )
-        content = response["choices"][0]["message"]["content"]
+        content = response["generations"][0]["message"]["content"]
         return str(content), data
     except openai.error.RateLimitError as e:
         print(e)
