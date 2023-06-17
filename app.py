@@ -211,7 +211,9 @@ def fokus_gpt():
 @limiter.limit("10/hour")
 def gpt_response():
     
-    return Response(ChainStreamHandler.chain(request.args.get('msg'), key),mimetype='text/event-stream')
+        return Response(
+            ChainStreamHandler.chain(
+            request.args.get('msg'), key),mimetype='text/event-stream')
     
 # End bot with this message after 9 messages (before cut)
 
