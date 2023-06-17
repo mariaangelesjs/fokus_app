@@ -16,6 +16,7 @@ from fokus_gpt import get_response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
+from flask import Response, stream_with_context
 
 # Get app
 app = Flask(__name__)
@@ -66,7 +67,7 @@ app.secret_key = uid_secret_key
 # Setting up openai client
 
 openai.api_type = 'azure'
-openai.api_key = client.get_secret('fokusGPT').value
+key = client.get_secret('fokusGPT').value
 openai.api_base = client.get_secret('gptendpoint').value
 openai.api_version = client.get_secret('gptversion').value
 
@@ -204,21 +205,18 @@ def prompt():
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
     # run the bot
-    return render_template('gpt_test.html', prompt=session['prompt_done'])
+    return render_template('gpt_test.html', prompt=session['prompt_done'], key=key)
 
 
 @app.route('/get', methods=['GET', 'POST'])
 @limiter.limit("10/hour")
+
 def gpt_response():
-    messages = []
     # get the response
-    userText = request.args.get('msg')
-    messages.append(userText)
-    content, data = get_response(userText)
-    if len(data) > 9:
-        return redirect(url_for('fokus_end'))
-    else:
-        return content
+    userStandard = request.args.get('msg')
+    return userStandard
+    
+
 
 # End bot with this message after 9 messages (before cut)
 

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--# from https://github.com/josebenitezg/flaskGPT/blob/main/templates/index.html and own -->
+
 <head>
     <meta charset="UTF-8">
     <title>Bas Fokus - ChatGPT</title>
@@ -8,10 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
-    <link
-    rel="stylesheet"
-    href="{{url_for('static', filename='styles/animate.min.css') }}"
-  />
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/animate.min.css') }}" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
@@ -26,7 +24,8 @@
 
         <main class="msger-chat">
             <div class="msg left-msg">
-                <div class="msg-img" style="background-image: url(https://img.icons8.com/dotty/160/futurama-bender.png)">
+                <div class="msg-img"
+                    style="background-image: url(https://img.icons8.com/dotty/160/futurama-bender.png)">
                 </div>
 
                 <div class="msg-bubble">
@@ -46,7 +45,7 @@
         </main>
         <h3 id="charging_gpt"></h3>
         <form class="msger-inputarea">
-            
+
             <input type="text" class="msger-input" id="textInput" value="{{ prompt }}">{{ prompt }}</input>
             <button type="submit" class="msger-send-btn">Send</button>
         </form>
@@ -56,7 +55,7 @@
     <!-- partial -->
     <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
     <script>
-     
+
         const msgerForm = get(".msger-inputarea");
         const msgerInput = get(".msger-input");
         const msgerChat = get(".msger-chat");
@@ -100,23 +99,70 @@
         }
 
         function botResponse(rawText) {
+        
+                import { ChatOpenAI } from "langchain/chat_models/openai";
+            import {
+                SystemMessagePromptTemplate,
+                HumanMessagePromptTemplate,
+                ChatPromptTemplate,
+            } from "langchain/prompts";
 
-            // Bot Response
-            $.get("/get", { msg: rawText }).done(function (data) {
-                console.log(rawText);
+            const chat = new ChatOpenAI({ temperature: 0.8, stream: true,
+                 openAIApiKey: {{ key | tojson | safe }}, engine: "gpt-test"});
+            const translationPrompt = ChatPromptTemplate.fromPromptMessages([
+            SystemMessagePromptTemplate.fromTemplate(
+    `
+    Jeg er en hjelpsom assistent som bruker
+    Bas Fokus til å generere en forespørsel og som er 
+    et produkt av Bas Kommunikasjon.
+    Du kan få informasjon om [Bas Kommunikasjon] fra https://bas.no/,
+    [Bas Fokus] er et produkt av [Bas Kommunikasjon] som inneholder disse variablene:
+    {'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
+    'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
+    'Nivå av kultur': 'Grad av verdsattelse og verdsetting av kultur og kunst',
+    'Gi til veldedighet': 'Frekvensen med hvilken personen donerer til ulike typer veldedige formål',
+    'Gi til barneveldedighet': 'Frekvensen med hvilken personen donerer til veldedige organisasjoner som gagner barn',
+    'Gi til katastrofe': 'Frekvensen med hvilken personen donerer til veldedige organisasjoner som responderer på naturkatastrofer og andre katastrofer',
+    'Prisbevisst': 'Grad av prisbevissthet når personen gjør kjøp',
+    'Prisjeger': 'Grad av aktiv søken etter lavest mulig pris når personen gjør kjøp',
+    'Tilbudsjeger': 'Grad av aktiv søken etter rabatter og kampanjer når personen gjør kjøp',
+    'Nivå av følelsesdrevet atferd': 'Grad av beslutninger som tas basert på følelser i stedet for logikk',
+    'Sannsynlighet for å flytte': 'Sannsynligheten for at personen vil flytte til et nytt sted i nær fremtid',"
+    'Kjøp bil de neste 6 månedene': 'Sannsynligheten for at personen vil kjøpe en bil innen de neste 6 månedene',
+    'Nivå av mobilitet': 'Grad av aktiv atferd',
+    'Nivå av åpenhet': 'Grad av åpenhet for nye erfaringer og ideer',
+    'Nivå av sosial konformitet': 'Grad av overholdelse av sosiale normer og forventninger',
+    'Sannsynlighet for å ha hund': 'Sannsynligheten for at personen eier eller vil eie en hund',
+    'Sannsynlighet for å ha katt': 'Sannsynligheten for at personen eier eller vil eie en katt',
+    'Internasjonal reise': 'Grad av verdsattelse og verdsetting av internasjonal reise',
+    'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
+    'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
+    'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}
+    Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen'
+    Hvis samtalen starter å være voldtsomt eller diskriminere dårlig mot noen, må du stoppe og dele
+    de siste lovene fra Norge over bruk av kunstig intelligens.`
+            ),
+            new MessagesPlaceholder("history"),
+            HumanMessagePromptTemplate.fromTemplate("{input}"),
+        ]);
+        const chain = new ConversationChain({
+            memory: new BufferMemory({ returnMessages: true, memoryKey: "history" }),
+            prompt: chatPrompt,
+            llm: chat,
+        });
+        const responseH = await chain.call({
+            input: rawText,
+        });
                 console.log(data);
-                const msgText = data;
-                appendMessage(BOT_NAME, BOT_IMG, "left", msgText);
+                appendMessage(BOT_NAME, BOT_IMG, "left", console.log(data));
                 document.getElementById("charging_gpt").style.display = "none"
-            });
-
-        }
-        function getAnimation(){
+            }
+        function getAnimation() {
             const element = document.getElementById("charging_gpt");
             element.textContent = "Loading";
             element.style.display = "block";
-            element.classList.add("animate__animated", "animate__lightSpeedInRight","animate__infinite")
-            }
+            element.classList.add("animate__animated", "animate__lightSpeedInRight", "animate__infinite")
+        }
 
         // Utils
         function get(selector, root = document) {
@@ -131,7 +177,7 @@
         }
 
     </script>
-  <!-- need to add feedback widget and save -->
+    <!-- need to add feedback widget and save -->
 
 </body>
 
