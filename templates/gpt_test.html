@@ -135,7 +135,10 @@
         }
         function botResponse(rawText) {
 
-            
+            // Bot Response
+            $.get("/get", { msg: rawText }).then(function (data) {
+                console.log(data);
+            });
             getStreaming();
             document.getElementById("charging_gpt").style.display = "none";
 
