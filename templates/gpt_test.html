@@ -47,7 +47,7 @@
         <h3 id="charging_gpt"></h3>
         <form class="msger-inputarea" method="post">
             
-            <input type="text" class="msger-input" id="textInput" value="{{ prompt }}">{{ prompt }}</input>
+            <input type="text" class="msger-input" name="textInput" value="{{ prompt }}">{{ prompt }}</input>
             <button type="submit" class="msger-send-btn">Send</button>
         </form>
 
@@ -137,11 +137,11 @@
 
             // Bot Response
             $.get("/get", { msg: rawText }).then(function (data) {
-                getStreaming();
                 console.log(rawText);
                 console.log(data);
-                document.getElementById("charging_gpt").style.display = "none"
             });
+            getStreaming();
+            document.getElementById("charging_gpt").style.display = "none";
 
         }
         
