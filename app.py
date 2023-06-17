@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 # Import packages
-from flask import Flask, request, session, render_template, url_for, redirect
+from flask import (Flask, request, session, render_template,
+                   url_for, redirect, Response, stream_with_context)
 import uuid
 from datetime import timedelta
 from sources.blobs import get_data
@@ -12,11 +13,11 @@ from azure.storage.blob import BlobServiceClient
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
 import openai
-from fokus_gpt import get_response
+from fokus_gpt import ChainStreamHandler
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
-from flask import Response, stream_with_context
+from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 
 # Get app
 app = Flask(__name__)
@@ -120,7 +121,6 @@ def welcome():
 def prompt():
     person = pd.read_json(session['data-person'])
 
-
     # Pretty variables and description
 
     fokus_variables_norwegian = {'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
@@ -166,14 +166,14 @@ def prompt():
                       'introvertProbability': 'Sannsynlighet for å være introvert',
                       'disposableIncomeIndividual': 'Disponibel inntekt for enkeltpersoner',
                       'disposableIncomeFamily': 'Disponibel inntekt for familier'}
-    
-    
-    # Get transpose for front-end form 
-    person_table = person.rename(columns=fokus_real_new).reset_index(drop=True).T
-    person_table.rename_axis('Fokus variabel', axis='index',inplace=True)
+
+    # Get transpose for front-end form
+    person_table = person.rename(
+        columns=fokus_real_new).reset_index(drop=True).T
+    person_table.rename_axis('Fokus variabel', axis='index', inplace=True)
     person_table.columns = ['Verdi']
 
-    # Get values for prompt 
+    # Get values for prompt
 
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
@@ -205,20 +205,18 @@ def prompt():
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
     # run the bot
-    return render_template('gpt_test.html', prompt=session['prompt_done'], key=key)
-
-
-@app.route('/get', methods=['GET', 'POST'])
-@limiter.limit("10/hour")
-
-def gpt_response():
-    # get the response
-    userStandard = request.args.get('msg')
-    return userStandard
-    
+    return render_template('example_test.html')
 
 
 # End bot with this message after 9 messages (before cut)
+@app.route('/get', methods=['GET', 'POST'])
+def get_chain():
+    # get the response
+    
+    input_text = request.args.get('msg')
+    return Response(
+    ChainStreamHandler.chain(input_text, key),
+    mimetype='text/event-stream')
 
 
 @app.route('/end', methods=['GET', 'POST'])
