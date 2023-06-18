@@ -210,10 +210,14 @@ def fokus_gpt():
 @app.route('/get', methods=['GET', 'POST'])
 @limiter.limit("10/hour")
 def gpt_response():
-    
-        return Response(
-            ChainStreamHandler.chain(
-            request.args.get('msg'), key),mimetype='text/event-stream')
+        if request.method == "POST":
+            data = request.form.get('textInput')
+            return Response(
+                ChainStreamHandler.chain(
+                data, key),mimetype='text/event-stream')
+        else: 
+            return Response(None,mimetype='text/event-stream')
+
     
 # End bot with this message after 9 messages (before cut)
 
