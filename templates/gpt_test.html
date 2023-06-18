@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Bas Fokus - ChatGPT</title>
+    <title>Bas FokusGPT</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -30,14 +30,16 @@
 
                 <div class="msg-bubble">
                     <div class="msg-info">
-                        <div class="msg-info-name">GPT3.5 Turbo</div>
+                        <div class="msg-info-name">Bas FokusGPT</div>
                         <div class="msg-info-time"></div>
                     </div>
 
                     <div class="msg-text" id="msg-text">
                         Hei, velkommen til chatGPT3.5 TURBO som drives av Azure Open AI og Bas Fokus!
                         Du kan skrive på hvilket som helst språk.
-                        Vennligst send din personlige forespørsel. 😄
+                        Vennligst send din personlige forespørsel.
+                        Din anbefalt fosrespørsel står som anbefaling,
+                        men du kan spørre noe annet om du vil 😄
                     </div>
                 </div>
             </div>
@@ -46,7 +48,16 @@
         <h3 id="charging_gpt"></h3>
         <form class="msger-inputarea" method="post">
 
-            <input type="text" class="msger-input" name="textInput" value="{{ prompt }}">{{ prompt }}</input>
+            <input type="text" class="msger-input"  
+            list="prompts" placeholder="Skriv her" 
+            name="textInput"></input>
+            <datalist id="prompts">
+                <option value="main">{{ prompt }}</option>
+                <option value="main-2">Hva er Bas Fokus?</option>
+                <option value="main-3">Kan du forklare meg hva er best med å bruke Bas Fokus?</option>
+                <option value="main-4">Hvem er du?</option>
+                <option value="main-5">Hva er best med å bruke data til markedsføring?</option>
+             </datalist>
             <button type="submit" class="msger-send-btn">Send</button>
         </form>
 
@@ -64,7 +75,7 @@
         // Icons made by Freepik from www.flaticon.com
         const BOT_IMG = "https://img.icons8.com/dotty/160/futurama-bender.png";
         const PERSON_IMG = "https://img.icons8.com/?size=512&id=MlrRrS5AdUX9&format=png";
-        const BOT_NAME = "Bas Fokus - ChatGPT";
+        const BOT_NAME = "Bas FokusGPT";
         const PERSON_NAME = "Du";
         var hoverCount = 0
         msgerForm.addEventListener("submit", event => {
