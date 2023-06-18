@@ -71,8 +71,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
             'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}
             Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen'
-            Hvis samtalen starter å være voldtsomt eller diskriminere dårlig mot noen, må du stoppe og dele
-            de siste lovene fra Norge over bruk av kunstig intelligens.
+            Ikke gi lov til diskriminering.
 
         '''
         )
