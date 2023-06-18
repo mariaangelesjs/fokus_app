@@ -66,21 +66,22 @@
         const PERSON_IMG = "https://img.icons8.com/?size=512&id=MlrRrS5AdUX9&format=png";
         const BOT_NAME = "Bas Fokus - ChatGPT";
         const PERSON_NAME = "Du";
-
+        var hoverCount = 0
         msgerForm.addEventListener("submit", event => {
+            hoverCount++;
             event.preventDefault();
             const msgText = msgerInput.value;
             if (!msgText) return;
-            appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person");
+            appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person", hoverCount);
             msgerChat.scrollTop += 500
             msgerInput.value = "";
             getAnimation();
-            appendMessage(BOT_NAME, BOT_IMG, "left", "", "robot");
+            appendMessage(BOT_NAME, BOT_IMG, "left", "","robot", hoverCount);
             msgerChat.scrollTop += 500
             window.onload = botResponse
-            botResponse()
+            botResponse(hoverCount)
         })
-        function botResponse(){
+        function botResponse(number){
         async function streamer() {
             try {
                     const response = await fetch('/get', {
@@ -88,12 +89,13 @@
                         body: formData
                     });
                     const reader = response.body.getReader();
-                    document.getElementById("msg-text-robot").innerHTML = "";
+                    var id = "msg-text-robot-"+ number
+                    document.getElementById(id).innerHTML = "";
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
                         const text = new TextDecoder().decode(value);
-                        document.getElementById("msg-text-robot").innerHTML += text;
+                        document.getElementById(id).innerHTML += text;
                     }
                 } catch (error) {
                     console.error(error);
@@ -102,19 +104,19 @@
         document.getElementById("charging_gpt").style.display = "none"}
             
 
-            function appendMessage(name, img, side, text, id) {
+            function appendMessage(name, img, side, text, id, number) {
                 //   Simple solution for small apps
                 const msgHTML = `
         <div class="msg ${side}-msg">
         <div class="msg-img" style="background-image: url(${img})"></div>
 
         <div class="msg-bubble">
-            <div class="msg-info">
-            <div class="msg-info-name">${name}</div>
+            <div class="msg-info"> 
+            <div class="msg-info-name">${name} ${number}/10 </div>
             <div class="msg-info-time">${formatDate(new Date())}</div>
             </div>
 
-            <div class="msg-text" id="msg-text-${id}">${text}</div>
+            <div class="msg-text" id="msg-text-${id}-${number}">${text}</div>
         </div>
         </div>
         `;
