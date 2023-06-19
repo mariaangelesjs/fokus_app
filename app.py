@@ -208,9 +208,8 @@ def fokus_gpt():
 
 
 @app.route('/get', methods=['GET', 'POST'])
-@limiter.limit("10/hour")
-def gpt_response(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-            CONTAINERNAME):
+def gpt_response():
+    try:
         if request.method == 'GET':
             session['input'] = request.args.get('msg')
         if request.method == 'POST':
@@ -221,6 +220,8 @@ def gpt_response(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
             CONTAINERNAME),mimetype='text/event-stream')
         else: 
             return Response(None,mimetype='text/event-stream')
+    except:
+        redirect(url_for('fokus_end'))
 
     
 # End bot with this message after 9 messages (before cut)

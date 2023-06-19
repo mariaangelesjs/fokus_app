@@ -92,6 +92,7 @@
             msgerChat.scrollTop += 500
             window.onload = botResponse
             botResponse(hoverCount)})
+            document.getElementById("charging_gpt").style.display = "none"
 })
       
         function botResponse(number, msgText){
@@ -113,8 +114,7 @@
                 } catch (error) {
                     console.error(error);
                 }}
-        streamer();
-        document.getElementById("charging_gpt").style.display = "none"}
+        streamer();}
             
 
             function appendMessage(name, img, side, text, id, number) {
@@ -125,7 +125,7 @@
 
         <div class="msg-bubble">
             <div class="msg-info"> 
-            <div class="msg-info-name">${name} ${number}/5 </div>
+            <div class="msg-info-name">${name} ${number}/10 </div>
             <div class="msg-info-time">${formatDate(new Date())}</div>
             </div>
 

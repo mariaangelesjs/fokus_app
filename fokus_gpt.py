@@ -38,10 +38,7 @@ class ThreadedGenerator:
     def close(self):
         self.queue.put(StopIteration)
 
-
 messages = []
-
-
 class ChainStreamHandler(StreamingStdOutCallbackHandler):
     def __init__(self, gen):
         super().__init__()
@@ -81,6 +78,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}
                 Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen'
                 Ikke gi lov til diskriminering.
+                [Alle url lenker må være skrevet i html format].
 
                 Current conversation:
                 {history}
@@ -94,7 +92,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             if messages:
                 old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, 'output/fokus-test/conversation.pickle')
+                    CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')
                 print(old_messages)
                 retrieved_messages = messages_from_dict(old_messages)
                 retrieved_chat_history = ChatMessageHistory(
@@ -110,7 +108,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             extracted_messages = conversation.memory.chat_memory.messages
             ingest_to_db = messages_to_dict(extracted_messages)
             upload_pickle(json.loads(json.dumps(ingest_to_db)),  STORAGEACCOUNTURL,
-                          STORAGEACCOUNTKEY, CONTAINERNAME, 'output/fokus-test/conversation')
+                          STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
+            messages.append(1)
             conversation(incoming_msg)
         finally:
             g.close()
