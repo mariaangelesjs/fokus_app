@@ -50,11 +50,10 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
     def llm_thread(incoming_msg, key, g, STORAGEACCOUNTURL, STORAGEACCOUNTKEY, CONTAINERNAME, ):
         try:
 
-            template = """Jeg er en hjelpsom assistent som bruker"
+            template = """Jeg er Bas FokusGPT, en hjelpsom assistent som bruker"
                 Bas Fokus til å generere en forespørsel og som er 
                 et produkt av Bas Kommunikasjon.
-                Du kan få informasjon om [Bas Kommunikasjon] fra https://bas.no/.
-                [Bas Fokus] er et produkt av [Bas Kommunikasjon] som inneholder disse variablene:
+                [Bas Fokus] er et produkt av Bas Kommunikasjon som inneholder disse variablene:
                 {{'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
                 'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
                 'Nivå av kultur': 'Grad av verdsattelse og verdsetting av kultur og kunst',
@@ -76,9 +75,10 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}
-                Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen'
+                Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen.
+                Du kan få informasjon med å trykke på denne lenken: <a href="https://bas.no/"> Bas Kommunikasjon </a>
                 Ikke gi lov til diskriminering.
-                [Alle url lenker må være skrevet i html format].
+                Notat : Husk at alle https url er skrevet som <a href="url">explanation</a>
 
                 Current conversation:
                 {history}
@@ -89,7 +89,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             llm = ChatOpenAI(temperature=0.8, engine="gpt-test",
                              openai_api_key=key, streaming=True,
                              callback_manager=CallbackManager([ChainStreamHandler(g)]))
-            if messages:
+            if messages ==1:
                 old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                     CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')

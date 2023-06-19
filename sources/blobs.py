@@ -76,6 +76,13 @@ def download_pickle(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
     ob = pickle.load(filebuffer)
     return ob
 
+def delete_blob(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                           container, blob_path):
+    blob_service_client_instance = BlobServiceClient(
+        account_url=STORAGEACCOUNTURL, credential=STORAGEACCOUNTKEY)
+    blob_client = blob_service_client_instance.get_blob_client(
+        container=container, blob=blob_path)
+    return blob_client.delete_blob()
 
 def upload_from_filebuffer(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                            container, blob_path, filebuffer):

@@ -57,7 +57,7 @@ body {
     width: 50%;
     background-image: var(--body-bg);
     font-family: 'Open Sans', sans-serif;
-    font-size: 24px;
+    font-size: 22px;
     -webkit-text-stroke: 0.25px black
   }
 #button-table {

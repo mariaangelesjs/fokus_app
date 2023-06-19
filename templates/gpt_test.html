@@ -108,7 +108,8 @@
                         const { done, value } = await reader.read();
                         if (done) break;
                         const text = new TextDecoder().decode(value);
-                        document.getElementById(id).innerHTML += text;
+                        document.getElementById(id).innerHTML += text
+                        msgerChat.scrollTo(0, msgerChat.scrollHeight);
                     }
                 } catch (error) {
                     console.error(error);

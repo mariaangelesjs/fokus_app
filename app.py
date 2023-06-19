@@ -4,10 +4,9 @@
 from flask import Flask, request, session, render_template, url_for, redirect, Response
 import uuid
 from datetime import timedelta
-from sources.blobs import get_data
+from sources.blobs import get_data, delete_blob
 import logging
 import pandas as pd
-from sources.blobs import get_data
 from azure.storage.blob import BlobServiceClient
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
@@ -221,6 +220,8 @@ def gpt_response():
         else: 
             return Response(None,mimetype='text/event-stream')
     except:
+        delete_blob(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+            CONTAINERNAME,'output/fokus-test/conversation.pickle')
         return redirect(url_for('fokus_end'))
 
     
