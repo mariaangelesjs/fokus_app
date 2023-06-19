@@ -79,7 +79,6 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen.
                 Du kan få informasjon av Bas Kommunikasjon 
                 med å trykke på denne lenken <a href="https://bas.no/"></a>
-                Vær forsiktig med tekstformatering!
                 Ikke gi lov til diskriminering.
 
                 Current conversation:
