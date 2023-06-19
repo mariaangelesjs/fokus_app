@@ -188,7 +188,7 @@ def prompt():
             'Skriv ' +
             ' en artikel med ' +
             session['words'] +
-            'av ' +
+            ' av ' +
             session['product'] +
             ' til en person med ' +
             str(value) + ' i ' +
