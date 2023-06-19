@@ -259,7 +259,7 @@ def fokus_end():
                     'Stilling': session['work-position'],
                     'Industri': session['industry'],
                     'Feedback': session['feedback']})
-                upload_df(feedback, CONTAINERNAME,
+            upload_df(feedback, CONTAINERNAME,
                         'output/fokus-test/fokusGPT_leads.parquet',
                             STORAGEACCOUNTURL, STORAGEACCOUNTURL)
     return render_template('fokus_gpt_end.html')
