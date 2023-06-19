@@ -90,7 +90,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             llm = ChatOpenAI(temperature=0.8, engine="gpt-test",
                              openai_api_key=key, streaming=True,
                              callback_manager=CallbackManager([ChainStreamHandler(g)]))
-            if messages ==1:
+            if messages:
                 old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                     CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')

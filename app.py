@@ -187,8 +187,9 @@ def prompt():
         value = person[fokus_real_variable].values[0]
         session['prompt_done'] = str(
             'Skriv ' +
+            ' en artikel med ' +
             session['words'] +
-            ' en artikel ' +
+            'av '+
             session['product'] +
             ' til en person med ' +
             str(value) + ' i ' +
@@ -226,8 +227,6 @@ def gpt_response():
             else: 
                 return Response(None,mimetype='text/event-stream')
     except:
-        delete_blob(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-            CONTAINERNAME,'output/fokus-test/conversation.pickle')
         return redirect(url_for('fokus_end'))
 
     
