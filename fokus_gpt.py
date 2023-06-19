@@ -1,7 +1,7 @@
 # From and own custom
 # https://gist.github.com/python273/563177b3ad5b9f74c0f8f3299ec13850
 from langchain.prompts import (
-    MessagesPlaceholder, 
+    MessagesPlaceholder,
     PromptTemplate,
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate
@@ -9,11 +9,16 @@ from langchain.prompts import (
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.chains import ConversationChain
 from langchain.chat_models import ChatOpenAI
-from langchain.memory import ConversationBufferMemory
+from langchain.memory import (ConversationBufferMemory, ChatMessageHistory)
 from langchain.callbacks.manager import CallbackManager
-import threading 
+from langchain.schema import (messages_from_dict, messages_to_dict)
+import threading
 import queue
-    
+import json
+import pandas as pd
+from sources.blobs import upload_pickle, download_pickle
+
+
 class ThreadedGenerator:
     def __init__(self):
         self.queue = queue.Queue()
@@ -23,7 +28,8 @@ class ThreadedGenerator:
 
     def __next__(self):
         item = self.queue.get()
-        if item is StopIteration: raise item
+        if item is StopIteration:
+            raise item
         return item
 
     def send(self, data):
@@ -31,6 +37,10 @@ class ThreadedGenerator:
 
     def close(self):
         self.queue.put(StopIteration)
+
+
+messages = []
+
 
 class ChainStreamHandler(StreamingStdOutCallbackHandler):
     def __init__(self, gen):
@@ -40,11 +50,10 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
     def on_llm_new_token(self, token: str, **kwargs):
         self.gen.send(token)
 
-    def llm_thread(incoming_msg, key, g):
+    def llm_thread(incoming_msg, key, g, STORAGEACCOUNTURL, STORAGEACCOUNTKEY, CONTAINERNAME, ):
         try:
-        
 
-            template= """Jeg er en hjelpsom assistent som bruker"
+            template = """Jeg er en hjelpsom assistent som bruker"
                 Bas Fokus til å generere en forespørsel og som er 
                 et produkt av Bas Kommunikasjon.
                 Du kan få informasjon om [Bas Kommunikasjon] fra https://bas.no/.
@@ -76,17 +85,43 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 Current conversation:
                 {history}
                 Human: {input}
-                Bas Fokus GPT:"""
-            prompt = PromptTemplate(input_variables=['history','input'], template=template)
-            llm = ChatOpenAI(temperature=0.8, engine="gpt-test", openai_api_key=key, streaming=True, callback_manager=CallbackManager([ChainStreamHandler(g)]))
-            memory = ConversationBufferMemory(memory_key="history")
-            conversation = ConversationChain(memory=memory, prompt=prompt, llm=llm)
-            conversation.run(incoming_msg)
+                Bas FokusGPT:"""
+            prompt = PromptTemplate(
+                input_variables=['history', 'input'], template=template)
+            llm = ChatOpenAI(temperature=0.8, engine="gpt-test",
+                             openai_api_key=key, streaming=True,
+                             callback_manager=CallbackManager([ChainStreamHandler(g)]))
+            if messages:
+                old_messages = download_pickle(
+                    STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                    CONTAINERNAME, 'output/fokus-test/conversation.pickle')
+                print(old_messages)
+                retrieved_messages = messages_from_dict(old_messages)
+                retrieved_chat_history = ChatMessageHistory(
+                    messages=retrieved_messages)
+                print(retrieved_chat_history)
+                memory = ConversationBufferMemory(
+                    chat_memory=retrieved_chat_history)
+            else:
+                memory = ConversationBufferMemory(memory_key='history')
+            conversation = ConversationChain(
+                memory=memory, prompt=prompt, llm=llm)
+            answer = conversation(incoming_msg)
+            extracted_messages = conversation.memory.chat_memory.messages
+            ingest_to_db = messages_to_dict(extracted_messages)
+            upload_pickle(json.loads(json.dumps(ingest_to_db)),  STORAGEACCOUNTURL,
+                          STORAGEACCOUNTKEY, CONTAINERNAME, 'output/fokus-test/conversation')
+            conversation(incoming_msg)
         finally:
             g.close()
 
-
-    def chain(incoming_msg, key):
-            g = ThreadedGenerator()
-            threading.Thread(target=ChainStreamHandler.llm_thread, args=(incoming_msg, key, g)).start()
-            return g
+    def chain(incoming_msg, key,
+              STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+              CONTAINERNAME):
+        g = ThreadedGenerator()
+        threading.Thread(target=ChainStreamHandler.llm_thread, args=(
+            incoming_msg, key,
+            g,
+            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+            CONTAINERNAME)).start()
+        return g

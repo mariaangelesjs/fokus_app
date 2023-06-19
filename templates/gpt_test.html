@@ -46,11 +46,11 @@
 
         </main>
         <h3 id="charging_gpt"></h3>
-        <form class="msger-inputarea" method="post">
+        <form class="msger-inputarea" method="get" name="complete_input">
 
             <input type="text" class="msger-input"  
             list="prompts" placeholder="Skriv her" 
-            name="textInput"></input>
+            name="input_text"></input>
             <datalist id="prompts">
                 <option value="{{ prompt }}">Anbefalt forespørsel</option>
                 <option value="Hva er Bas Fokus?"></option>
@@ -71,7 +71,7 @@
         const msgerInput = get(".msger-input");
         const msgerChat = get(".msger-chat");
         const formData = new FormData(msgerForm);
-              formData.append('textInput', msgerForm.elements.textInput.value)
+              formData.append('input_text', msgerForm.elements.input_text.value)
         // Icons made by Freepik from www.flaticon.com
         const BOT_IMG = "https://img.icons8.com/dotty/160/futurama-bender.png";
         const PERSON_IMG = "https://img.icons8.com/?size=512&id=MlrRrS5AdUX9&format=png";
@@ -87,12 +87,14 @@
             msgerChat.scrollTop += 500
             msgerInput.value = "";
             getAnimation();
+            $.get("/get", { msg: msgText }).done(function (data) {
             appendMessage(BOT_NAME, BOT_IMG, "left", "","robot", hoverCount);
             msgerChat.scrollTop += 500
             window.onload = botResponse
-            botResponse(hoverCount)
-        })
-        function botResponse(number){
+            botResponse(hoverCount)})
+})
+      
+        function botResponse(number, msgText){
         async function streamer() {
             try {
                     const response = await fetch('/get', {
@@ -123,7 +125,7 @@
 
         <div class="msg-bubble">
             <div class="msg-info"> 
-            <div class="msg-info-name">${name} ${number}/10 </div>
+            <div class="msg-info-name">${name} ${number}/5 </div>
             <div class="msg-info-time">${formatDate(new Date())}</div>
             </div>
 

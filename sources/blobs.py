@@ -53,7 +53,7 @@ def upload_pickle(data, STORAGEACCOUNTURL, STORAGEACCOUNTKEY, CONTAINERNAME, BLO
         account_url=STORAGEACCOUNTURL, credential=STORAGEACCOUNTKEY)
     logger.info('Uploading pickle')
     blob_client = blob_service_client_instance.get_blob_client(
-        container=CONTAINERNAME, blob="/output/{}.pickle".format(BLOBNAME))
+        container=CONTAINERNAME, blob="output/{}.pickle".format(BLOBNAME))
     pickle_file = BytesIO()
     pickle.dump(data, pickle_file)
     # change the stream position back to the beginning after writing

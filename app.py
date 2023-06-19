@@ -209,12 +209,16 @@ def fokus_gpt():
 
 @app.route('/get', methods=['GET', 'POST'])
 @limiter.limit("10/hour")
-def gpt_response():
-        if request.method == "POST":
-            data = request.form.get('textInput')
+def gpt_response(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+            CONTAINERNAME):
+        if request.method == 'GET':
+            session['input'] = request.args.get('msg')
+        if request.method == 'POST':
             return Response(
                 ChainStreamHandler.chain(
-                data, key),mimetype='text/event-stream')
+                session['input'], key,
+            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+            CONTAINERNAME),mimetype='text/event-stream')
         else: 
             return Response(None,mimetype='text/event-stream')
 
