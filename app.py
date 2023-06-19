@@ -264,7 +264,14 @@ def fokus_end():
                             'output/fokus-test/fokusGPT_leads.parquet',
                                 STORAGEACCOUNTURL, STORAGEACCOUNTURL)
             except:
-                return "Ikke mulig å laste ned feedback"
+                try:
+                    feedback = pd.DataFrame(index=[0], data={
+                        'Feedback': str(session['feedback'])})
+                    return upload_df(feedback, CONTAINERNAME,
+                                'output/fokus-test/fokusGPT_leads.parquet',
+                                    STORAGEACCOUNTURL, STORAGEACCOUNTURL)
+                except:
+                    return "Ikke mulig å laste ned feedback"
     
 
 
