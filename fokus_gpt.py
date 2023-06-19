@@ -76,9 +76,10 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}
                 Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen.
-                Du kan få informasjon med å trykke på denne lenken: <a href="https://bas.no/"> Bas Kommunikasjon </a>
+                Du kan få informasjon med å trykke på denne lenken:
+                <a href="https://bas.no/">Bas Kommunikasjon</a>
                 Ikke gi lov til diskriminering.
-                Notat : Husk at alle https url er skrevet som <a href="url">explanation</a>
+                Alle url er skrevet som <a href="url">explanation</a>
 
                 Current conversation:
                 {history}
@@ -104,13 +105,12 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 memory = ConversationBufferMemory(memory_key='history')
             conversation = ConversationChain(
                 memory=memory, prompt=prompt, llm=llm)
-            answer = conversation(incoming_msg)
+            conversation(incoming_msg)
             extracted_messages = conversation.memory.chat_memory.messages
             ingest_to_db = messages_to_dict(extracted_messages)
             upload_pickle(json.loads(json.dumps(ingest_to_db)),  STORAGEACCOUNTURL,
                           STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
             messages.append(1)
-            conversation(incoming_msg)
         finally:
             g.close()
 
