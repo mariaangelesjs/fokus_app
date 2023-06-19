@@ -20,6 +20,10 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app, supports_credentials=True)
 
+limiter = Limiter(
+    get_remote_address,
+    app=app
+)
 # Start logger
 
 logging.basicConfig(level=logging.INFO)
@@ -207,18 +211,20 @@ def fokus_gpt():
 
 
 @app.route('/get', methods=['GET', 'POST'])
+
 def gpt_response():
     try:
-        if request.method == 'GET':
-            session['input'] = request.args.get('msg')
-        if request.method == 'POST':
-            return Response(
-                ChainStreamHandler.chain(
-                session['input'], key,
-            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-            CONTAINERNAME),mimetype='text/event-stream')
-        else: 
-            return Response(None,mimetype='text/event-stream')
+        with limiter.limit("20/hour"):
+            if request.method == 'GET':
+                session['input'] = request.args.get('msg')
+            if request.method == 'POST':
+                return Response(
+                    ChainStreamHandler.chain(
+                    session['input'], key,
+                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                CONTAINERNAME),mimetype='text/event-stream')
+            else: 
+                return Response(None,mimetype='text/event-stream')
     except:
         delete_blob(STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
             CONTAINERNAME,'output/fokus-test/conversation.pickle')
