@@ -57,7 +57,6 @@
           <form action="{{url_for('prompt')}}">
             <script>
               function thunderGif(){
-            document.getElementById("gif").src="static/images/loading.gif"
             const element = document.getElementById("charging");
             element.textContent += "Loading";
             element.style.display = "block"
@@ -65,7 +64,6 @@
 }
             </script>
             <input type="submit" id="button" value="Submit" onclick="thunderGif()"/>
-            <br>
             <br>
             <h3 id="charging"></h3>
             <img id="gif"  />
