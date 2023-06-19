@@ -261,6 +261,7 @@ def fokus_end():
             upload_df(feedback, CONTAINERNAME,
                        'output/fokus-test/fokusGPT_leads.parquet',
                          STORAGEACCOUNTURL, STORAGEACCOUNTURL)
+        return redirect(url_for('welcome'))
     return render_template('fokus_gpt_end.html')
 
 

@@ -51,7 +51,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         try:
 
             template = """Jeg er Bas FokusGPT, en hjelpsom assistent som bruker"
-                Bas Fokus til å generere en forespørsel og som er 
+                Bas Fokus data til å generere en forespørsel og som er 
                 et produkt av Bas Kommunikasjon.
                 Husk at alle lenker er skrevet som <a href="lenke">description</a> !
                 [Bas Fokus] er et produkt av Bas Kommunikasjon som inneholder disse variablene:
@@ -79,6 +79,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 Hvis en person skrive om en av disse variablene, definere disse men ikke inkludere de i artikelen.
                 Du kan få informasjon av Bas Kommunikasjon 
                 med å trykke på denne lenken <a href="https://bas.no/"></a>
+                Vær forsiktig med tekstformatering!
                 Ikke gi lov til diskriminering.
 
                 Current conversation:
