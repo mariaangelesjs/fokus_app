@@ -221,7 +221,7 @@ def gpt_response():
         else: 
             return Response(None,mimetype='text/event-stream')
     except:
-        redirect(url_for('fokus_end'))
+        return redirect(url_for('fokus_end'))
 
     
 # End bot with this message after 9 messages (before cut)
@@ -232,7 +232,6 @@ def fokus_end():
     return render_template('fokus_gpt_end.html')
 
 
-    # if request.method == 'POST':
 if __name__ == '__main__':
     app.config['PROPAGATE_EXCEPTIONS'] = True
     app.run(debug=True)
