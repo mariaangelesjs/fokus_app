@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-     <meta http-equiv="refresh" content="7; url='end'"/>
+     <meta http-equiv="refresh" content="7; url='{{url_for('fokus_end')}}'"/>
     <title>FokusGPT Demo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -12,7 +12,7 @@
             <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" alt="Bas Logo" width="192" height="192"/>
             <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
             <h1 class="display-6 fw-bold text-primary">The end </h1>
-            <form class="feedback" method="post|get" name="complete_feedback">
+            <form class="feedback" method="post" name="complete_feedback" action="{{url_for('fokus_end')}}">
               <input type="text" name="feedback_done"></input> 
               <input type="submit" id="button" value="Submit"/>           
           </div>
