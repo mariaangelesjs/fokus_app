@@ -233,14 +233,14 @@ def gpt_response():
 
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
-    if request.method == 'POST':
+    if request.method=='GET':
         session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])
-        try:
+    try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                 CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
-            feedback_new = pd.DataFrame(index=0, data={
+            feedback_new = pd.DataFrame(index=[0], data={
                 'Navn': session['name'],
                 'Phone': session['phone'],
                 'E-post': session['email'],
@@ -251,8 +251,8 @@ def fokus_end():
             upload_df(feedback, CONTAINERNAME,
                        'output/fokus-test/fokusGPT_leads.parquet',
                          STORAGEACCOUNTURL, STORAGEACCOUNTURL)
-        except:
-            feedback = pd.DataFrame(index=0,data={
+    except:
+            feedback = pd.DataFrame(index=[0],data={
                 'Navn': session['name'],
                 'Phone': session['phone'],
                 'E-post': session['email'],
@@ -262,7 +262,6 @@ def fokus_end():
             upload_df(feedback, CONTAINERNAME,
                        'output/fokus-test/fokusGPT_leads.parquet',
                          STORAGEACCOUNTURL, STORAGEACCOUNTURL)
-        return redirect(url_for('welcome'))
     return render_template('fokus_gpt_end.html')
 
 
