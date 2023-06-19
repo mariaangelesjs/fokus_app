@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
 # Import packages
-from flask import Flask, request, session, render_template, url_for, redirect, Response
-import uuid
+from flask import (Flask, request, session, render_template,
+                   url_for, redirect, Response)
 from datetime import timedelta
-from sources.blobs import (get_data, delete_blob, upload_df)
+from sources.blobs import (get_data, upload_df)
 import logging
 import pandas as pd
-from azure.storage.blob import BlobServiceClient
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
 import openai
