@@ -4,7 +4,7 @@
 from flask import Flask, request, session, render_template, url_for, redirect, Response
 import uuid
 from datetime import timedelta
-from sources.blobs import get_data, delete_blob
+from sources.blobs import (get_data, delete_blob, upload_df)
 import logging
 import pandas as pd
 from azure.storage.blob import BlobServiceClient
@@ -122,7 +122,6 @@ def welcome():
 def prompt():
     person = pd.read_json(session['data-person'])
 
-
     # Pretty variables and description
 
     fokus_variables_norwegian = {'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
@@ -168,14 +167,14 @@ def prompt():
                       'introvertProbability': 'Sannsynlighet for å være introvert',
                       'disposableIncomeIndividual': 'Disponibel inntekt for enkeltpersoner',
                       'disposableIncomeFamily': 'Disponibel inntekt for familier'}
-    
-    
-    # Get transpose for front-end form 
-    person_table = person.rename(columns=fokus_real_new).reset_index(drop=True).T
-    person_table.rename_axis('Fokus variabel', axis='index',inplace=True)
+
+    # Get transpose for front-end form
+    person_table = person.rename(
+        columns=fokus_real_new).reset_index(drop=True).T
+    person_table.rename_axis('Fokus variabel', axis='index', inplace=True)
     person_table.columns = ['Verdi']
 
-    # Get values for prompt 
+    # Get values for prompt
 
     if request.method == 'POST':
         session['variable'] = request.form.get('variable')
@@ -189,7 +188,7 @@ def prompt():
             'Skriv ' +
             ' en artikel med ' +
             session['words'] +
-            'av '+
+            'av ' +
             session['product'] +
             ' til en person med ' +
             str(value) + ' i ' +
@@ -212,7 +211,6 @@ def fokus_gpt():
 
 
 @app.route('/get', methods=['GET', 'POST'])
-
 def gpt_response():
     try:
         with limiter.limit("20/hour"):
@@ -221,20 +219,48 @@ def gpt_response():
             if request.method == 'POST':
                 return Response(
                     ChainStreamHandler.chain(
-                    session['input'], key,
-                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                CONTAINERNAME),mimetype='text/event-stream')
-            else: 
-                return Response(None,mimetype='text/event-stream')
+                        session['input'], key,
+                        STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                        CONTAINERNAME), mimetype='text/event-stream')
+            else:
+                return Response(None, mimetype='text/event-stream')
     except:
         return redirect(url_for('fokus_end'))
 
-    
+
 # End bot with this message after 9 messages (before cut)
 
 
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
+    if request.method == 'POST':
+        session['feedback'] = request.form.get('feedback_done')
+        try:
+            feedback_old = pd.read_parquet(get_data(
+                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
+            feedback_new = pd.DataFrame({
+                'Navn': session['name'],
+                'Phone': session['phone'],
+                'E-post': session['email'],
+                'Stilling': session['work-position'],
+                'Industri': session['industry'],
+                'Feedback': session['feedback']})
+            feedback = pd.concat([feedback_old, feedback_new])
+            upload_df(feedback, CONTAINERNAME,
+                       'output/fokus-test/fokusGPT_leads.parquet',
+                         STORAGEACCOUNTURL, STORAGEACCOUNTURL)
+        except:
+            feedback = pd.DataFrame({
+                'Navn': session['name'],
+                'Phone': session['phone'],
+                'E-post': session['email'],
+                'Stilling': session['work-position'],
+                'Industri': session['industry'],
+                'Feedback': session['feedback']})
+            upload_df(feedback, CONTAINERNAME,
+                       'output/fokus-test/fokusGPT_leads.parquet',
+                         STORAGEACCOUNTURL, STORAGEACCOUNTURL)
     return render_template('fokus_gpt_end.html')
 
 

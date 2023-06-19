@@ -31,14 +31,14 @@ def get_data(STORAGEACCOUNTURL, STORAGEACCOUNTKEY, CONTAINERNAME, BLOBNAME):
 # To upload blob into Bas Analyse
 
 
-def upload_df(data, container, blobpathfilename, STORAGEACCOUNTURL, STORAGEACCOUNTKEY,dictionary):
+def upload_df(data, container, blobpathfilename, STORAGEACCOUNTURL, STORAGEACCOUNTKEY):
     blob_service_client_instance = BlobServiceClient(
         account_url=STORAGEACCOUNTURL, credential=STORAGEACCOUNTKEY)
     logger.info('Uploading data')
     blob_client = blob_service_client_instance.get_blob_client(
         container=container, blob="{}.parquet".format(blobpathfilename))
     parquet_file = BytesIO()
-    data.to_parquet(parquet_file, engine='pyarrow', use_dictionary=dictionary)
+    data.to_parquet(parquet_file, engine='pyarrow')
     # change the stream position back to the beginning after writing
     parquet_file.seek(0)
     return blob_client.upload_blob(
