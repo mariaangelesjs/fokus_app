@@ -289,7 +289,7 @@ def fokus_end():
                 'Tilbakemelding': str(session['feedback'])})
             feedback_old['Tilbakemelding'] = feedback['Tilbakemelding']
             del feedback
-            return upload_df(feedback, CONTAINERNAME,
+            return upload_df(feedback_old, CONTAINERNAME,
                                 'output/fokus-test/fokusGPT_leads.parquet',
                                 STORAGEACCOUNTURL, STORAGEACCOUNTURL)
            
