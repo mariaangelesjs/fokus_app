@@ -4,7 +4,7 @@
 from flask import (Flask, request, session, render_template,
                    url_for, redirect, Response)
 from datetime import timedelta
-from sources.blobs import (get_data, upload_df, download_pickle)
+from sources.blobs import (get_data, upload_df, download_pickle, delete_blob)
 import logging
 import pandas as pd
 from azure.keyvault.secrets import SecretClient
@@ -241,6 +241,9 @@ def fokus_end():
         old_messages = [download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                     CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')]
+        delete_blob(
+            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+              CONTAINERNAME,'output/fokus-test/conversation.pickle')
         try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
@@ -272,7 +275,6 @@ def fokus_end():
                 upload_df(feedback, CONTAINERNAME,
                                  'output/fokus-test/fokusGPT_leads.parquet',
                                  STORAGEACCOUNTURL,STORAGEACCOUNTKEY)
-                del old_messages
             except:
                 return "Ikke mulig å laste ned feedback"
     
