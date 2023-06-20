@@ -49,8 +49,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
             template = """Jeg er Bas FokusGPT, en hjelpsom assistent som bruker"
                 Bas Fokus data til å generere en forespørsel og som er 
-                et produkt av Bas Kommunikasjon.
-                Husk at alle lenker er skrevet som <a href="lenke">description</a> og kan trykkes på.
+                et produkt av <a href="https://bas.no/">Bas Kommunikasjonr </a>.
                 [Bas Fokus] er et produkt av Bas Kommunikasjon som inneholder disse variablene:
                 {{'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
                 'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
@@ -72,17 +71,19 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Internasjonal reise': 'Grad av verdsattelse og verdsetting av internasjonal reise',
                 'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
-                'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}
-                Hvis en person skrive om en av disse variablene, beskrive de men ikke inkludere nivå verdi i teksten.
+                'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
+                 Denne beskivelsen må være i HTML format.
+                Hvis en person skrive om en av disse variablene, beskrive de men de personene må få noe tilpasset
+                med en snill/profesjonelt tone of voice.
                 Du kan få informasjon av Bas Kommunikasjon <a href="https://bas.no/"> her </a>
                 Ikke gi lov til diskriminering.
-
+                Husk å skrive alle de http/https url lenkene i HTML format.
                 Current conversation:
                 {history}
                 Human: {input}
-                Bas FokusGPT:"""
+                Bas FokusGPT:{output}"""
             prompt = PromptTemplate(
-                input_variables=['history', 'input'], template=template)
+                input_variables=['history', 'input', 'output'], template=template)
             llm = ChatOpenAI(temperature=0.8, engine="gpt-test",
                              openai_api_key=key, streaming=True,
                              callback_manager=CallbackManager([ChainStreamHandler(g)]))
