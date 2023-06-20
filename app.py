@@ -259,6 +259,9 @@ def fokus_end():
                              'output/fokus-test/fokusGPT_leads.parquet',
                              STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
             del old_messages
+            delete_blob(
+            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+              CONTAINERNAME,'output/fokus-test/conversation.pickle')
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
@@ -272,6 +275,9 @@ def fokus_end():
                 upload_df(feedback, CONTAINERNAME,
                                  'output/fokus-test/fokusGPT_leads.parquet',
                                  STORAGEACCOUNTURL,STORAGEACCOUNTKEY)
+                delete_blob(
+            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+              CONTAINERNAME,'output/fokus-test/conversation.pickle')
             except:
                 return "Ikke mulig å laste ned feedback"
     
