@@ -218,8 +218,7 @@ def prompt():
                     'Phone': str(session['phone']),
                     'E-post': str(session['email']),
                     'Stilling': str(session['work-position']),
-                    'Industri': str(session['industry']),
-                    'Feedback': str(session['feedback'])})
+                    'Industri': str(session['industry'])})
                 upload_df(person_full, CONTAINERNAME,
                                  'output/fokus-test/fokusGPT_leads.parquet',
                                  STORAGEACCOUNTURL, STORAGEACCOUNTURL)
