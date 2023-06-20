@@ -227,7 +227,7 @@ def gpt_response():
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
-        return redirect(url_for('get_end'))
+        return redirect('/end')
 
 
 # End bot with this message after 9 messages (before cut)
