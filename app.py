@@ -234,13 +234,9 @@ def gpt_response():
 
 
 @app.route('/end', methods=['GET', 'POST'])
-def get_end():
-    {"Refresh": "1; url='/end"}
-    return render_template('fokus_gpt_end.html')
-
 def fokus_end():
-    if request.method =='GET':
-        session['feedback'] = request.args.get("inputText")
+    if request.method =='POST':
+        session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])
         try:
             feedback_old = pd.read_parquet(get_data(
@@ -272,6 +268,8 @@ def fokus_end():
                                  STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
             except:
                     return "Ikke mulig å laste ned feedback"
+    
+    return render_template('fokus_gpt_end.html')
 
            
 
