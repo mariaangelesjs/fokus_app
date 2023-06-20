@@ -72,8 +72,6 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
-                Hvis en person skrive om en av disse variablene, beskrive de men de personene må få noe tilpasset
-                med en snill/profesjonelt tone of voice.
                 Ikke gi lov til diskriminering.
                 Alle lenker må beskrives som  "<a href="lenke">description</a>"
                 Current conversation:
