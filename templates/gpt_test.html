@@ -82,6 +82,10 @@
             const msgText = msgerInput.value;
             if (!msgText) return;
             appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person", hoverCount);
+            if(hoverCount == 11) {
+             window.open("/end")
+            }
+            else{
             msgerChat.scrollTop += 500
             msgerInput.value = "";
             getAnimation();
@@ -89,7 +93,8 @@
             appendMessage(BOT_NAME, BOT_IMG, "left", "","robot", hoverCount);
             msgerChat.scrollTop += 500
             botResponse(hoverCount)})
-            document.getElementById("charging_gpt").style.display = "none"
+            document.getElementById("charging_gpt").style.display = "none"    
+            }
 })
       
         function botResponse(number, msgText){

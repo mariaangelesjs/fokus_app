@@ -227,7 +227,7 @@ def gpt_response():
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
-        return redirect(url_for('get_end'))
+        return ""
 
 
 # End bot with this message after 9 messages (before cut)
@@ -239,21 +239,20 @@ def get_end():
     return render_template('fokus_gpt_end.html')
 
 def fokus_end():
-    if request.method == 'GET':
-        session['feedback'] = request.args.get('inputText')
-        print(session['feedback'])
     if request.method == 'POST':
+        session['feedback'] = request.args.get("inputText")
+        print(session['feedback'])
         try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                 CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
             feedback_new = pd.DataFrame(index=[0], data={
-                'Navn': str(session['name']),
-                'Phone': str(session['phone']),
-                'E-post': str(session['email']),
-                'Stilling': str(session['work-position']),
-                'Industri': str(session['industry']),
-                'Tilbakemelding': str(session['feedback'])})
+                    'Navn':session['name'],
+                    'Phone': session['phone'],
+                    'E-post': session['email'],
+                    'Stilling': session['work-position'],
+                    'Industri': session['industry'],
+                    'Tilbakemelding': session['feedback']})
             feedback = pd.concat([feedback_old, feedback_new],
                                  axis=0).reset_index(drop=True)
             return upload_df(feedback, CONTAINERNAME,
@@ -262,12 +261,12 @@ def fokus_end():
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
-                    'Navn': str(session['name']),
-                    'Phone': str(session['phone']),
-                    'E-post': str(session['email']),
-                    'Stilling': str(session['work-position']),
-                    'Industri': str(session['industry']),
-                    'Tilbakemelding': str(session['feedback'])})
+                    'Navn':session['name'],
+                    'Phone': session['phone'],
+                    'E-post': session['email'],
+                    'Stilling': session['work-position'],
+                    'Industri': session['industry'],
+                    'Tilbakemelding': session['feedback']})
                 return upload_df(feedback, CONTAINERNAME,
                                  'output/fokus-test/fokusGPT_leads.parquet',
                                  STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
