@@ -241,9 +241,6 @@ def fokus_end():
         old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                     CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')
-        delete_blob(
-            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME,'output/fokus-test/conversation.pickle')
         try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
