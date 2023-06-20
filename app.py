@@ -4,7 +4,7 @@
 from flask import (Flask, request, session, render_template,
                    url_for, redirect, Response)
 from datetime import timedelta
-from sources.blobs import (get_data, upload_df)
+from sources.blobs import (get_data, upload_df, download_pickle)
 import logging
 import pandas as pd
 from azure.keyvault.secrets import SecretClient
@@ -238,6 +238,9 @@ def fokus_end():
     if request.method == 'POST':
         session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])
+        old_messages = [download_pickle(
+                    STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                    CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')]
         try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
@@ -249,11 +252,13 @@ def fokus_end():
                 'Stilling': str(session['work-position']),
                 'Industri': str(session['industry']),
                 'Feedback': str(session['feedback'])})
+            feedback_new['Samtale'] = old_messages
             feedback = pd.concat([feedback_old, feedback_new],
                                  axis=0).reset_index(drop=True)
             upload_df(feedback, CONTAINERNAME,
                              'output/fokus-test/fokusGPT_leads.parquet',
                              STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
+            del old_messages
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
@@ -263,9 +268,11 @@ def fokus_end():
                     'Stilling': str(session['work-position']),
                     'Industri': str(session['industry']),
                     'Feedback': str(session['feedback'])})
+                feedback['Samtale'] = old_messages
                 upload_df(feedback, CONTAINERNAME,
                                  'output/fokus-test/fokusGPT_leads.parquet',
                                  STORAGEACCOUNTURL,STORAGEACCOUNTKEY)
+                del old_messages
             except:
                 return "Ikke mulig å laste ned feedback"
     
