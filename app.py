@@ -239,7 +239,7 @@ def get_end():
     return render_template('fokus_gpt_end.html')
 
 def fokus_end():
-    if request.method == 'POST':
+    if request.method =='GET':
         session['feedback'] = request.args.get("inputText")
         print(session['feedback'])
         try:

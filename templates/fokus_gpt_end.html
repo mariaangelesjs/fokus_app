@@ -14,11 +14,12 @@
             <h1 class="display-6 fw-bold text-primary">The end </h1>
             <form class="feedback" id=feedback method="post" name="complete_feedback">
               <input type="text" id="input_text" name="feedback_done"></input> 
-              <input type="submit" id="button" value="Submit"/>           
+              <input type="submit" id="button" value="Submit" onsubmit="getInput()"/>           
           </div>
           <script>
           const input = document.getElementById("input_text")
-          $.post("/fokus_end", { inputText: input.value})
+          function getInput(){
+          $.get("/fokus_end", { inputText: input.value})}
          
           </script>
 </html>
