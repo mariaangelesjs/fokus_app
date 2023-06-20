@@ -113,34 +113,6 @@ def welcome():
         else:
             person = fokus.sample(1, random_state=42)[fokus_segments]
         session['data-person'] = person.to_json()
-        try:
-            person_old = pd.read_parquet(get_data(
-                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
-            person_new = pd.DataFrame(index=[0], data={
-                    'Navn': session['name'],
-                    'Phone': session['phone'],
-                    'E-post': session['email'],
-                    'Stilling': session['work-position'],
-                    'Industri': session['industry']})
-            person_full = pd.concat([person_old, person_new],
-                                 axis=0).reset_index(drop=True)
-            upload_df(person_full, CONTAINERNAME,
-                             'output/fokus-test/fokusGPT_leads.parquet',
-                             STORAGEACCOUNTURL, STORAGEACCOUNTURL)
-        except:
-            try:
-                person_full = pd.DataFrame(index=[0], data={
-                    'Navn': session['name'],
-                    'Phone': session['phone'],
-                    'E-post': session['email'],
-                    'Stilling': session['work-position'],
-                    'Industri': session['industry']})
-                upload_df(person_full, CONTAINERNAME,
-                                 'output/fokus-test/fokusGPT_leads.parquet',
-                                 STORAGEACCOUNTURL, STORAGEACCOUNTURL)
-            except:
-                pass
                     
         return redirect(url_for('prompt'))
     return render_template('form.html')
@@ -255,40 +227,51 @@ def gpt_response():
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
-        return render_template('fokus_gpt_end.html')
+        return redirect(url_for('get_end'))
 
 
 # End bot with this message after 9 messages (before cut)
 
 
 @app.route('/end', methods=['GET', 'POST'])
+def get_end():
+    return render_template('fokus_gpt_end.html')
+
 def fokus_end():
     if request.method == 'POST':
-        session['feedback'] = request.form.get('feedback_done')
+        session['feedback'] = request.args.get('feedback_done')
         print(session['feedback'])
-        
-        feedback_old = pd.read_parquet(get_data(
+        try:
+            feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                 CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
-        feedback_new = pd.DataFrame(index=[0], data={
+            feedback_new = pd.DataFrame(index=[0], data={
+                'Navn': str(session['name']),
+                'Phone': str(session['phone']),
+                'E-post': str(session['email']),
+                'Stilling': str(session['work-position']),
+                'Industri': str(session['industry']),
                 'Tilbakemelding': str(session['feedback'])})
-        try:
-            feedback_old['Tilbakemelding'] = np.where(feedback_old['Tilbakemelding'].isnull(),
-                                                      feedback_new['Tilbakemelding'],
-                                                      feedback_old['Tilbakemelding'])
-            del feedback_new
-            upload_df(feedback_old, CONTAINERNAME,
+            feedback = pd.concat([feedback_old, feedback_new],
+                                 axis=0).reset_index(drop=True)
+            return upload_df(feedback, CONTAINERNAME,
                              'output/fokus-test/fokusGPT_leads.parquet',
-                             STORAGEACCOUNTURL, STORAGEACCOUNTURL)
-            
+                             STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
         except:
-            feedback = pd.DataFrame(index=[0], data={
-                'Tilbakemelding': str(session['feedback'])})
-            feedback_old['Tilbakemelding'] = feedback['Tilbakemelding']
-            del feedback
-            return upload_df(feedback_old, CONTAINERNAME,
-                                'output/fokus-test/fokusGPT_leads.parquet',
-                                STORAGEACCOUNTURL, STORAGEACCOUNTURL)
+            try:
+                feedback = pd.DataFrame(index=[0], data={
+                    'Navn': str(session['name']),
+                    'Phone': str(session['phone']),
+                    'E-post': str(session['email']),
+                    'Stilling': str(session['work-position']),
+                    'Industri': str(session['industry']),
+                    'Tilbakemelding': str(session['feedback'])})
+                return upload_df(feedback, CONTAINERNAME,
+                                 'output/fokus-test/fokusGPT_leads.parquet',
+                                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
+            except:
+                    return "Ikke mulig å laste ned feedback"
+
            
 
 

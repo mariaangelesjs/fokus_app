@@ -12,8 +12,15 @@
             <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" alt="Bas Logo" width="192" height="192"/>
             <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
             <h1 class="display-6 fw-bold text-primary">The end </h1>
-            <form class="feedback" method="post" name="complete_feedback">
-              <input type="text" name="feedback_done"></input> 
+            <form class="feedback" id=feedback method="post" name="complete_feedback">
+              <input type="text" id="input_text" name="feedback_done"></input> 
               <input type="submit" id="button" value="Submit"/>           
           </div>
+          <script>
+          const input = document.getElementById("input_text").value
+          const form = document.getElementById("feedback")  
+          form.addEventListener("submit", event => {
+          $.post("/fokus_end", { inputText: input })
+          })
+          </script>
 </html>

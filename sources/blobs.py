@@ -36,7 +36,7 @@ def upload_df(data, container, blobpathfilename, STORAGEACCOUNTURL, STORAGEACCOU
         account_url=STORAGEACCOUNTURL, credential=STORAGEACCOUNTKEY)
     logger.info('Uploading data')
     blob_client = blob_service_client_instance.get_blob_client(
-        container=container, blob="{}.parquet".format(blobpathfilename))
+        container=container, blob="{}".format(blobpathfilename))
     parquet_file = BytesIO()
     data.to_parquet(parquet_file, engine='pyarrow')
     # change the stream position back to the beginning after writing
