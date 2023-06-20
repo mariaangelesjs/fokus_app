@@ -118,11 +118,11 @@ def welcome():
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                 CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
             person_new = pd.DataFrame(index=[0], data={
-                'Navn': str(session['name']),
-                'Phone': str(session['phone']),
-                'E-post': str(session['email']),
-                'Stilling': str(session['work-position']),
-                'Industri': str(session['industry'])})
+                    'Navn': session['name'],
+                    'Phone': session['phone'],
+                    'E-post': session['email'],
+                    'Stilling': session['work-position'],
+                    'Industri': session['industry']})
             person_full = pd.concat([person_old, person_new],
                                  axis=0).reset_index(drop=True)
             upload_df(person_full, CONTAINERNAME,
@@ -131,11 +131,11 @@ def welcome():
         except:
             try:
                 person_full = pd.DataFrame(index=[0], data={
-                    'Navn': str(session['name']),
-                    'Phone': str(session['phone']),
-                    'E-post': str(session['email']),
-                    'Stilling': str(session['work-position']),
-                    'Industri': str(session['industry'])})
+                    'Navn': session['name'],
+                    'Phone': session['phone'],
+                    'E-post': session['email'],
+                    'Stilling': session['work-position'],
+                    'Industri': session['industry']})
                 upload_df(person_full, CONTAINERNAME,
                                  'output/fokus-test/fokusGPT_leads.parquet',
                                  STORAGEACCOUNTURL, STORAGEACCOUNTURL)
@@ -255,15 +255,13 @@ def gpt_response():
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
-        return redirect(url_for('end_page'))
+        return render_template('fokus_gpt_end.html')
 
 
 # End bot with this message after 9 messages (before cut)
 
 
 @app.route('/end', methods=['GET', 'POST'])
-def end_page():
-    return render_template('fokus_gpt_end.html')
 
 def fokus_end():
     if request.method == 'POST':
