@@ -238,9 +238,9 @@ def fokus_end():
     if request.method == 'POST':
         session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])
-        old_messages = [download_pickle(
+        old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')]
+                    CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')
         delete_blob(
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
               CONTAINERNAME,'output/fokus-test/conversation.pickle')
