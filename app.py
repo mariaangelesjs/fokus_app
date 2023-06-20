@@ -235,7 +235,7 @@ def gpt_response():
 
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
-    if request.method =='POST':
+    if request.method == 'POST':
         session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])
         try:
@@ -243,31 +243,31 @@ def fokus_end():
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                 CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
             feedback_new = pd.DataFrame(index=[0], data={
-                    'Navn':session['name'],
-                    'Phone': session['phone'],
-                    'E-post': session['email'],
-                    'Stilling': session['work-position'],
-                    'Industri': session['industry'],
-                    'Tilbakemelding': session['feedback']})
+                'Navn': str(session['name']),
+                'Phone': str(session['phone']),
+                'E-post': str(session['email']),
+                'Stilling': str(session['work-position']),
+                'Industri': str(session['industry']),
+                'Feedback': str(session['feedback'])})
             feedback = pd.concat([feedback_old, feedback_new],
                                  axis=0).reset_index(drop=True)
-            return upload_df(feedback, CONTAINERNAME,
+            upload_df(feedback, CONTAINERNAME,
                              'output/fokus-test/fokusGPT_leads.parquet',
                              STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
-                    'Navn':session['name'],
-                    'Phone': session['phone'],
-                    'E-post': session['email'],
-                    'Stilling': session['work-position'],
-                    'Industri': session['industry'],
-                    'Tilbakemelding': session['feedback']})
-                return upload_df(feedback, CONTAINERNAME,
+                    'Navn': str(session['name']),
+                    'Phone': str(session['phone']),
+                    'E-post': str(session['email']),
+                    'Stilling': str(session['work-position']),
+                    'Industri': str(session['industry']),
+                    'Feedback': str(session['feedback'])})
+                upload_df(feedback, CONTAINERNAME,
                                  'output/fokus-test/fokusGPT_leads.parquet',
-                                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
+                                 STORAGEACCOUNTURL,STORAGEACCOUNTKEY)
             except:
-                    return "Ikke mulig å laste ned feedback"
+                return "Ikke mulig å laste ned feedback"
     
     return render_template('fokus_gpt_end.html')
 
