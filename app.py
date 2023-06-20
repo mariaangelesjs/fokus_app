@@ -262,7 +262,6 @@ def gpt_response():
 
 
 @app.route('/end', methods=['GET', 'POST'])
-
 def fokus_end():
     if request.method == 'POST':
         session['feedback'] = request.form.get('feedback_done')
