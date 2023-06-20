@@ -224,8 +224,10 @@ def gpt_response():
                         session['input'], key,
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME), mimetype='text/event-stream')
+            else:
+                return Response(None, mimetype='text/event-stream')
     except:
-        return redirect('/end', code=301)
+        return redirect(url_for('get_end')),{"Refresh": "1; url='/end"}
 
 
 # End bot with this message after 9 messages (before cut)
