@@ -113,6 +113,35 @@ def welcome():
         else:
             person = fokus.sample(1, random_state=42)[fokus_segments]
         session['data-person'] = person.to_json()
+        try:
+            person_old = pd.read_parquet(get_data(
+                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
+            person_new = pd.DataFrame(index=[0], data={
+                'Navn': str(session['name']),
+                'Phone': str(session['phone']),
+                'E-post': str(session['email']),
+                'Stilling': str(session['work-position']),
+                'Industri': str(session['industry'])})
+            person_full = pd.concat([person_old, person_new],
+                                 axis=0).reset_index(drop=True)
+            upload_df(person_full, CONTAINERNAME,
+                             'output/fokus-test/fokusGPT_leads.parquet',
+                             STORAGEACCOUNTURL, STORAGEACCOUNTURL)
+        except:
+            try:
+                person_full = pd.DataFrame(index=[0], data={
+                    'Navn': str(session['name']),
+                    'Phone': str(session['phone']),
+                    'E-post': str(session['email']),
+                    'Stilling': str(session['work-position']),
+                    'Industri': str(session['industry'])})
+                upload_df(person_full, CONTAINERNAME,
+                                 'output/fokus-test/fokusGPT_leads.parquet',
+                                 STORAGEACCOUNTURL, STORAGEACCOUNTURL)
+            except:
+                pass
+                    # redirect to GPT fokus
         return redirect(url_for('prompt'))
     return render_template('form.html')
 
@@ -196,35 +225,7 @@ def prompt():
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
-        try:
-            person_old = pd.read_parquet(get_data(
-                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
-            person_new = pd.DataFrame(index=[0], data={
-                'Navn': str(session['name']),
-                'Phone': str(session['phone']),
-                'E-post': str(session['email']),
-                'Stilling': str(session['work-position']),
-                'Industri': str(session['industry'])})
-            person_full = pd.concat([person_old, person_new],
-                                 axis=0).reset_index(drop=True)
-            upload_df(person_full, CONTAINERNAME,
-                             'output/fokus-test/fokusGPT_leads.parquet',
-                             STORAGEACCOUNTURL, STORAGEACCOUNTURL)
-        except:
-            try:
-                person_full = pd.DataFrame(index=[0], data={
-                    'Navn': str(session['name']),
-                    'Phone': str(session['phone']),
-                    'E-post': str(session['email']),
-                    'Stilling': str(session['work-position']),
-                    'Industri': str(session['industry'])})
-                upload_df(person_full, CONTAINERNAME,
-                                 'output/fokus-test/fokusGPT_leads.parquet',
-                                 STORAGEACCOUNTURL, STORAGEACCOUNTURL)
-            except:
-                pass
-                    # redirect to GPT fokus
+        
         return redirect(url_for('fokus_gpt'))
 
     return render_template(
