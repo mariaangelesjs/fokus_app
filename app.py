@@ -208,14 +208,19 @@ def prompt():
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
-    # run the bot
-    return render_template('gpt_test.html', prompt=session['prompt_done'])
+    try:
+            with limiter.limit("20/hour"):
+                return render_template('gpt_test.html', prompt=session['prompt_done'])
+    except:
+            return redirect('/end')
+    
+
 
 
 @app.route('/get', methods=['GET', 'POST'])
 def gpt_response():
+    # run the bot
     try:
-        with limiter.limit("20/hour"):
             if request.method == 'GET':
                 session['input'] = request.args.get('msg')
             if request.method == 'POST':
@@ -225,9 +230,9 @@ def gpt_response():
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME), mimetype='text/event-stream')
             else:
-                return Response(None, mimetype='text/event-stream')
+                 return Response(None, mimetype='text/event-stream')
     except:
-        return redirect(url_for('get_end'))
+        return redirect('/end')
 
 
 # End bot with this message after 9 messages (before cut)
@@ -235,7 +240,7 @@ def gpt_response():
 
 @app.route('/end', methods=['GET', 'POST'])
 def get_end():
-    return render_template('fokus_gpt_end.html'),{"Refresh": "1; url='/end"}
+    return render_template('fokus_gpt_end.html')
 
 def fokus_end():
     if request.method == 'GET':
