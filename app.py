@@ -227,7 +227,7 @@ def gpt_response():
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
-        return redirect(url_for('get_end')),{"Refresh": "1; url='/end"}
+        return redirect(url_for('get_end'))
 
 
 # End bot with this message after 9 messages (before cut)
@@ -235,6 +235,7 @@ def gpt_response():
 
 @app.route('/end', methods=['GET', 'POST'])
 def get_end():
+    {"Refresh": "1; url='/end"}
     return render_template('fokus_gpt_end.html')
 
 def fokus_end():
