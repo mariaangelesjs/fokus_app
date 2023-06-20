@@ -141,7 +141,7 @@ def welcome():
                                  STORAGEACCOUNTURL, STORAGEACCOUNTURL)
             except:
                 pass
-                    # redirect to GPT fokus
+                    
         return redirect(url_for('prompt'))
     return render_template('form.html')
 
@@ -225,7 +225,7 @@ def prompt():
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
-        
+        # redirect to GPT fokus
         return redirect(url_for('fokus_gpt'))
 
     return render_template(
