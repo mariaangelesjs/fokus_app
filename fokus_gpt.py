@@ -1,10 +1,7 @@
 # From and own custom
 # https://gist.github.com/python273/563177b3ad5b9f74c0f8f3299ec13850
 from langchain.prompts import (
-    MessagesPlaceholder,
     PromptTemplate,
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate
 )
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.chains import ConversationChain
