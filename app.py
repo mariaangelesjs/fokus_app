@@ -251,7 +251,7 @@ def fokus_end():
                 'E-post': str(session['email']),
                 'Stilling': str(session['work-position']),
                 'Industri': str(session['industry']),
-                'Feedback': str(session['feedback'])})
+                'Tilbakemelding': str(session['feedback'])})
             feedback_new['Samtale'] = old_messages
             feedback = pd.concat([feedback_old, feedback_new],
                                  axis=0).reset_index(drop=True)
@@ -267,7 +267,7 @@ def fokus_end():
                     'E-post': str(session['email']),
                     'Stilling': str(session['work-position']),
                     'Industri': str(session['industry']),
-                    'Feedback': str(session['feedback'])})
+                    'Tilbakemelding': str(session['feedback'])})
                 feedback['Samtale'] = old_messages
                 upload_df(feedback, CONTAINERNAME,
                                  'output/fokus-test/fokusGPT_leads.parquet',
