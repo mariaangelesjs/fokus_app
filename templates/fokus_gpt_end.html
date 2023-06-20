@@ -1,6 +1,6 @@
 <!doctype html>
 <head>
-     <meta http-equiv="refresh" content="7; url='{{url_for('fokus_end')}}'"/>
+     <meta http-equiv="refresh" content="7; url='{{url_for('get_end')}}'"/>
     <title>FokusGPT Demo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
@@ -14,13 +14,12 @@
             <h1 class="display-6 fw-bold text-primary">The end </h1>
             <form class="feedback" id=feedback method="post" name="complete_feedback">
               <input type="text" id="input_text" name="feedback_done"></input> 
-              <input type="submit" id="button" value="Submit"/>           
+              <input type="submit" id="button" value="Submit" onsubmit="getInput()"/>           
           </div>
           <script>
-          const input = document.getElementById("input_text").value
+          function getInput(){const input = document.getElementById("input_text").value
           const form = document.getElementById("feedback")  
-          form.addEventListener("submit", event => {
-          $.post("/fokus_end", { inputText: input })
-          })
+          $.get("/fokus_end", { inputText: input })}
+         
           </script>
 </html>

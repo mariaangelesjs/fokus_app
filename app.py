@@ -238,9 +238,10 @@ def get_end():
     return render_template('fokus_gpt_end.html')
 
 def fokus_end():
-    if request.method == 'POST':
-        session['feedback'] = request.args.get('feedback_done')
+    if request.method == 'GET':
+        session['feedback'] = request.args.get('inputText')
         print(session['feedback'])
+    if request.method == 'POST':
         try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
