@@ -72,18 +72,16 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
-                 Denne beskivelsen må være i HTML format.
                 Hvis en person skrive om en av disse variablene, beskrive de men de personene må få noe tilpasset
                 med en snill/profesjonelt tone of voice.
-                Du kan få informasjon av Bas Kommunikasjon <a href="https://bas.no/"> her </a>
                 Ikke gi lov til diskriminering.
-                Husk å skrive alle de http/https url lenkene i HTML format.
+                Alle lenker må beskrives som  "<a href="lenke">description</a>"
                 Current conversation:
                 {history}
-                Human: {input}
-                Bas FokusGPT:{output}"""
+                Human:{input}
+                Bas FokusGPT: """
             prompt = PromptTemplate(
-                input_variables=['history', 'input', 'output'], template=template)
+                input_variables=['history', 'input'], template=template)
             llm = ChatOpenAI(temperature=0.8, engine="gpt-test",
                              openai_api_key=key, streaming=True,
                              callback_manager=CallbackManager([ChainStreamHandler(g)]))
