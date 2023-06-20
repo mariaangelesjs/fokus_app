@@ -53,7 +53,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             template = """Jeg er Bas FokusGPT, en hjelpsom assistent som bruker"
                 Bas Fokus data til å generere en forespørsel og som er 
                 et produkt av Bas Kommunikasjon.
-                ikke inkludere dette i template, men huske:Husk at alle lenker er skrevet som <a href="lenke">description</a> !
+                Ikke inkludere dette i teksten, men husk:Husk at alle lenker er skrevet som <a href="lenke">description</a> !
                 [Bas Fokus] er et produkt av Bas Kommunikasjon som inneholder disse variablene:
                 {{'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
                 'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
