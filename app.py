@@ -233,6 +233,7 @@ def gpt_chat_response():
 
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
+    
 
 
 

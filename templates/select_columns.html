@@ -147,6 +147,8 @@
                             //assuming thunder.gif animation length is 3 seconds
                         }
                     </script>
+                    <h3>Du kan velge mellom e-post generator eller fokusGPT chatbot</h1>
+                    <br>
                     <div class="buttons">
                         <button type="submit" class ="button_decision chat"
                          id="button_chat" name="submit chat" 
@@ -155,7 +157,7 @@
                         <button type="submit" class ="button_decision epost"
                          id="button_epost" name="submit epost"
                           value="E-post" onclick="thunderGif()"
-                          href="{{url_for('fokus_epost')}}"></button>
+                          href="{{url_for('gpt_email_response')}}"></button>
                         <br>
                         <br>
                     </div>
