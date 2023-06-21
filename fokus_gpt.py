@@ -52,7 +52,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 Jeg er Bas FokusGPT, en hjelpsom assistent som bruker
                 Bas Fokus data til å generere en forespørsel og som er 
                 et produkt av lenke :
-                [<a href="https://bas.no/">Bas Kommunikasjon </a>]
+                <a href="https://bas.no/">Bas Kommunikasjon </a>
                 
                 Kontekst:
                 Bas Fokus er et produkt av Bas Kommunikasjon som inneholder disse variablene:
