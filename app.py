@@ -223,7 +223,7 @@ def gpt_chat_response():
             if request.method == 'POST':
                 return Response(
                     ChainStreamHandler.chain(
-                        session['input'], key,
+                        session['input'], key,'chat',
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME), mimetype='text/event-stream')
             else:
@@ -233,8 +233,25 @@ def gpt_chat_response():
 
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
-    
-
+     # run the bot
+    return render_template('gpt_email.html')
+def gpt_chat_response():
+    try:
+        # End bot with this message after 10 messages (before cut)
+        with limiter.limit("4/hour"):
+            if request.method == 'GET':
+                tone = request.args.get('tone')
+                full_prompt = str(session['prompt_done'] + ' og ' + tone )
+            if request.method == 'POST':
+                return Response(
+                    ChainStreamHandler.chain(
+                        full_prompt , key, 'email',
+                        STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                        CONTAINERNAME), mimetype='text/event-stream')
+            else:
+                return Response(None, mimetype='text/event-stream')
+    except:
+        return ""
 
 
 
