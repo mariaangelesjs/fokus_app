@@ -1,0 +1,89 @@
+<!doctype html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title style="font-weight: bold">FokusGPT Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/animate.min.css') }}" />
+</head>
+<html>
+
+<body>
+    <main>
+        <form name="tone_voice" method="post">
+            <label for="tone_of_voice">Tone of voice:</label>
+            <br>
+            <br>
+            <select name="tone" id="select_tone">
+                <option value="null">Velg "tone of voice" </option>
+                <option value="entusiastisk">entusiastisk</option>
+                <option value="gøy">gøy</option>
+                <option value="trist">trist</option>
+                <option value="spennende">spennende</option>
+                <option value="profesjonell">profesjonell</option>
+            </select>
+        </form>
+        <form class="email-form">
+            <label for="subject">Emne:</label>
+            <input type="text" id="subject" name="subject">
+            <label for="content">Innhold:</label>
+            <textarea id="content" name="content"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <script>
+            const emailForm = get(".email-form");
+            const selectedTone = document.getElementById('select_tone')
+            const subjectInput = document.getElementById('subject');
+            const contentInput = document.getElementById('content');
+            selectedTone.addEventListener('change', function (e) {
+                $.get("/get", { tone: document.getElementById('select_tone').value })
+            }).done(function () {
+                emailResponse(hoverCount)
+            })
+
+            function emailResponse(number, msgText) {
+                async function streamer() {
+                    try {
+                        const response = await fetch('/get_email', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const reader = response.body.getReader();
+                        subjectInput.innerHTML = "";
+                        contentInput.innerHTML = "";
+                        while (true) {
+                            const { done, value } = await reader.read();
+                            if (done) break;
+                            const text = new TextDecoder().decode(value);
+                            if (text.startsWith("Emne")) {
+                                subjectInput.innerHTML += text
+                            } else if (text.startsWith("Innhold")) {
+                                contentInput.innerHTML += text
+                            } else { msgerChat.scrollTo(0, msgerChat.scrollHeight); }
+                        }
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+                streamer();
+            }
+            $(function () {
+                $("select").select2({
+                    templateResult: formatOption
+                });
+
+                function formatOption(option) {
+                    var $option = $(
+                        '<div><strong>' + option.text + '</strong></div><div>' + option.title + '</div>'
+                    );
+                    return $option;
+                };
+            });
+        </script>
+    </main>
+</body>
+
+</html>
