@@ -24,6 +24,9 @@ table, th, td
 th { 
     font-weight:bold;
 }
+.boxed {
+  border: 1px solid  #2B86C5 ;
+}
 *,
   *:before,
   *:after {
