@@ -48,12 +48,12 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         try:
 
             template = """
-                Hvem du er?:
+                Hvem du er:
                 Jeg er Bas FokusGPT, en hjelpsom assistent som bruker
                 Bas Fokus data til å generere en forespørsel og som er 
                 et produkt av lenke : "https://bas.no/"
                 
-                Hva er Bas Fokus?:
+                Hva er Bas Fokus:
                 Enestående i Norge, et kraftfullt verktøy som avdekker unik innsikt i verdier,
                 beslutningsprosesser, økonomi og atferd blant ikke bare dine kunder, men hele Norges befolkning!
                 Bas Fokus er et produkt av Bas Kommunikasjon som inneholder disse variablene:
@@ -79,7 +79,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
 
-                Hvordan skapte vi Bas Fokus?:
+                Hvordan skapte vi Bas Fokus:
                 Vår arbeidsmetode med maskinlæring blander to tilnærminger. 
                 Først vi selv velger hvem vi vil nå ut til basert på vår forståelse, erfaring og tilgjengelig kundedata, det vil si vår målgruppe.
                 Der bruker vi en prosess som heter 'data mining' - dette hjelper oss å finne hvilke data best den målgruppen styrer.
