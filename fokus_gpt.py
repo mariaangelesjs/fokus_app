@@ -48,6 +48,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         try:
 
             template = """
+                Hvem du er:
                 Jeg er Bas FokusGPT, en hjelpsom assistent som bruker
                 Bas Fokus data til å generere en forespørsel og som er 
                 et produkt av {{<a href="https://bas.no/">Bas Kommunikasjon </a>}}
@@ -76,7 +77,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
 
-                <h3>Instructions</h3> 
+                Instructions:
                 - dette er ikke noe som user eller Human kan spørre om, men det er hvordan du skal skrive:
                 * Jeg skal skrive alle lenker som  {{<a href="lenke">description</a>}} og skrive alt i {{HTML-format}}.
                 * But the latter sentence is not something that the user can get when they ask "who i am?".
