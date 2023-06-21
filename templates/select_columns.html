@@ -1,6 +1,7 @@
 <html>
 
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create your unique prompt</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
@@ -13,7 +14,14 @@
         <br>
 <h1>Lag din unike forespørsel</h1>
 <body>
-        <br>
+    <br>
+    <br>
+    <div class="boxed">
+    Her skaper din unikk forespørsel som :
+    "Skriv en artikel med  <b>[ord]</b> av  <b>[produkt]</b> 
+    til en person med  <b>[Fokus-verdi]</b> i  <b>[Fokus-variabel]</b>
+    som er  <b>[stilling] </b>i  <b>[industri]</b>"
+          </div>
     <div class="container">
         <br>
         <br>
@@ -85,11 +93,6 @@
                 };
             });
         </script>
-        <div class="boxed">
-        Her vi skaper din unikk forespørsel som :
-         "Skriv en artikel med [ord] av [produkt] til en person med [Fokus-verdi] i [Fokus-variabel] som er [stilling] i [industri]""
-          </div>
-        <br>
         <form action="{{url_for('prompt')}}" , method="POST">
             <div id="words_total">
                 <label for="word_amount">Antall
