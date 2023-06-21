@@ -137,25 +137,19 @@
                 <br>
                 <br>
             </div>
-                <form action="{{url_for('fokus_gpt')}}" method="POST">
+                <form action="{{url_for('fokus_gpt')}}">
                     <script>
-                        function thunderGif(url) {
-                            window.open(url)
+                        function thunderGif() {
+                            const element = document.getElementById("charging");
+                            element.textContent += "Loading";
+                            element.style.display = "block"
+                            element.classList.add("animate__animated", "animate__heartBeat","animate__infinite")
                             //assuming thunder.gif animation length is 3 seconds
                         }
                     </script>
-                    <h3>Du kan velge mellom e-post generator eller fokusGPT chatbot</h1>
+                    <input type="submit" id="button" value="Lag prompt" onclick="thunderGif()" />
                     <br>
-                    <div class="buttons">
-                        <input type="submit" class ="button_decision chat"
-                         id="button_chat" name="submit chat" 
-                         value="Chat" onclick="thunderGif('/unique_ad')" >
-                        <input type="submit" class ="button_decision epost"
-                         id="button_epost" name="submit epost"
-                          value="E-post" onclick="thunderGif('/unique_email')">
-                        <br>
-                        <br>
-                    </div>
+                    <br>
                     <img id="gif" />
                 </form>
             </td>

@@ -197,7 +197,7 @@ def prompt():
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
-
+        return redirect(url_for('fokus_gpt'))
     return render_template(
         'select_columns.html',
         columns=fokus_variables_norwegian,
