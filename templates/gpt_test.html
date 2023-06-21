@@ -85,14 +85,14 @@
         var hoverCount = 0
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
+            if(hoverCount == 11) {
+            window.open("/end") 
+            }
+            else{
             event.preventDefault();
             const msgText = msgerInput.value;
             if (!msgText) return;
             appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person", hoverCount);
-            if(hoverCount == 11) {
-             window.open("/end")
-            }
-            else{
             msgerChat.scrollTop += 500
             msgerInput.value = "";
             $.get("/get", { msg: msgText }).done(function (data) {
@@ -133,7 +133,7 @@
 
         <div class="msg-bubble">
             <div class="msg-info"> 
-            <div class="msg-info-name">${name} ${number}/11 </div>
+            <div class="msg-info-name">${name} ${number}/10 </div>
             <div class="msg-info-time">${formatDate(new Date())}</div>
             </div>
 

@@ -10,7 +10,7 @@ import pandas as pd
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
 import openai
-from fokus_gpt import ChainStreamHandler
+from sources.fokus_gpt import ChainStreamHandler
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
@@ -198,6 +198,7 @@ def prompt():
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
         # redirect to GPT fokus
+
         return redirect(url_for('fokus_gpt'))
 
     return render_template(
@@ -213,8 +214,9 @@ def fokus_gpt():
 
 
 @app.route('/get', methods=['GET', 'POST'])
-def gpt_response():
+def gpt_chat_response():
     try:
+        # End bot with this message after 10 messages (before cut)
         with limiter.limit("20/hour"):
             if request.method == 'GET':
                 session['input'] = request.args.get('msg')
@@ -229,8 +231,11 @@ def gpt_response():
     except:
         return ""
 
+@app.route('/get_email', methods=['GET', 'POST'])
+def gpt_email_response():
 
-# End bot with this message after 9 messages (before cut)
+
+
 
 
 @app.route('/end', methods=['GET', 'POST'])

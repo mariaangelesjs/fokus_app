@@ -137,7 +137,7 @@
                 <br>
                 <br>
             </div>
-                <form action="{{url_for('fokus_gpt')}}">
+                <form action="{{url_for('fokus_gpt')}}" method="POST">
                     <script>
                         function thunderGif() {
                             const element = document.getElementById("charging");
@@ -147,9 +147,18 @@
                             //assuming thunder.gif animation length is 3 seconds
                         }
                     </script>
-                    <input type="submit" id="button" value="Lag prompt" onclick="thunderGif()" />
-                    <br>
-                    <br>
+                    <div class="buttons">
+                        <button type="submit" class ="button_decision chat"
+                         id="button_chat" name="submit chat" 
+                         value="Chat" onclick="thunderGif()" 
+                         href="{{url_for('fokus_gpt')}}" ></button>
+                        <button type="submit" class ="button_decision epost"
+                         id="button_epost" name="submit epost"
+                          value="E-post" onclick="thunderGif()"
+                          href="{{url_for('fokus_epost')}}"></button>
+                        <br>
+                        <br>
+                    </div>
                     <img id="gif" />
                 </form>
             </td>

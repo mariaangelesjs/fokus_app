@@ -70,7 +70,7 @@ body {
     width: 50%;
     background-image: var(--body-bg);
     font-family: 'Open Sans', sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     -webkit-text-stroke: 0.25px black
   }
 #button-table {
@@ -85,6 +85,9 @@ div {
   margin-right: auto;
   text-align: center;
   position: relative;
+}
+label {
+  font-weight:bold;
 }
 input[type=text] {
   color: black;
@@ -111,10 +114,15 @@ input[type=submit] {
     text-align: center;
     cursor: wait;
     }
+.button_decision{
+    display: inline-block;
+    margin: 0 20px;
+   }
 .hide{
       display:none;
     }
 .show{
       display:block;
+      text-align: center !important;
     }
 
