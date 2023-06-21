@@ -17,7 +17,7 @@
             <label for="tone_of_voice">Tone of voice:</label>
             <br>
             <br>
-            <select name="tone" id="select_tone" onchange="emailResponse()">
+            <select name="tone" id="select_tone">
                 <option value="null">Velg "tone of voice" </option>
                 <option value="entusiastisk">entusiastisk</option>
                 <option value="gøy">gøy</option>
@@ -46,8 +46,11 @@
         const subjectInput = document.getElementById('subject');
         const contentInput = document.getElementById('content');
         
+        toneForm.tone.onchange = function() {
+            $.post("/get_email", { tone: selectedTone.value }).done(function(){
+                emailResponse()
+            })};
             function emailResponse() {
-            $.get("/get", { tone: selectedTone.value }).done(function (data) {
                 async function streamer() {
                     try {
                         const response = await fetch('/get_email', {
@@ -73,7 +76,7 @@
                     }
                 }
                 streamer();
-            })}
+            }
         $(function () {
                 $("select").select2({
                     templateResult: formatOption
