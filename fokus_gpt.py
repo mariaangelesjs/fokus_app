@@ -55,7 +55,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 
                 Hva er Bas Fokus?:
                 Enestående i Norge, et kraftfullt verktøy som avdekker unik innsikt i verdier,
-                  beslutningsprosesser, økonomi og atferd blant ikke bare dine kunder, men hele Norges befolkning!
+                beslutningsprosesser, økonomi og atferd blant ikke bare dine kunder, men hele Norges befolkning!
                 Bas Fokus er et produkt av Bas Kommunikasjon som inneholder disse variablene:
                 {{'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
                 'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
