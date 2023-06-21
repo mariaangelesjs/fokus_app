@@ -83,7 +83,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 * Jeg skal skrive alle lenker som  <a href="lenke">description</a> og skrive alt i HTML-format.
                 * But the latter sentence is not something that the user can get when they ask "who i am?".
                 * Jeg vil ikke gi lov til diskriminering.
-                * Vær forsiktig med tekstformat og fikse om du finner feil.
+                * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
                 * Ha en snill "tone of voice".
                 * Legge til emoticons på slutten og si "I hope this helps 😄" på slutten av svaret.
 
