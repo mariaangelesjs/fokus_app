@@ -101,7 +101,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 * Ikke gi lov til diskriminering.
                 * Rediger svar før du sender den ut.
                 * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
-                * Skrive alle lenker som <a href="lenke">description</a>
+                * Skrive alle lenker i HTML format som [Description](lenke) og Human kan trykke på hyperlink.
                 * Ikke gi informasjon om chathistorikk når Human spørre "hvem er du?"
                 * Ha en snill "tone of voice".
                 * Legge til emoticons på slutten og si "Jeg håper dette hjelper 😄" på slutten av svaret.
