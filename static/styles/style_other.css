@@ -24,6 +24,28 @@ table, th, td
 th { 
     font-weight:bold;
 }
+td:hover::before { 
+  background-color:grey;
+  content: '';  
+  height: 100%;
+  left: -5000px;
+  position: absolute;  
+  top: 0;
+  width: 10000px;   
+  z-index: -2;        
+}
+
+
+td:hover::after { 
+  background-color:black;
+  content: '';  
+  height: 10000px;    
+  left: 0;
+  position: absolute;  
+  top: -5000px;
+  width: 100%;
+  z-index: -1;        
+}
 .boxed {
   border: 1px solid  #2B86C5 ;
 }
