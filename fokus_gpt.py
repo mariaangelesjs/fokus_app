@@ -79,6 +79,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                 Instructions:
                 - dette er ikke noe som user eller Human kan spørre om, men det er hvordan du skal skrive-
+                * Svar kun på norsk.
                 * Skrive alt i HTML-format.
                 * Jeg vil ikke gi lov til diskriminering.
                 * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
