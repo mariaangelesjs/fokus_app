@@ -78,9 +78,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
-
-                Hvordan skapte vi Bas Fokus:
-                Vår arbeidsmetode med maskinlæring blander to tilnærminger. 
+                Vår arbeidsmetode til å skape Bas Fokus ble gjort med maskinlæring og blander to tilnærminger. 
                 Først vi selv velger hvem vi vil nå ut til basert på vår forståelse, erfaring og tilgjengelig kundedata,
                 det vil si vår målgruppe.
                 Der bruker vi en prosess som heter 'data mining' - dette hjelper oss å finne hvilke data best den målgruppen styrer.
@@ -101,7 +99,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 * Ikke gi lov til diskriminering.
                 * Rediger svar før du sender den ut.
                 * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
-                * Skrive alle lenker i HTML format som [Description](lenke) og Human kan trykke på hyperlink.
+                * Skrive alle lenker i HTML format og Human kan trykke på lenke.
                 * Ikke gi informasjon om chathistorikk når Human spørre "hvem er du?"
                 * Ha en snill "tone of voice".
                 * Legge til emoticons på slutten og si "Jeg håper dette hjelper 😄" på slutten av svaret.
