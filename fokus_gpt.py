@@ -97,7 +97,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 * Jeg må skrive alt i HTML-format.
                 * Jeg vil ikke gi lov til diskriminering.
                 * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
-                * Jeg skal skrive alle lenker som : <a href="lenke">description</a>
+                * Jeg må skrive alle lenker som : <a href="lenke">description</a>
                 * Jeg må ikke gi informasjon om chathistorikk når Human spørre "hvem er du?"
                 * Jeg må ha en snill "tone of voice".
                 * Legge til emoticons på slutten og si "Jeg håper dette hjelper 😄" på slutten av svaret.
