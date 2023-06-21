@@ -197,9 +197,6 @@ def prompt():
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
-        # redirect to GPT fokus
-
-        return redirect(url_for('fokus_gpt'))
 
     return render_template(
         'select_columns.html',
@@ -231,16 +228,18 @@ def gpt_chat_response():
     except:
         return ""
 
-@app.route('/get_email', methods=['GET', 'POST'])
-def gpt_email_response():
+@app.route('/unique_email', methods=['GET', 'POST'])
+def gpt_email():
      # run the bot
     return render_template('gpt_email.html')
-def gpt_chat_response():
+
+@app.route('/get_email', methods=['GET', 'POST'])
+def gpt_email_response():
     try:
         # End bot with this message after 10 messages (before cut)
-        with limiter.limit("4/hour"):
             if request.method == 'GET':
                 tone = request.args.get('tone')
+                print(tone)
                 full_prompt = str(session['prompt_done'] + ' og ' + tone )
             if request.method == 'POST':
                 return Response(

@@ -13,11 +13,11 @@
 
 <body>
     <main>
-        <form name="tone_voice" method="post">
+        <form class="tones" name="tone_voice" method="post">
             <label for="tone_of_voice">Tone of voice:</label>
             <br>
             <br>
-            <select name="tone" id="select_tone">
+            <select name="tone" id="select_tone" onchange="emailResponse()">
                 <option value="null">Velg "tone of voice" </option>
                 <option value="entusiastisk">entusiastisk</option>
                 <option value="gøy">gøy</option>
@@ -29,22 +29,25 @@
         <form class="email-form">
             <label for="subject">Emne:</label>
             <input type="text" id="subject" name="subject">
+            <br>
+            <br>
             <label for="content">Innhold:</label>
-            <textarea id="content" name="content"></textarea>
+            <input type="text" id="content" name="content"></textarea>
+            <br>
+            <br>
             <button type="submit">Submit</button>
         </form>
         <script>
-            const emailForm = get(".email-form");
-            const selectedTone = document.getElementById('select_tone')
-            const subjectInput = document.getElementById('subject');
-            const contentInput = document.getElementById('content');
-            selectedTone.addEventListener('change', function (e) {
-                $.get("/get", { tone: document.getElementById('select_tone').value })
-            }).done(function () {
-                emailResponse(hoverCount)
-            })
-
-            function emailResponse(number, msgText) {
+        const toneForm = get('.tones');
+        const formData = new FormData(toneForm);
+            formData.append('subject', emailForm.elements.subject.value)
+            formData.append('content', emailForm.elements.content.value)
+        const selectedTone = document.getElementById('select_tone')
+        const subjectInput = document.getElementById('subject');
+        const contentInput = document.getElementById('content');
+        
+            function emailResponse() {
+            $.get("/get", { tone: selectedTone.value }).done(function (data) {
                 async function streamer() {
                     try {
                         const response = await fetch('/get_email', {
@@ -52,8 +55,6 @@
                             body: formData
                         });
                         const reader = response.body.getReader();
-                        subjectInput.innerHTML = "";
-                        contentInput.innerHTML = "";
                         while (true) {
                             const { done, value } = await reader.read();
                             if (done) break;
@@ -62,15 +63,18 @@
                                 subjectInput.innerHTML += text
                             } else if (text.startsWith("Innhold")) {
                                 contentInput.innerHTML += text
-                            } else { msgerChat.scrollTo(0, msgerChat.scrollHeight); }
+                            } else {
+                                subjectInput.innerHTML = "";
+                                contentInput.innerHTML = "";
+                            }
                         }
                     } catch (error) {
                         console.error(error);
                     }
                 }
                 streamer();
-            }
-            $(function () {
+            })}
+        $(function () {
                 $("select").select2({
                     templateResult: formatOption
                 });
