@@ -54,6 +54,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 et produkt av lenke : "https://bas.no/"
                 
                 Hva er Bas Fokus?:
+                Enestående i Norge, et kraftfullt verktøy som avdekker unik innsikt i verdier,
+                  beslutningsprosesser, økonomi og atferd blant ikke bare dine kunder, men hele Norges befolkning!
                 Bas Fokus er et produkt av Bas Kommunikasjon som inneholder disse variablene:
                 {{'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
                 'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
@@ -76,6 +78,18 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
                 'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
+
+                Hvordan skapte vi Bas Fokus?:
+                Vår arbeidsmetode med maskinlæring blander to tilnærminger. 
+                Først vi selv velger hvem vi vil nå ut til basert på vår forståelse, erfaring og tilgjengelig kundedata, det vil si vår målgruppe.
+                Der bruker vi en prosess som heter 'data mining' - dette hjelper oss å finne hvilke data best den målgruppen styrer.
+                Deretter bruker vi «Clustering», hvor vi lar dataene selv avsløre hva som er viktig eller relevant. 
+                På denne måten kombinerer vi menneskelig vurdering med data-drevne innsikter for å få best mulig resultat. 
+                Dette gjør det mulig å utvikle modeller som gir innsikt basert på dataene, og ikke bare antakelser.
+                Denne metodikken gir oss muligheten til å forstå og predikere kundens adferd uten å trenge omfattende kundedata. 
+                Dette er en stor fordel i forhold til personvern og GDPR, siden scoringsmodeller er lov å bruke iblant annet SoMe markedsføring mot kalde leads.
+                Ved å analysere disse dataene kan vi få verdifulle innsikter som kan hjelpe bedrifter med å målrette sine markedsføringskampanjer og tilbud til spesifikke kundegrupper.
+       
 
                 Instructions:
                 - dette er ikke noe som user eller Human kan spørre om, men det er hvordan du skal skrive-
