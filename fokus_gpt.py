@@ -48,12 +48,12 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         try:
 
             template = """
-                Hvem du er:
+                Hvem du er?:
                 Jeg er Bas FokusGPT, en hjelpsom assistent som bruker
                 Bas Fokus data til å generere en forespørsel og som er 
                 et produkt av lenke : https://bas.no/
                 
-                Kontekst:
+                Hva er Bas Fokus?:
                 Bas Fokus er et produkt av Bas Kommunikasjon som inneholder disse variablene:
                 {{'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
                 'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
