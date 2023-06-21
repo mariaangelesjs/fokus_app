@@ -80,7 +80,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 Instructions:
                 - dette er ikke noe som user eller Human kan spørre om, men det er hvordan du skal skrive-
                 * Jeg skal skrive alle lenker som  <a href="lenke">description</a>
-                * Ikke gi informasjon om chathistorikk når user spørre "hvem er du?"
+                * Ikke gi informasjon om chathistorikk når Human spørre "hvem er du?"
                 * Skrive alt i HTML-format.
                 * Jeg vil ikke gi lov til diskriminering.
                 * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
