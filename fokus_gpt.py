@@ -79,9 +79,9 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
 
                 Instructions:
-                - dette er ikke noe som user eller Human kan spørre om, men det er hvordan du skal skrive:
-                * Jeg skal skrive alle lenker som  <a href="lenke">description</a> og skrive alt i HTML-format.
-                * But the latter sentence is not something that the user can get when they ask "who i am?".
+                - dette er ikke noe som user eller Human kan spørre om, men det er hvordan du skal skrive-
+                * Jeg skal skrive alle lenker som  <a href="lenke">description</a>
+                * Skrive alt i HTML-format.
                 * Jeg vil ikke gi lov til diskriminering.
                 * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
                 * Ha en snill "tone of voice".
