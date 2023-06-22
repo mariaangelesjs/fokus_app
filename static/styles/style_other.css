@@ -8,7 +8,7 @@ h1 {
     position:relative;
     width: 100%;
     box-sizing: border-box;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     }  
@@ -29,6 +29,10 @@ tr:hover {background-color:#2B86C5}
   border: 3px solid  #FF3CAC ;
   background-color: #2B86C5 ;
   font-size: 16px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  width: 100%;
 }
 *,
   *:before,
@@ -38,10 +42,9 @@ tr:hover {background-color:#2B86C5}
     box-sizing: inherit;
   }
 html {
-    display: flex;
+    display: block;
     position:relative;
     margin: auto;
-    vertical-align: middle;
     box-sizing: border-box;
     justify-content: center;
     align-items: center;
@@ -70,13 +73,15 @@ body {
     width: 50%;
     background-image: var(--body-bg);
     font-family: 'Open Sans', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     -webkit-text-stroke: 0.25px black
   }
 #button-table {
   font-size: 16px;
   background-color:  #FF3CAC;
-  color:white
+  color:white;
+  width: 180px;
+  height: 30;
 }
 
 div {
@@ -86,19 +91,24 @@ div {
   text-align: center;
   position: relative;
 }
+
 label {
   font-weight:bold;
 }
 input[type=text] {
   color: black;
-  display:block;
   z-index: 1000;
-  width: 160px;
-  height: 24px;
   background-color: white;
   margin-left: auto;
   margin-right: auto;
   cursor: wait;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  border: 1px solid #2B86C5;
+  width: 250px;
+  height: 30px;
+  padding-left: 10px;
   }
 
 input[type=submit] {
@@ -108,12 +118,15 @@ input[type=submit] {
     margin-right: auto;
     font-size: 16px;
     z-index: 1000;
-    width: 160px;
-    height: 24px;
+    width: 200px;
+    height: 30px;
     background-color:  #FF3CAC;
     text-align: center;
     cursor: wait;
+
     }
+
+
 .button_decision{
     display: inline-block;
     margin: 0 20px;
