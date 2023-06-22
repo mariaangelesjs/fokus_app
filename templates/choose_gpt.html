@@ -17,20 +17,24 @@
             <h1 class="display-6 fw-bold text-primary">Hva vil du teste? </h1>
             <br>
             <br>
-              <input type="submit" id="button chat" value= "FokusGPT Chat" name="GPTchat"></input> 
-              <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_chat.png') }}" 
+              <input type="submit" class="button_decision chat" id="button chat" 
+              onclick="redirect('/unique_ad')" value= "FokusGPT Chat" name="GPTchat"></input> 
+              <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_chat1.png') }}" 
             alt="ChatBot" width="400" height="400"/> 
-              <input type="submit" id="button epost" name="GPTepost" value="FokusGPT E-post"/> 
+              <br>    
+              <br>
+              <input type="submit" id="button epost"  onclick="redirect('/unique_email')" 
+              class="button_decision epost" name="GPTepost" value="FokusGPT E-post"/></input> 
               <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_epost.png') }}" 
             alt="E-post" width="400" height="400"/> 
               <br>
               <br>
+              <script>
+              function redirect(url){
+                window.open(url)
+              }
+              </script>
               <br>
-              <br>    
-              <br>
-              <br> 
-               <b>Fokus GPT lære seg alltid noe nytt, så du kan bruke vår demo så mye du vil</b>
-              <br>
-              <br>          
+              <br>              
           </div>
 </html>

@@ -197,12 +197,17 @@ def prompt():
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
             session['industry']).replace('_', ' ')
-        return redirect(url_for('fokus_gpt'))
+        return redirect(url_for('choose_gpt'))
     return render_template(
         'select_columns.html',
         columns=fokus_variables_norwegian,
         tables=person_table.reset_index().to_dict(orient='records'))
 
+
+@app.route('/choose_service', methods=['GET', 'POST'])
+def choose_gpt():
+    # run the bot
+    return render_template('choose_gpt.html')
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
