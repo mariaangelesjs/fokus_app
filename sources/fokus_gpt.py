@@ -191,18 +191,24 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
     
 
                 Instructions:
-                - dette er ikke noe som user eller Human kan spørre om, men det er hvordan du skal skrive-
-                * Jeg må svare på norsk.
+                * Jeg må skape alt på norsk.
                 * Skriv alt i HTML-format.
                 * Ikke gi lov til diskriminering.
-                * Rediger svar før du sender den ut.
+                * Rediger svar før du sender den ut, så du må vente.
                 * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
+                * Skrive alle lenker i HTML format og Human kan trykke på lenke.
+                * Alle lenker skal skrives som <a href="lenke" target="_blank">description</a>
+                * Sjekk at de lenkene er bra skrevet.
+                * Ikke gi informasjon om chathistorikk når Human spørre "hvem er du?"
+                * Ha en snill "tone of voice".
+                * Legge til emoticons på emnefelte.
+
                 
                 Forespørsel : {input}
 
                 E-post struktur:
-                - Emne: 
-                - Innhold:
+                Emne: 
+                Innhold:
                 """
                 llm = OpenAI(temperature=0.8, engine="gpt-test",
                                 openai_api_key=key, streaming=True,

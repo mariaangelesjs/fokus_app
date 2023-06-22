@@ -245,7 +245,7 @@ def gpt_email_response():
             if request.method == 'GET':
                 tone = request.args.get('tone')
                 print(tone)
-                full_prompt = str(session['prompt_done'] + ' og ' + tone )
+                full_prompt = str(session['prompt_done'] + ' og ' + tone ).replace('artikel','e-post')
             if request.method == 'POST':
                 return Response(
                     ChainStreamHandler.chain(

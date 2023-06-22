@@ -141,4 +141,10 @@ input[type=submit] {
 .picture2 {
   display: flex;
 }
+#content{
+  background-color: white;
+}
+#subject{
+  background-color: white;
+}
 

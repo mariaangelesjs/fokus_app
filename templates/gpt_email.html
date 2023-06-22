@@ -28,11 +28,11 @@
         </form>
         <form class="email-form">
             <label for="subject">Emne:</label>
-            <input type="text" id="subject" name="subject">
+            <div id="subject" name="subject"></div>
             <br>
             <br>
             <label for="content">Innhold:</label>
-            <input type="text" id="content" name="content"></textarea>
+            <div id="content" name="content"></div>
             <br>
             <br>
             <button type="submit">Submit</button>
@@ -47,7 +47,7 @@
         const contentInput = document.getElementById('content');
         
         toneForm.tone.onchange = function() {
-            $.post("/get_email", { tone: selectedTone.value }).done(function(){
+            $.get("/get_email", { tone: selectedTone.value }).done(function(){
                 emailResponse()
             })};
             function emailResponse() {
@@ -58,17 +58,16 @@
                             body: formData
                         });
                         const reader = response.body.getReader();
+                        subjectInput.innerHTML = "";
+                        contentInput.innerHTML = "";
                         while (true) {
                             const { done, value } = await reader.read();
                             if (done) break;
                             const text = new TextDecoder().decode(value);
-                            if (text.startsWith("Emne")) {
+                            if (!text.startsWith("Innhold")) {
                                 subjectInput.innerHTML += text
-                            } else if (text.startsWith("Innhold")) {
+                            } else if (text.startsWith("Innhold:")) {
                                 contentInput.innerHTML += text
-                            } else {
-                                subjectInput.innerHTML = "";
-                                contentInput.innerHTML = "";
                             }
                         }
                     } catch (error) {
@@ -76,6 +75,8 @@
                     }
                 }
                 streamer();
+                subjectInput.innerHTML = subjectInput.innerHTML.replace("Emne:", "")
+                contentInput.innerHTML = contentInput.innerHTML.replace("Innhold:", "")
             }
         $(function () {
                 $("select").select2({
