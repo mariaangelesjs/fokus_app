@@ -202,20 +202,20 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 - Emne: 
                 - Innhold:
                 """
-            llm = OpenAI(temperature=0.8, engine="gpt-test",
-                             openai_api_key=key, streaming=True,
-                             callback_manager=CallbackManager([ChainStreamHandler(g)]))
-            prompt = PromptTemplate(input_variables=["input"], template=template)
-            gpt_chain = LLMChain(
-                llm=llm,
-                prompt=prompt,
-                streaming=True
-            )
-            gpt_chain(incoming_msg)
-            upload_pickle(json.loads(json.dumps(
-                ChainStreamHandler.get_conversation(gpt_chain))),
-                    STORAGEACCOUNTURL,
-                            STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
+                llm = OpenAI(temperature=0.8, engine="gpt-test",
+                                openai_api_key=key, streaming=True,
+                                callback_manager=CallbackManager([ChainStreamHandler(g)]))
+                prompt = PromptTemplate(input_variables=["input"], template=template)
+                gpt_chain = LLMChain(
+                    llm=llm,
+                    prompt=prompt,
+                    streaming=True
+                )
+                gpt_chain(incoming_msg)
+                upload_pickle(json.loads(json.dumps(
+                    ChainStreamHandler.get_conversation(gpt_chain))),
+                        STORAGEACCOUNTURL,
+                                STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
         finally:
             g.close()
 
