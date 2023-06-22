@@ -105,15 +105,15 @@
                     const response = await fetch('/get', {
                         method: 'POST',
                         body: formData
-                    });
-                    const reader = response.body.getReader();
+                    })
+                    const reader = await response.body.getReader();
                     var id = "msg-text-robot-"+ number
                     document.getElementById(id).innerHTML = "";
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
-                        const text = new TextDecoder().decode(value, {stream:true});
-                        document.getElementById(id).innerHTML += text
+                        const text = await new TextDecoder().decode(value, {stream:true});
+                        document.getElementById(id).innerHTML += await text
                         msgerChat.scrollTo(0, msgerChat.scrollHeight);
                     }
                 } catch (error) {
