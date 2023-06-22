@@ -85,6 +85,10 @@
         var hoverCount = 0
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
+            if(hoverCount == 11) {
+            window.open("/end") 
+            }
+            else{
             event.preventDefault();
             const msgText = msgerInput.value;
             if (!msgText) return;
@@ -94,9 +98,8 @@
             $.get("/get", { msg: msgText }).done(function (data) {
             appendMessage(BOT_NAME, BOT_IMG, "left", "","robot", hoverCount);
             msgerChat.scrollTop += 500
-            botResponse(hoverCount)});
-            if(hoverCount == 11) {
-            window.open("/end") }
+            botResponse(hoverCount)})
+            }
 })
       
         function botResponse(number, msgText){
@@ -112,7 +115,7 @@
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
-                        const text = new TextDecoder().decode(value, {stream:true});
+                        const text = new TextDecoder().decode(value);
                         document.getElementById(id).innerHTML += text
                         msgerChat.scrollTo(0, msgerChat.scrollHeight);
                     }
