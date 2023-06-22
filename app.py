@@ -204,7 +204,7 @@ def prompt():
         tables=person_table.reset_index().to_dict(orient='records'))
 
 
-@app.route('/choose_service', methods=['GET', 'POST'])
+@app.route('/choose_service')
 def choose_gpt():
     # run the bot
     return render_template('choose_gpt.html')

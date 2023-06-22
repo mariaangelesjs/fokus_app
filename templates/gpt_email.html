@@ -3,21 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
+    <meta http-equiv="refresh" content="7; url='{{url_for('gpt_email')}}'"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title style="font-weight: bold">FokusGPT Demo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{url_for('static', filename='styles/animate.min.css') }}" />
+    <link href="{{ url_for('static', filename='styles/select2.css') }}" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"
+        integrity="sha512-m7x59G4+NdYoUUKUscYq2qKkineVwmjXA/7WfXm8pukxYiFavrh9uFImpPtbmZGAnHR0rouVWWk+dgcHNurQ5g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <html>
 
 <body>
     <main>
-        <form class="tones" name="tone_voice" method="post">
+        <br>
+        <br>
+        <div class="px-4 py-3 my-2 text-center">
+        <h1>Lag din e-post </h1>
+        <br>
+        <br>
+        <div class="tones" name="tone_voice" >
+            <br>
+            <br>
             <label for="tone_of_voice">Tone of voice:</label>
             <br>
             <br>
-            <select name="tone" id="select_tone">
+            <select name="tone_form" id="select_tone">
                 <option value="null">Velg "tone of voice" </option>
                 <option value="entusiastisk">entusiastisk</option>
                 <option value="gøy">gøy</option>
@@ -25,7 +38,23 @@
                 <option value="spennende">spennende</option>
                 <option value="profesjonell">profesjonell</option>
             </select>
-        </form>
+        </div>
+        <script>
+        $(function () {
+                $("select").select2({
+                    templateResult: formatOption
+                });
+
+                function formatOption(option) {
+                    var $option = $(
+                        '<div><strong>' + option.text + '</strong></div><div>' + option.title + '</div>'
+                    );
+                    return $option;
+                };
+            });
+        </script>
+        <br>
+        <br>
         <form class="email-form">
             <label for="subject">Emne:</label>
             <div id="subject" name="subject"></div>
@@ -35,7 +64,7 @@
             <div id="content" name="content"></div>
             <br>
             <br>
-            <button type="submit">Submit</button>
+            <input type="submit" value="Submit"></button>
         </form>
         <script>
         const toneForm = get('.tones');
@@ -46,11 +75,9 @@
         const subjectInput = document.getElementById('subject');
         const contentInput = document.getElementById('content');
         
-        toneForm.tone.onchange = function() {
+        $('#select_tone').change(function emailResponse() {
+            alert('Change Happened');
             $.get("/get_email", { tone: selectedTone.value }).done(function(){
-                emailResponse()
-            })};
-            function emailResponse() {
                 async function streamer() {
                     try {
                         const response = await fetch('/get_email', {
@@ -77,20 +104,9 @@
                 streamer();
                 subjectInput.innerHTML = subjectInput.innerHTML.replace("Emne:", "")
                 contentInput.innerHTML = contentInput.innerHTML.replace("Innhold:", "")
-            }
-        $(function () {
-                $("select").select2({
-                    templateResult: formatOption
-                });
-
-                function formatOption(option) {
-                    var $option = $(
-                        '<div><strong>' + option.text + '</strong></div><div>' + option.title + '</div>'
-                    );
-                    return $option;
-                };
-            });
+            })})
         </script>
+    </div>
     </main>
 </body>
 
