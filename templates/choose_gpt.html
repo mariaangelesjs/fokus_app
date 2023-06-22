@@ -2,39 +2,50 @@
 <head>
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
     <meta http-equiv="refresh" content="7; url='{{url_for('choose_gpt')}}'"/>
-    <title>FokusGPT Demo</title>
+    <title>FokusGPT Demo - Services</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </head>
 <html>
    <body>
      <main>
-      <br>
-        <div class="px-4 py-3 my-2 text-center">
-            <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" 
+           <br>
+           <div class="px-4 py-3 my-2 text-center">
+            <img src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" 
             alt="Bas Logo" width="192" height="192"/>
+            <br>
+            <br>
+            </div>
             <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-            <h1 class="display-6 fw-bold text-primary">Hva vil du teste? </h1>
-            <br>
-            <br>
-              <input type="submit" class="button_decision chat" id="button chat" 
-              onclick="redirect('/unique_ad')" value= "FokusGPT Chat" name="GPTchat"></input> 
-              <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_chat1.png') }}" 
-            alt="ChatBot" width="400" height="400"/> 
-              <br>    
-              <br>
-              <input type="submit" id="button epost"  onclick="redirect('/unique_email')" 
-              class="button_decision epost" name="GPTepost" value="FokusGPT E-post"/></input> 
-              <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_epost.png') }}" 
-            alt="E-post" width="400" height="400"/> 
-              <br>
-              <br>
-              <script>
-              function redirect(url){
-                window.open(url)
-              }
-              </script>
-              <br>
-              <br>              
-          </div>
-</html>
+            <h1>Hva vil du teste? </h1>
+            <div class="pictures">
+                <br>
+                <br>
+                <div class="picture1">
+                    <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_chat1.png') }}" 
+                    alt="ChatBot" width="250" height="250" hspace="20"/>
+                    <br>
+                    <br>
+                     <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_epost.png') }}" 
+                    alt="E-post" width="250" height="250"/> 
+                </div> 
+                <br>   
+                <br>
+                <div class="picture2">
+                    <input type="submit" class="button_decision chat" id="button chat" 
+                    onclick="redirect('/unique_ad')" value= "FokusGPT Chat" name="GPTchat"></input>
+                    <br>
+                    <br> 
+                    <input type="submit" id="button epost"  onclick="redirect('/unique_email')" 
+                    class="button_decision epost" name="GPTepost" value="FokusGPT E-post"/></input>
+                </div>
+                <br> 
+                <br>
+                <script>
+                function redirect(url){
+                    window.open(url)
+                }
+                </script>            
+            </div>
+    </main>
+   </body>
+</html>  

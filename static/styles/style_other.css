@@ -2,7 +2,7 @@
     --body-bg: linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%);
   }
 
-  html {
+html {
     display: inline-block;
     margin: auto;
     justify-content: center;
@@ -14,6 +14,10 @@
     background-image: var(--body-bg);
       }
 
+#bas-logo {
+        text-align: center;
+        align-items: center;
+    }
 table, th, td 
 {
     border: solid 1px #ddd;
@@ -36,15 +40,6 @@ tr:hover {background-color:#2B86C5}
   }
 
 
-h1 {
-      font-weight: bold;
-      } 
-#bas-logo {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
 .boxed {
   border: 3px solid  #FF3CAC ;
   background-color: #2B86C5 ;
@@ -70,6 +65,12 @@ body {
     font-size: 18px;
     -webkit-text-stroke: 0.25px black
   }
+h1 {
+    font-weight: bold;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    } 
 #button-table {
   font-size: 16px;
   background-color:  #FF3CAC;
@@ -118,14 +119,9 @@ input[type=submit] {
     background-color:  #FF3CAC;
     text-align: center;
     cursor: wait;
-
     }
 
 
-.button_decision{
-    display: inline-block;
-    margin: 0 20px;
-   }
 .hide{
       display:none;
     }
@@ -133,4 +129,16 @@ input[type=submit] {
       display:block;
       text-align: center !important;
     }
+
+.picture1 {
+  display: flex;
+  align-items: center;
+  gap: 90px;
+  text-align: center;
+  margin-left: 90px;
+  margin-right: auto;
+}
+.picture2 {
+  display: flex;
+}
 
