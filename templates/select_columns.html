@@ -10,109 +10,112 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link href="{{ url_for('static', filename='styles/select2.css') }}" rel="stylesheet" />
 </head>
-<br>
-        <br>
-<h1>Lag din unike forespørsel</h1>
-<body>
     <br>
     <br>
-    <div class="boxed">
-    <b>Her skaper din unikk forespørsel som :</b>
-    <br>
-    "Skriv en <b>artikel/email</b> med  <b>[ord]</b> av  <b>[produkt]</b> 
-    til en person med  <b>[Fokus-verdi]</b> i  <b>[Fokus-variabel]</b>
-    som er  <b>[stilling] </b>i  <b>[industri]</b>"
-          </div>
-    <div class="container">
-        <br>
-        <br>
-        <h3> Du er kvalifisert som: </h3>
-        <br>
-        <button class="button" id="button-table" onclick="tableFromJson()">Dine Fokus verdier</button>
-        <br>
-        <p id="table-fokus"></p>
-        <script>
-            let tableFromJson = () => {
-                // the json data.
-                const myData = {{ tables | tojson | safe}}
-            // Get headers
-            let col = [];
-            for (let i = 0; i < myData.length; i++) {
-                for (let key in myData[i]) {
-                    if (col.indexOf(key) === -1) {
-                        col.push(key);
+    <body>
+        <div class="px-4 py-3 my-2 text-center">
+            <h1 class="display-6 fw-bold text-primary">Lag din unike forespørsel</h1>
+                <br>
+                <br>
+            </div>
+                <div class="boxed">
+                    <b>Her skaper din unikk forespørsel som :</b>
+                    <br>
+                    "Skriv en <b>artikel/email</b> med <b>[ord]</b> av <b>[produkt]</b>
+                    til en person med <b>[Fokus-verdi]</b> i <b>[Fokus-variabel]</b>
+                    som er <b>[stilling] </b>i <b>[industri]</b>"
+                </div>
+        <div class="container">
+            <br>
+            <br>
+            <h3> Du er kvalifisert som: </h3>
+            <br>
+            <button class="button" id="button-table" onclick="tableFromJson()">Dine Fokus verdier</button>
+            <br>
+            <p id="table-fokus"></p>
+            <script>
+                let tableFromJson = () => {
+                    // the json data.
+                    const myData = {{ tables | tojson | safe
+                }}
+                // Get headers
+                let col = [];
+                for (let i = 0; i < myData.length; i++) {
+                    for (let key in myData[i]) {
+                        if (col.indexOf(key) === -1) {
+                            col.push(key);
+                        }
                     }
                 }
-            }
 
-            // Create table.
-            const table = document.createElement("table");
+                // Create table.
+                const table = document.createElement("table");
 
-            // Create table header row using the extracted headers above.
-            let tr = table.insertRow(-1);                   // table row.
+                // Create table header row using the extracted headers above.
+                let tr = table.insertRow(-1);                   // table row.
 
-            for (let i = 0; i < col.length; i++) {
-                let th = document.createElement("th");      // table header.
-                th.innerHTML = col[i];
-                tr.appendChild(th);
-            }
-
-            // add json data to the table as rows.
-            for (let i = 0; i < myData.length; i++) {
-
-                tr = table.insertRow(-1);
-
-                for (let j = 0; j < col.length; j++) {
-                    let tabCell = tr.insertCell(-1);
-                    tabCell.innerHTML = myData[i][col[j]];
+                for (let i = 0; i < col.length; i++) {
+                    let th = document.createElement("th");      // table header.
+                    th.innerHTML = col[i];
+                    tr.appendChild(th);
                 }
-            }
 
-            // Now, add the newly created table with json data, to a container.
-            const divShowData = document.getElementById("table-fokus");
-            divShowData.innerHTML = "";
-            divShowData.appendChild(table);
-            }
-            $(document).ready(function () {
-                $("#button-table").click(function () {
-                    $("#table-fokus").toggle();
+                // add json data to the table as rows.
+                for (let i = 0; i < myData.length; i++) {
+
+                    tr = table.insertRow(-1);
+
+                    for (let j = 0; j < col.length; j++) {
+                        let tabCell = tr.insertCell(-1);
+                        tabCell.innerHTML = myData[i][col[j]];
+                    }
+                }
+
+                // Now, add the newly created table with json data, to a container.
+                const divShowData = document.getElementById("table-fokus");
+                divShowData.innerHTML = "";
+                divShowData.appendChild(table);
+                }
+                $(document).ready(function () {
+                    $("#button-table").click(function () {
+                        $("#table-fokus").toggle();
+                    });
                 });
-            });
-        </script>
-        <br>
-        <script>
+            </script>
+            <br>
+            <script>
 
-            $(function () {
-                $("select").select2({
-                    templateResult: formatOption
+                $(function () {
+                    $("select").select2({
+                        templateResult: formatOption
+                    });
+
+                    function formatOption(option) {
+                        var $option = $(
+                            '<div><strong>' + option.text + '</strong></div><div>' + option.title + '</div>'
+                        );
+                        return $option;
+                    };
                 });
-
-                function formatOption(option) {
-                    var $option = $(
-                        '<div><strong>' + option.text + '</strong></div><div>' + option.title + '</div>'
-                    );
-                    return $option;
-                };
-            });
-        </script>
-        <form action="{{url_for('prompt')}}" , method="POST">
-            <div id="words_total">
-                <label for="word_amount">Antall
-                    ord:</label>
-                <br>
-                <br>
+            </script>
+            <form action="{{url_for('prompt')}}" , method="POST">
+                <div id="words_total">
+                    <label for="word_amount">Antall
+                        ord:</label>
+                    <br>
+                    <br>
                     <select name="words">
                         <option value="No_words">Velg hvor mange ord du ønsker å ha </option>
                         <option value="100 ord">100 ord</option>
                         <option value="300 ord">300 ord</option>
                         <option value="500 ord">500 ord</option>
                     </select>
-            </div>
-            <br>
-            <div id="fokus_variables">
-                <label for="variable_name">Bas
-                    Fokus
-                    variabel:</label>
+                </div>
+                <br>
+                <div id="fokus_variables">
+                    <label for="variable_name">Bas
+                        Fokus
+                        variabel:</label>
                     <br>
                     <br>
                     <select name="variable" id="selected-variable">
@@ -124,27 +127,25 @@
                     <span id="fokus-description">{{ value }}</span>
                     <br>
                     <br>
-           </div>
-           <div id="posible_product">
-                <label for="product">Produktet
-                    du er
-                    interessert i:</label>
+                </div>
+                <div id="posible_product">
+                    <label for="product">Produktet du er interessert i:</label>
                     <br>
-                <br>
+                    <br>
                     <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
                     <input type="text" class="form-control" id="product" name="product" style="max-width: 256px;">
                     </td>
                     <td>
-                <br>
-                <br>
-            </div>
+                        <br>
+                        <br>
+                </div>
                 <form action="{{url_for('fokus_gpt')}}">
                     <script>
                         function thunderGif() {
                             const element = document.getElementById("charging");
                             element.textContent += "Loading";
                             element.style.display = "block"
-                            element.classList.add("animate__animated", "animate__heartBeat","animate__infinite")
+                            element.classList.add("animate__animated", "animate__heartBeat", "animate__infinite")
                             //assuming thunder.gif animation length is 3 seconds
                         }
                     </script>
@@ -153,12 +154,9 @@
                     <br>
                     <img id="gif" />
                 </form>
-            </td>
-        </form>
-    </div>
+                </td>
+            </form>
+        </div>
 </body>
 
 </html>
-
-
-

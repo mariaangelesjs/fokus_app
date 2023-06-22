@@ -1,0 +1,36 @@
+<!doctype html>
+<head>
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
+    <meta http-equiv="refresh" content="7; url='{{url_for('choose_gpt')}}'"/>
+    <title>FokusGPT Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<html>
+   <body>
+     <main>
+      <br>
+        <div class="px-4 py-3 my-2 text-center">
+            <img class="d-block mx-auto mb-4" src="{{ url_for('static', filename='images/Symbol-blå.svg') }}" 
+            alt="Bas Logo" width="192" height="192"/>
+            <!-- <img  src="/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
+            <h1 class="display-6 fw-bold text-primary">Hva vil du teste? </h1>
+            <br>
+            <br>
+              <input type="submit" id="button chat" value= "FokusGPT Chat" name="GPTchat"></input> 
+              <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_chat.png') }}" 
+            alt="ChatBot" width="400" height="400"/> 
+              <input type="submit" id="button epost" name="GPTepost" value="FokusGPT E-post"/> 
+              <img class="fixed_chatbot" src="{{ url_for('static', filename='images/fokusGPT_epost.png') }}" 
+            alt="E-post" width="400" height="400"/> 
+              <br>
+              <br>
+              <br>
+              <br>    
+              <br>
+              <br> 
+               <b>Fokus GPT lære seg alltid noe nytt, så du kan bruke vår demo så mye du vil</b>
+              <br>
+              <br>          
+          </div>
+</html>
