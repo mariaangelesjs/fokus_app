@@ -152,3 +152,17 @@ input[type=submit] {
 #small_button{
   width:100px;
 }
+.email_here {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+}
+.email_here::-webkit-scrollbar {
+  width: 6px;
+}
+.email_here::-webkit-scrollbar-track {
+  background: #ddd;
+}
+.email_here::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+}

@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
-    <meta http-equiv="refresh" content="7; url='{{url_for('gpt_email')}}'"/>
+    <meta http-equiv="refresh" content="7; url='{{url_for('gpt_email')}}'" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title style="font-weight: bold">FokusGPT Demo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
@@ -17,9 +18,9 @@
 <html>
 
 <body>
-        <br>
-        <br>
-        <div class="px-4 py-3 my-2 text-center">
+    <br>
+    <br>
+    <div class="px-4 py-3 my-2 text-center">
         <h1>Lag din e-post </h1>
         <br>
         <br>
@@ -40,7 +41,7 @@
             <input type="submit" id="small_button" class="small_button" value="Submit">
         </form>
         <script>
-        $(function () {
+            $(function () {
                 $("select").select2({
                     templateResult: formatOption
                 });
@@ -56,7 +57,6 @@
         <br>
         <br>
         <main class="email_here">
-            <form class="email-form">
                 <label for="subject">Emne:</label>
                 <div id="subject_done" name="subject"></div>
                 <br>
@@ -66,55 +66,43 @@
                 <br>
                 <br>
                 <input type="submit" value="Submit"></button>
-            </form>
         </main>
         <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
-        <script>
-        const toneForm = get('.tones');
-        const emailForm = get('.email-form')
-        const emailChat = get(".email_here");
-        const formData = new FormData(emailForm);
+        <script type="text/javascript">
+            const toneForm = get('.tones');
+            const emailForm = get('.email-form')
+            const emailChat = get(".email_here");
+            const formData = new FormData(emailForm);
             formData.append('subject', emailForm.elements.subject.value)
             formData.append('content', emailForm.elements.content.value)
-        const selectedTone =  get('.select2');
-        const subjectInput = document.getElementById('subject');
-        const contentInput = document.getElementById('content');
-        
-        toneForm.addEventListener('submit', event => {
-            alert('Change Happened');
-                
+            const selectedTone = get('.select2');
+            const subjectInput = document.getElementById('subject_done');
+            const contentInput = document.getElementById('content_done');
+            toneForm.addEventListener('submit', event => {
+                alert('Change Happened');
                 event.preventDefault();
-                emailHTML = `
-                <label for="subject">Emne:</label>
-                <div id="subject_done" name="subject"></div>
-                <br>
-                <br>
-                <label for="content">Innhold:</label>
-                <div id="content_done" name="content"></div>
-                <br>
-                <br>
-                `
-                emailChat.insertAdjacentHTML("beforeend", emailHTML);
                 async function streamer() {
                     try {
                         const response = await fetch('/get_email', {
                             method: 'POST',
-                           headers:{'Content-Type': 'text/event-stream'},
-                           body: formData
+                            headers: { 'Content-Type': 'text/event-stream' },
+                            body: toneForm
                         });
                         const reader = response.body.getReader();
-                        subjectInput.innerHTML += ""
-                        contentInput.innerHTML += ""
+                        subjectInput.innerHTML = ""
+                        contentInput.innerHTML = ""
                         while (true) {
-                            const { done, value } = await reader.read();
-                            if (done) break;
-                            const text = new TextDecoder().decode(value);
-                            if (text.startsWith("Emne:")) {
-                                subjectInput.innerHTML += text
-                            } else if (text.startsWith("Innhold:")) {
-                                contentInput.innerHTML += text
-                            }
+                            const { done, value } = await reader.read()
+                            if (done) break; then(function writestream() {
+                                const text = new TextDecoder().decode(value);
+                                if (text.startsWith("Emne:")) {
+                                    subjectInput.value += text
+                                } else if (text.startsWith("Innhold:")) {
+                                    contentInput.value += text
+                                }
+                            })
                         }
+                        emailChat.scrollTo(0, emailChat.scrollHeight)
                     } catch (error) {
                         console.error(error);
                     }
