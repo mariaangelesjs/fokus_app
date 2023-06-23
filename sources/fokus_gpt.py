@@ -178,6 +178,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 * Ikke gi informasjon om chathistorikk når Human spørre "hvem er du?"
                 * Ha en snill "tone of voice".
                 * Legge til emoticons på emnefelte.
+                * Du må ikke vise nivå eller verdien av Bas Fokus variabel, men tilpasse tekst bassert på verdi
 
                 
                 Forespørsel : {input}

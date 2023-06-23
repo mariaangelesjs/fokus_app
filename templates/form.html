@@ -6,7 +6,6 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title style="font-weight: bold">FokusGPT Demo</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
-  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
   <link
     rel="stylesheet"
     href="{{url_for('static', filename='styles/animate.min.css') }}"
@@ -58,7 +57,7 @@
         <br>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
 
-          <form action="{{url_for('prompt')}}">
+          <form>
             <script>
               function thunderGif(){
             const element = document.getElementById("charging");

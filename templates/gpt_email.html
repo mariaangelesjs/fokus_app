@@ -57,52 +57,49 @@
         <br>
         <br>
         <main class="email_here">
-                <label for="subject">Emne:</label>
-                <div id="subject_done" name="subject"></div>
-                <br>
-                <br>
-                <label for="content">Innhold:</label>
-                <div id="content_done" name="content"></div>
-                <br>
-                <br>
-                <input type="submit" value="Submit"></button>
+            <label for="subject">Emne:</label>
+            <div id="subject_done" name="subject"></div>
+            <br>
+            <br>
+            <label for="content">Innhold:</label>
+            <div id="content_done" name="content"></div>
+            <br>
+            <br>
+            <input type="submit" value="Submit"></button>
         </main>
         <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
         <script type="text/javascript">
-            const toneForm = get('.tones');
-            const emailForm = get('.email-form')
-            const emailChat = get(".email_here");
-            const formData = new FormData(emailForm);
+            var toneForm = get('.tones');
+            var emailForm = get('.email-form')
+            var emailChat = get(".email_here");
+            var formData = new FormData(emailForm);
             formData.append('subject', emailForm.elements.subject.value)
             formData.append('content', emailForm.elements.content.value)
-            const selectedTone = get('.select2');
-            const subjectInput = document.getElementById('subject_done');
-            const contentInput = document.getElementById('content_done');
+            var subjectInput = document.getElementById('subject_done');
+            var contentInput = document.getElementById('content_done');
             toneForm.addEventListener('submit', event => {
                 alert('Change Happened');
                 event.preventDefault();
                 async function streamer() {
                     try {
-                        const response = await fetch('/get_email', {
+                        const response = await fetch('/unique_email', {
                             method: 'POST',
                             headers: { 'Content-Type': 'text/event-stream' },
-                            body: toneForm
                         });
                         const reader = response.body.getReader();
-                        subjectInput.innerHTML = ""
-                        contentInput.innerHTML = ""
+
                         while (true) {
                             const { done, value } = await reader.read()
-                            if (done) break; then(function writestream() {
-                                const text = new TextDecoder().decode(value);
+                            if (done) break; then(function () {
+                                const text = new TextDecoder().decode(value, { stream: true });
                                 if (text.startsWith("Emne:")) {
-                                    subjectInput.value += text
+                                    subjectInput.innerHTML += text
                                 } else if (text.startsWith("Innhold:")) {
-                                    contentInput.value += text
+                                    contentInput.innerHTML += text
                                 }
-                            })
+                            })()
+                            emailChat.scrollTo(0, emailChat.scrollHeight)
                         }
-                        emailChat.scrollTo(0, emailChat.scrollHeight)
                     } catch (error) {
                         console.error(error);
                     }
@@ -111,6 +108,12 @@
                 subjectInput.innerHTML = subjectInput.innerHTML.replace("Emne:", "")
                 contentInput.innerHTML = contentInput.innerHTML.replace("Innhold:", "")
             })
+            if (!!window.EventSource) {
+                var source = new EventSource('/unique_email');
+                source.onmessage = function (e) {
+                    $("#data").text(e.data);
+                }
+            }
         </script>
     </div>
 </body>

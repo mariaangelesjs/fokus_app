@@ -79,7 +79,6 @@ openai.api_version = client.get_secret('gptversion').value
 
 @app.route('/', methods=['GET', 'POST'])
 def welcome():
-    global person
     if request.method == 'POST':
         # getting input with name = fname in HTML form
         session['name'] = request.form.get('name')
