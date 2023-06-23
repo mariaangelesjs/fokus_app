@@ -120,7 +120,6 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     {history}
                     Human:{input}
                     Bas FokusGPT: """
-                messages.append(1)
             else:
                 template = """
                 Hvem du er:
@@ -210,6 +209,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             conversation(incoming_msg)
             upload_pickle(json.loads(json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
                         STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
+            messages.append(1)
         finally:
             g.close()
 
