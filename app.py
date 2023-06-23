@@ -236,20 +236,20 @@ def gpt_chat_response():
 @app.route('/unique_email', methods=['GET', 'POST'])
 def gpt_email():
      # run the bot
+    # End bot with this message after 10 messages (before cut)
+    if request.method == 'POST':
+        session['tone'] = request.form.get('tone_form')
+        print(session['tone'])
+        session['full_prompt'] = str(session['prompt_done'] + ' og ' + session['tone'] ).replace('artikel','e-post')
     return render_template('gpt_email.html')
 
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
     try:
-        # End bot with this message after 10 messages (before cut)
-            if request.method == 'GET':
-                tone = request.args.get('tone')
-                print(tone)
-                full_prompt = str(session['prompt_done'] + ' og ' + tone ).replace('artikel','e-post')
             if request.method == 'POST':
                 return Response(
                     ChainStreamHandler.chain(
-                        full_prompt , key, 'email',
+                        session['full_prompt'] , key, 'email',
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME), mimetype='text/event-stream')
             else:

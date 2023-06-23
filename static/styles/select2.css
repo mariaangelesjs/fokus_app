@@ -8,6 +8,7 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+    font-size: 16px;
 }
 
 .select2-container .select2-selection--single {
@@ -61,7 +62,7 @@
 .select2-container .select2-search--inline .select2-search__field {
     box-sizing: border-box;
     border: none;
-    font-size: 18px;
+    font-size: 16px;
     margin-top: 5px;
     padding: 0
 }
@@ -339,7 +340,6 @@
     border: none;
     outline: 0;
     box-shadow: none;
-    -webkit-appearance: textfield
 }
 
 .select2-container--default .select2-results>.select2-results__options {

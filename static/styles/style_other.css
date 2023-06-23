@@ -133,9 +133,9 @@ input[type=submit] {
 .picture1 {
   display: flex;
   align-items: center;
-  gap: 90px;
+  gap: 115px;
   text-align: center;
-  margin-left: 90px;
+  margin-left: 112px;
   margin-right: auto;
 }
 .picture2 {
@@ -147,4 +147,6 @@ input[type=submit] {
 #subject{
   background-color: white;
 }
-
+#small_button{
+  width:100px;
+}
