@@ -241,19 +241,14 @@ def gpt_email():
         print(session['tone'])
         session['full_prompt'] = str(session['prompt_done'] + ' og ' + session['tone'] ).replace(
             'artikel','e-post').replace('en person', session['name']) +' fra Bas Analyse'
-        try:
-            if request.method == 'POST':
-                return Response(
+        return  Response(
                     ChainStreamHandler.chain(
                         session['full_prompt'] , key, 'email',
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME), mimetype='text/event-stream')
-            else:
-                return Response(None, mimetype='text/event-stream')
-        except:
-            return ""
     return render_template('gpt_email.html')
-
+    
+    
 
 
 

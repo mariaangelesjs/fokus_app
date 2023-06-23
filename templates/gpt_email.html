@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
-    <meta http-equiv="refresh" content="7; url='{{url_for('gpt_email')}}'" />
+    <meta content="7; url='{{url_for('gpt_email')}}'" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title style="font-weight: bold">FokusGPT Demo</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
@@ -38,7 +38,7 @@
                 <option value="spennende">spennende</option>
                 <option value="profesjonell">profesjonell</option>
             </select>
-            <input type="submit" id="small_button" class="small_button" value="Submit">
+            <input type="submit" id="small_button" class="small_button" value="Submit" onsubmit="getEmailResponse()">
         </form>
         <script>
             $(function () {
@@ -57,49 +57,37 @@
         <br>
         <br>
         <main class="email_here">
-            <label for="subject">Emne:</label>
-            <div id="subject_done" name="subject"></div>
-            <br>
-            <br>
-            <label for="content">Innhold:</label>
-            <div id="content_done" name="content"></div>
-            <br>
-            <br>
-            <input type="submit" value="Submit"></button>
+                <label for="subject">Emne:</label>
+                <div id="subject_done" name="subject"></div>
+                <br>
+                <br>
+                <label for="content">Innhold:</label>
+                <div id="content_done" name="content" href="{{ url_for('gpt_email') }}"></div>
+                <br>
+                <br>
+                <input type="submit" value="Submit">
         </main>
         <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
         <script type="text/javascript">
-            var toneForm = get('.tones');
-            var emailForm = get('.email-form')
-            var emailChat = get(".email_here");
-            var formData = new FormData(emailForm);
-            formData.append('subject', emailForm.elements.subject.value)
-            formData.append('content', emailForm.elements.content.value)
-            var subjectInput = document.getElementById('subject_done');
-            var contentInput = document.getElementById('content_done');
-            toneForm.addEventListener('submit', event => {
-                alert('Change Happened');
-                event.preventDefault();
+            const toneForm = get('.tones');
+            function getEmailResponse(){
                 async function streamer() {
                     try {
-                        const response = await fetch('/unique_email', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'text/event-stream' },
-                        });
+                        const response = fetch('/unique_email');
                         const reader = response.body.getReader();
-
+                        document.getElementById('subject_done').innerHTML = ""
+                        document.getElementById('content_done').innerHTML = ""
                         while (true) {
                             const { done, value } = await reader.read()
-                            if (done) break; then(function () {
-                                const text = new TextDecoder().decode(value, { stream: true });
+                            if (done) break; 
+                                const text = new TextDecoder().decode(value);
                                 if (text.startsWith("Emne:")) {
-                                    subjectInput.innerHTML += text
+                                    document.getElementById('subject_done').innerHTML += text
                                 } else if (text.startsWith("Innhold:")) {
-                                    contentInput.innerHTML += text
+                                    document.getElementById('content_done').innerHTML += text
                                 }
-                            })()
-                            emailChat.scrollTo(0, emailChat.scrollHeight)
                         }
+                        emailChat.scrollTo(0, emailChat.scrollHeight)
                     } catch (error) {
                         console.error(error);
                     }
@@ -107,12 +95,6 @@
                 streamer();
                 subjectInput.innerHTML = subjectInput.innerHTML.replace("Emne:", "")
                 contentInput.innerHTML = contentInput.innerHTML.replace("Innhold:", "")
-            })
-            if (!!window.EventSource) {
-                var source = new EventSource('/unique_email');
-                source.onmessage = function (e) {
-                    $("#data").text(e.data);
-                }
             }
         </script>
     </div>
