@@ -109,7 +109,7 @@ input[type=text] {
 
 input[type=submit] {
     color: white;
-    top: 200 px;
+    top: 200px;
     margin-left: auto;
     margin-right: auto;
     font-size: 16px;
@@ -134,9 +134,11 @@ input[type=submit] {
   display: flex;
   align-items: center;
   gap: 90px;
-  text-align: center;
-  margin-left: 90px;
+  top: 30px;
+  width: 690px;
   margin-right: auto;
+
+
 }
 .picture2 {
   display: flex;
