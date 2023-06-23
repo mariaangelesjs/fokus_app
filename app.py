@@ -240,7 +240,8 @@ def gpt_email():
     if request.method == 'POST':
         session['tone'] = request.form.get('tone_form')
         print(session['tone'])
-        session['full_prompt'] = str(session['prompt_done'] + ' og ' + session['tone'] ).replace('artikel','e-post')
+        session['full_prompt'] = str(session['prompt_done'] + ' og ' + session['tone'] ).replace(
+            'artikel','e-post').replace('en person', session['name']) +' fra Bas Analyse'
         try:
             if request.method == 'POST':
                 return Response(
