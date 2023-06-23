@@ -241,11 +241,7 @@ def gpt_email():
         session['tone'] = request.form.get('tone_form')
         print(session['tone'])
         session['full_prompt'] = str(session['prompt_done'] + ' og ' + session['tone'] ).replace('artikel','e-post')
-    return render_template('gpt_email.html')
-
-@app.route('/get_email', methods=['GET', 'POST'])
-def gpt_email_response():
-    try:
+        try:
             if request.method == 'POST':
                 return Response(
                     ChainStreamHandler.chain(
@@ -254,8 +250,10 @@ def gpt_email_response():
                         CONTAINERNAME), mimetype='text/event-stream')
             else:
                 return Response(None, mimetype='text/event-stream')
-    except:
-        return ""
+        except:
+            return ""
+    return render_template('gpt_email.html')
+
 
 
 

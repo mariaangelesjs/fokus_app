@@ -120,29 +120,6 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     {history}
                     Human:{input}
                     Bas FokusGPT: """
-                prompt = PromptTemplate(
-                    input_variables=['history', 'input'], template=template)
-                llm = ChatOpenAI(temperature=0.8, engine="gpt-test",
-                             openai_api_key=key, streaming=True,
-                             callback_manager=CallbackManager([ChainStreamHandler(g)]))
-                if messages:
-                    old_messages = download_pickle(
-                        STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                        CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')
-                    print(old_messages)
-                    retrieved_messages = messages_from_dict(old_messages)
-                    retrieved_chat_history = ChatMessageHistory(
-                        messages=retrieved_messages)
-                    print(retrieved_chat_history)
-                    memory = ConversationBufferMemory(
-                        chat_memory=retrieved_chat_history)
-                else:
-                    memory = ConversationBufferMemory(memory_key='history')
-                conversation = ConversationChain(
-                    memory=memory, prompt=prompt, llm=llm)
-                conversation(incoming_msg)
-                upload_pickle(json.loads(json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
-                            STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
                 messages.append(1)
             else:
                 template = """
@@ -205,25 +182,34 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                 
                 Forespørsel : {input}
-
+                {history}
                 E-post struktur:
                 Emne: 
                 Innhold:
                 """
-                llm = OpenAI(temperature=0.8, engine="gpt-test",
-                                openai_api_key=key, streaming=True,
-                                callback_manager=CallbackManager([ChainStreamHandler(g)]))
-                prompt = PromptTemplate(input_variables=["input"], template=template)
-                gpt_chain = LLMChain(
-                    llm=llm,
-                    prompt=prompt,
-                    streaming=True
-                )
-                gpt_chain(incoming_msg)
-                upload_pickle(json.loads(json.dumps(
-                    ChainStreamHandler.get_conversation(gpt_chain))),
-                        STORAGEACCOUNTURL,
-                                STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
+            prompt = PromptTemplate(
+                    input_variables=['history', 'input'], template=template)
+            llm = ChatOpenAI(temperature=0.8, engine="gpt-test",
+                            openai_api_key=key, streaming=True,
+                            callback_manager=CallbackManager([ChainStreamHandler(g)]))
+            if messages:
+                old_messages = download_pickle(
+                    STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                    CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')
+                print(old_messages)
+                retrieved_messages = messages_from_dict(old_messages)
+                retrieved_chat_history = ChatMessageHistory(
+                    messages=retrieved_messages)
+                print(retrieved_chat_history)
+                memory = ConversationBufferMemory(
+                    chat_memory=retrieved_chat_history)
+            else:
+                memory = ConversationBufferMemory(memory_key='history')
+            conversation = ConversationChain(
+                memory=memory, prompt=prompt, llm=llm)
+            conversation(incoming_msg)
+            upload_pickle(json.loads(json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
+                        STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
         finally:
             g.close()
 

@@ -81,7 +81,7 @@
                 event.preventDefault();
                 async function streamer() {
                     try {
-                        const response = await fetch('/get_email', {
+                        const response = await fetch('/unique_email', {
                             method: 'POST',
                             body: formData
                         });

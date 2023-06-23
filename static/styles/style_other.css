@@ -133,9 +133,9 @@ input[type=submit] {
 .picture1 {
   display: flex;
   align-items: center;
-  gap: 115px;
+  gap: 90px;
   text-align: center;
-  margin-left: 112px;
+  margin-left: 90px;
   margin-right: auto;
 }
 .picture2 {
