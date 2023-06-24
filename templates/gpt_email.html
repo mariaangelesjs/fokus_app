@@ -70,10 +70,16 @@
         <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
         <script type="text/javascript">
             const toneForm = get('.tones');
+            var counter = 0
             function getEmailResponse(){
+                const toneSelected = get('.select2').value;
+                $.get("/get_email", { tone: toneSelected }).done(function(data){
+                   emailRobot()})}
+                   
+            function emailRobot(){
                 async function streamer() {
                     try {
-                        const response = fetch('/unique_email');
+                        const response = fetch('/get_email');
                         const reader = response.body.getReader();
                         document.getElementById('subject_done').innerHTML = ""
                         document.getElementById('content_done').innerHTML = ""
@@ -96,6 +102,7 @@
                 subjectInput.innerHTML = subjectInput.innerHTML.replace("Emne:", "")
                 contentInput.innerHTML = contentInput.innerHTML.replace("Innhold:", "")
             }
+            
         </script>
     </div>
 </body>
