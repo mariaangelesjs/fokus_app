@@ -234,11 +234,10 @@ def gpt_chat_response():
 
 @app.route('/unique_email', methods=['GET', 'POST'])
 def gpt_email():
-    
     return render_template('gpt_email.html')
     
 @app.route('/get_email', methods=['GET', 'POST'])
-def gpt_email():
+def gpt_email_response():
     if request.method =='GET':
         session['tone'] = request.args.get('tone')
         print(session['tone'])

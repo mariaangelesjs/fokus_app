@@ -62,7 +62,7 @@
                 <br>
                 <br>
                 <label for="content">Innhold:</label>
-                <div id="content_done" name="content" href="{{ url_for('gpt_email') }}"></div>
+                <div id="content_done" name="content"></div>
                 <br>
                 <br>
                 <input type="submit" value="Submit">
@@ -75,7 +75,7 @@
                 const toneSelected = get('.select2').value;
                 $.get("/get_email", { tone: toneSelected }).done(function(data){
                    emailRobot()})}
-                   
+
             function emailRobot(){
                 async function streamer() {
                     try {
