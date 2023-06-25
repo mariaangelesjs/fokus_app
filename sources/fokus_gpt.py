@@ -174,7 +174,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         
 
                    Instruksjoner:
-                   Du må legge til emoticons på emnet.
+                   Du må legge til emoticons på Emne.
                    Ikke legg til hvem denne e-posten er til i emnet.
                    Du bør aldri la personen vite hva du har funnet eller sett.
                    Ikke nevn forespørsel  eller hva som ble spurt.
