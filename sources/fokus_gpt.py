@@ -177,6 +177,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                     Instructions:
                     * You must add emoticons på Emne
+                    * Do not add who this email is to in the Emne.
                     * You should never make the person know what you have found or seen.
                     * Do not mention the prompt or what was asked.
                     * Ikke skriv lav, middels eller høy.
