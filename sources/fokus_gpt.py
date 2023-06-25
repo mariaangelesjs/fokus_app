@@ -110,7 +110,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må svare på norsk.
                     * Do not mention the prompt or what was asked.
                     * When writing an article do: Title and Content. Make it creative.
-                    * The title should not include the words that were asked on who the person is.
+                    * The title should not include the topic that was asked before. Use synonyms or be creative.
                     * Avoid talking about who the person is the article directed to.
                     * You must write all hyperlinks and websites as HTML <a> hyperlinks.
                     * Ikke gi lov til diskriminering.
