@@ -244,14 +244,15 @@ def gpt_email_response():
         with limiter.limit("20/hour"):
             if request.method =='GET':
                 session['tone'] = request.args.get('msg')
-                tone = session['tone']
-                prompt = str(session['prompt_done']).replace(
-                    ' Skriv en artikel',f' Skriv en e-post fra Bas Analyse med en {tone} tone of voice').replace(
-                    'en person', session['name'])
+                tone_replace = str('Skriv en e-post fra Bas Analyse med en '+ session['tone'])
+                print(tone_replace)
+                session['full_prompt'] = str(session['prompt_done']).replace(
+                    ' Skriv en artikel', tone_replace).replace('en person', session['name'])
+                print(session['full_prompt'])
             if request.method=='POST':
                 return  Response(
                             ChainStreamHandler.chain(
-                                prompt , key, 'email',
+                                session['full_prompt'] , key, 'email',
                                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                                 CONTAINERNAME), mimetype='text/html')
             else:
