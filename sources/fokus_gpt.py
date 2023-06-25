@@ -175,13 +175,14 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                    Instruksjoner:
                    Du må legge til emoticons på Emne.
-                   Ikke legg til hvem denne e-posten er til i emnet.
+                   Ikke legg til hvem denne e-posten er til i Emnet.
                    Du bør aldri la personen vite hva du har funnet eller sett.
                    Ikke nevn forespørsel  eller hva som ble spurt.
-                   Ikke skriv lav, middels eller høy.
+                   Ikke skriv nivå, grad eller sannsynligheter med lav, middels eller høy.
                    Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om dem.
                    Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
-                   Ikke nevn karakterpoeng, interesse eller nivå i en egenskap i e-posten, men du må tilpasse teksten til nivået uten å nevne ord om nivået.\n
+                   Ikke nevn karakterpoeng, interesse eller nivå i en egenskap i e-posten, 
+                   men du må tilpasse teksten til nivået uten å nevne ord om nivået,interesse grav eller kategori.
                    Du må skrive bare på norsk.
                    Ha en hyggelig tone i teksten.
                    E-poststrukturen skal alltid være emne og innhold.
