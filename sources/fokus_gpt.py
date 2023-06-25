@@ -108,7 +108,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Do not mention any word that is in the prompt, but adapt the text based on the prompt.
                     * Do not mention scores "grad" or "nivå" of a psychological characteristic in the e-post,
                     but you must create the text adapted to the level without mentioning any words about the level.
-                    * You should write the text knowing they have a high interest in an area, but adapting it to what it means
+                    * You should write the text knowing they have an interest in an area, but adapting it to what it means
                     without mentioning the prompt.
                     * You must write all hyperlinks and websites as HTML <a> hyperlinks.
                     * Ikke gi lov til diskriminering.
@@ -177,9 +177,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Do not mention the prompt in the text.
                     * Emne or "Subject" should be about the context of the prompt but not about the user or who the person is.
                     * You must write only in norwegian
-                    * Do not mention any word that is in the prompt, but adapt the text based on the prompt.
-                    * You should write the text knowing that the user may have an interest or probability in an area, but adapting it to what it means
-                    without mentioning the prompt or mentioning the specific level of interest.
+                    * Do not write what you know about the user or the specific level of interest. Adapt to the prompt.
                     * Ha en hyggelig "tone of voice".
                     * E-post struktur blir alltid Emne og Innhold.
                     * Jeg må skape alt på norsk.
