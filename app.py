@@ -5,6 +5,7 @@ from flask import (Flask, request, session, render_template,
                    url_for, redirect, Response)
 from datetime import timedelta
 from sources.blobs import (get_data, upload_df, download_pickle, delete_blob)
+from sources.emails import send_email
 import logging
 import pandas as pd
 from azure.keyvault.secrets import SecretClient
@@ -15,6 +16,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
 import numpy as np
+
 
 # Get app
 app = Flask(__name__)
@@ -245,8 +247,14 @@ def gpt_email_response():
                 tone = session['tone']
                 print(session['tone'])
                 session['full_prompt'] = str(session['prompt_done']).replace(
-                    ' Skriv en artikel',f' Skriv en e-post med {tone} tone of voice').replace('en person', session['name']) +' fra Bas Analyse'
+                    ' Skriv en artikel',f' Skriv en e-post fra Bas Analyse med {tone} tone of voice').replace('en person', session['name'])
                 print(session['full_prompt'])
+                try:
+                    session['subject'] = request.args.get('subject')
+                    session['content'] = request.args.get('content')
+
+                except:
+                    pass
             if request.method=='POST':
                 return  Response(
                             ChainStreamHandler.chain(
@@ -259,9 +267,19 @@ def gpt_email_response():
             return ""
 
 
-
+username = client.get_secret('basAnalyseMail').value
+mailpass = client.get_secret('basAnalyseMailPassword').value
+STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
+    try:
+        send_email(
+            username, mailpass, 
+            session['name'], session['email'],
+              session['subject'], session['content'])
+        del username, mailpass
+    except:
+        pass
     if request.method == 'POST':
         session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])

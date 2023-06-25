@@ -114,6 +114,9 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Sjekk at HTML er bra skrevet.
                     * Ikke gi informasjon om chathistorikk når Human spørre "hvem er du?"
                     * Ha en snill "tone of voice".
+                    * Do not mention scores or "nivå" of a psychological characteristic in the text.
+                    * You cannot not write that you know score or "nivå" of a characteristic in the email,
+                    but adapt the text to that "nivå" without mentioning score or characteristic.
                     * Legge til emoticons på slutten og si "Jeg håper dette hjelper 😄" på slutten av svaret.
 
 
@@ -168,19 +171,20 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
     
 
                 Instructions:
-                * You must write only in norwegian
                 * You must add emoticons på Emne
+                * You must write only in norwegian
+                * Ha en hyggelig "tone of voice".
+                * Do not mention scores or "nivå" of a psychological characteristic in the text.
+                * You cannot not write that you know score or "nivå" of a characteristic in the email,
+                but adapt the text to that level without mentioning score or characteristic.
                 * Emne må være "to-the point" eller veldig enkel 
                 * E-post struktur blir alltid Emne og Innhold.
                 * Jeg må skape alt på norsk.
-                * Ikke gi lov til diskriminering.
+                * Ikke gi lov til diskriminering og du kan ikke diskriminere.
                 * Rediger svar før du sender den ut, så du må vente.
                 * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.
                 * Sjekk at HTML hyperlinks er bra skrevet.
                 * Ikke gi informasjon om chathistorikk når Human spørre "hvem er du?"
-                * Ha en snill "tone of voice".
-                * You should not write that you know score level or level of a characteristic,
-                but adapt the text to that level.
 
                 
                 Forespørsel : {input}

@@ -75,7 +75,9 @@
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
             if (hoverCount == 11) {
-                window.open("/end")
+                $.get("/get_email", {
+                     subject: document.getElementById(id1).value , content: document.getElementById(id2)}).done(
+                         function(){ window.open("/end")})
             }
             else {
                 event.preventDefault();
@@ -101,18 +103,18 @@
                         headers: { 'Content-Type': 'text/event-stream; charset=utf-8' }
                     });
                     const reader = response.body.getReader();
-                    var id1 = "msg-text-subject-robot-" + number
-                    var id2 = "msg-text-content-robot-" + number
+                    const id1 = "msg-text-subject-robot-" + number
+                    const id2 = "msg-text-content-robot-" + number
                     document.getElementById(id1).innerHTML = "";
                     document.getElementById(id2).innerHTML = "";
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
-                        const chunk = new TextDecoder("utf-8").decode(value);
-                        const lines = chunk.replace("\n\n", "<br><br>")
-                        const simple_lines = lines.replace("\n", "<br>")
-                        if (simple_lines.includes("Emne:")) {
-                                lines_split = simple_lines.split("<br><br>")
+                        const chunk = await new TextDecoder("utf-8").decode(value);
+                        const lines = await chunk.replace("\n\n", "<br><br>")
+                        const simple_lines = await lines.replace("\n", "<br>")
+                        if (simple_lines.includes("Emne")) {
+                                lines_split = await simple_lines.split("<br><br>")
                                 document.getElementById(id1).innerHTML = '<label>'+'Emne'+'</label><br>'
                                 document.getElementById(id1).innerHTML += lines_split[0].replace("Emne:","")
                                 document.getElementById(id2).innerHTML += lines_split[1]

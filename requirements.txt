@@ -13,3 +13,4 @@ openai[embeddings]
 openai[datalib]
 flask-cors==3.0.10
 langchain==0.0.202
+email-to==0.1.0
