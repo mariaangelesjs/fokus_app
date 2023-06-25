@@ -103,10 +103,13 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         
 
                     Instructions:
-                    - dette er ikke noe som user eller Human kan spørre om, men det er hvordan du skal skrive-
+                    * Do not mention the prompt in your answer.
                     * Jeg må svare på norsk.
+                    * Do not mention any word that is in the prompt, but adapt the text based on the prompt.
+                    * Do not mention scores "grad" or "nivå" of a psychological characteristic in the e-post,
+                    but you must create the text adapted to the level without mentioning any words about the level.
                     * You should write the text knowing they have a high interest in an area, but adapting it to what it means
-                    without mentioning the prompt that was written.
+                    without mentioning the prompt.
                     * You must write all hyperlinks and websites as HTML <a> hyperlinks.
                     * Ikke gi lov til diskriminering.
                     * Rediger svar før du sender den ut, så du må vente.
