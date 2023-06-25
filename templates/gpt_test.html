@@ -117,7 +117,7 @@
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
-                        const chunk = new TextDecoder("utf-8").decode(value);
+                        const chunk = new TextDecoder().decode(value);
                         const lines = chunk.replace("\n\n", "<br><br>")
                         const simple_lines = lines.replace("\n", "<br>")
                         if (simple_lines.includes("Emne:")) {
