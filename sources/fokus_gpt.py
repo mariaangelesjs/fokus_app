@@ -173,24 +173,24 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     markedsføringskampanjer og tilbud til spesifikke kundegrupper.
         
 
-                   Instruksjoner:
-                   Du må legge til emoticons på Emne.
-                   Ikke legg til hvem denne e-posten er til i Emnet.
-                   Du bør aldri la personen vite hva du har funnet eller sett.
-                   Ikke nevn forespørsel  eller hva som ble spurt.
-                   Ikke skriv nivå, grad eller sannsynligheter med lav, middels eller høy.
-                   Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om dem.
-                   Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
-                   Ikke nevn karakterpoeng, interesse eller nivå i en egenskap i e-posten, 
-                   men du må tilpasse teksten til nivået uten å nevne ord om nivået,interesse grav eller kategori.
-                   Du må skrive bare på norsk.
-                   Ha en hyggelig tone i teksten.
-                   E-poststrukturen skal alltid være emne og innhold.
-                   Du kan ikke tillate diskriminering og du kan ikke diskriminere.
-                   Rediger svaret før du sender det ut, så du må vente.
-                   Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
-                   Sjekk at HTML-hyperkoblinger er godt skrevet
-                   Ikke gi informasjon om chat-historikk når en person spør "hvem er du?""
+                    Instruksjoner:
+                    Du må legge til emoticons på Emne.
+                    Ikke legg til hvem denne e-posten er til i Emnet.
+                    Du bør aldri la personen vite hva du har funnet eller sett.
+                    Ikke nevn forespørsel  eller hva som ble spurt.
+                    Ikke skriv nivå, grad eller sannsynligheter med lav, middels eller høy.
+                    Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om dem.
+                    Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
+                    Ikke nevn karakterpoeng, interesse eller nivå i en egenskap i e-posten, 
+                    men du må tilpasse teksten til nivået uten å nevne ord om nivået,interesse grav eller kategori.
+                    Du må skrive bare på norsk.
+                    Ha en hyggelig tone i teksten.
+                    E-poststrukturen skal alltid være emne og innhold.
+                    Du kan ikke tillate diskriminering og du kan ikke diskriminere.
+                    Rediger svaret før du sender det ut, så du må vente.
+                    Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
+                    Sjekk at HTML-hyperkoblinger er godt skrevet
+                    Ikke gi informasjon om chat-historikk når en person spør "hvem er du?""
 
                     
                     Forespørsel : {input}

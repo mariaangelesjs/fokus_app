@@ -118,12 +118,12 @@
                                 lines_split = simple_lines.split("<br><br>")
                                 document.getElementById(id1).innerHTML = '<label>'+'Emne'+'</label><br>'
                                 document.getElementById(id1).innerHTML += lines_split[0].replace("Emne:","")
-                                document.getElementById(id2).innerHTML += lines_split[1]
+                                document.getElementById(id2).innerHTML += lines_split[1].replace("Innhold:","")
                                 msgerChat.scrollTo(0, msgerChat.scrollHeight)
                                 continue
                         }
                         else {
-                            document.getElementById(id2).innerHTML += simple_lines
+                            document.getElementById(id2).innerHTML += simple_lines.replace("Innhold:","")
                             msgerChat.scrollTo(0, msgerChat.scrollHeight)
                         }
                     }
