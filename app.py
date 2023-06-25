@@ -249,12 +249,6 @@ def gpt_email_response():
                 session['full_prompt'] = str(session['prompt_done']).replace(
                     ' Skriv en artikel',f' Skriv en e-post fra Bas Analyse med {tone} tone of voice').replace('en person', session['name'])
                 print(session['full_prompt'])
-                try:
-                    session['subject'] = request.args.get('subject')
-                    session['content'] = request.args.get('content')
-
-                except:
-                    pass
             if request.method=='POST':
                 return  Response(
                             ChainStreamHandler.chain(
@@ -264,6 +258,10 @@ def gpt_email_response():
             else:
                 return Response(None, mimetype='text/html')
     except:
+            session['subject'] = request.args.get('subject')
+            print(session['subject'])
+            session['content'] = request.args.get('content')
+            print(session['content'])
             return ""
 
 

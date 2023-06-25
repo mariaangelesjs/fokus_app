@@ -24,7 +24,7 @@
     align-items: center;
     height: 100vh;
     background-image: var(--body-bg);
-    font-family: Nunito, sans-serif;
+    font-family: 'Open Sans', sans-serif;
   }
  
   div[class="col-md-6 mx-auto text-center"] {
