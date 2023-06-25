@@ -117,9 +117,9 @@
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
-                        const chunk = new TextDecoder().decode(value);
-                        const lines = chunk.replace("\n\n", "<br><br>")
-                        const simple_lines = lines.replace("\n", "<br>")
+                        const chunk = await new TextDecoder().decode(value);
+                        const lines =  await chunk.replace("\n\n", "<br><br>")
+                        const simple_lines = await lines.replace("\n", "<br>")
                         if (simple_lines.includes("Emne:")) {
                                 lines_split = simple_lines.split("<br><br>")
                                 document.getElementById(id1).innerHTML += lines_split[0]
