@@ -186,7 +186,7 @@ def prompt():
                 fokus_real_variable = key
         value = person[fokus_real_variable].values[0]
         session['prompt_done'] = str(
-            'Skriv ' +
+            'Skriv' +
             ' en artikel med ' +
             session['words'] +
             ' av ' +
@@ -238,21 +238,25 @@ def gpt_email():
     
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
-        if request.method =='GET':
-            session['tone'] = request.args.get('msg')
-            print(session['tone'])
-            session['full_prompt'] = str(session['prompt_done'] + ' og ' + session['tone'] ).replace(
-                'artikel','e-post').replace('en person', session['name']) +' fra Bas Analyse'
-            print(session['full_prompt'])
-        if request.method=='POST':
-            return  Response(
-                        ChainStreamHandler.chain(
-                            session['full_prompt'] , key, 'email',
-                            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                            CONTAINERNAME), mimetype='text/event-stream')
-        else:
-            return Response(None, mimetype='text/event-stream')
-
+    try:
+        with limiter.limit("20/hour"):
+            if request.method =='GET':
+                session['tone'] = request.args.get('msg')
+                tone = session['tone']
+                print(session['tone'])
+                session['full_prompt'] = str(session['prompt_done']).replace(
+                    ' Skriv en artikel',f' Skriv en e-post med {tone} tone of voice').replace('en person', session['name']) +' fra Bas Analyse'
+                print(session['full_prompt'])
+            if request.method=='POST':
+                return  Response(
+                            ChainStreamHandler.chain(
+                                session['full_prompt'] , key, 'email',
+                                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                                CONTAINERNAME), mimetype='text/html')
+            else:
+                return Response(None, mimetype='text/html')
+    except:
+            return ""
 
 
 
