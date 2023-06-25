@@ -108,9 +108,9 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Ikke skriv lav, middels eller høy.
                     * Jeg må svare på norsk.
                     * Do not mention the prompt or what was asked.
-                    * When writing an article do: Title and Content.
-                    * The title should not include name of characteristic or level. Just adapt to context.
-                    * Make the title and the context to be precise and unbiased.
+                    * When writing an article do: Title and Content. Make it creative.
+                    * The title should not include the words that were asked on who the person is.
+                    * Avoid talking about who the person is the article directed to.
                     * Do not mention scores "grad", interest or "nivå" of a characteristic in the text,
                     but you must create the text adapted to the level without mentioning any words about the level.
                     * You must write all hyperlinks and websites as HTML <a> hyperlinks.
