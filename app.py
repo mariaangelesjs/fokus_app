@@ -245,14 +245,13 @@ def gpt_email_response():
             if request.method =='GET':
                 session['tone'] = request.args.get('msg')
                 tone = session['tone']
-                print(session['tone'])
-                session['full_prompt'] = str(session['prompt_done']).replace(
-                    ' Skriv en artikel',f' Skriv en e-post fra Bas Analyse med {tone} tone of voice').replace('en person', session['name'])
-                print(session['full_prompt'])
+                prompt = str(session['prompt_done']).replace(
+                    ' Skriv en artikel',f' Skriv en e-post fra Bas Analyse med en {tone} tone of voice').replace(
+                    'en person', session['name'])
             if request.method=='POST':
                 return  Response(
                             ChainStreamHandler.chain(
-                                session['full_prompt'] , key, 'email',
+                                prompt , key, 'email',
                                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                                 CONTAINERNAME), mimetype='text/html')
             else:
