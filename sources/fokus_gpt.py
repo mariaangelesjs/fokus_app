@@ -107,7 +107,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Ikke nevn prompten eller hva som ble spurt.
                     Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
                     Jeg må svare på norsk.
-                    Når du skriver en artikkel, bruk: Tittel og Innhold. Vær kreativ.
+                    Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
                     Tittelen bør ikke inneholde emnet som ble spurt om før. Bruk synonymer eller vær kreativ.
                     Unngå å snakke om hvem artikkelen er rettet mot.
                     Du må skrive alle lenker og nettsider som HTML <a> lenker.
