@@ -175,7 +175,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Instructions:
                     * You must add emoticons på Emne
                     * Do not mention the prompt in the text.
-                    * Emne or "Subject" should be about the context of the prompt but not about the user.
+                    * Emne or "Subject" should be about the context of the prompt but not about the user or who the person is.
                     * You must write only in norwegian
                     * Do not mention any word that is in the prompt, but adapt the text based on the prompt.
                     * You should write the text knowing that the user may have an interest or probability in an area, but adapting it to what it means
