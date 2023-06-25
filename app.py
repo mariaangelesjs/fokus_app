@@ -238,17 +238,20 @@ def gpt_email():
     
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
-    if request.method =='GET':
-        session['tone'] = request.args.get('tone')
-        print(session['tone'])
-        session['full_prompt'] = str(session['prompt_done'] + ' og ' + session['tone'] ).replace(
-            'artikel','e-post').replace('en person', session['name']) +' fra Bas Analyse'
-    if request.method == 'POST':
-        return  Response(
-                    ChainStreamHandler.chain(
-                        session['full_prompt'] , key, 'email',
-                        STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                        CONTAINERNAME), mimetype='text/event-stream')
+        if request.method =='GET':
+            session['tone'] = request.args.get('msg')
+            print(session['tone'])
+            session['full_prompt'] = str(session['prompt_done'] + ' og ' + session['tone'] ).replace(
+                'artikel','e-post').replace('en person', session['name']) +' fra Bas Analyse'
+            print(session['full_prompt'])
+        if request.method=='POST':
+            return  Response(
+                        ChainStreamHandler.chain(
+                            session['full_prompt'] , key, 'email',
+                            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                            CONTAINERNAME), mimetype='text/event-stream')
+        else:
+            return Response(None, mimetype='text/event-stream')
 
 
 

@@ -110,14 +110,26 @@
                         body: formData
                     });
                     const reader = response.body.getReader();
-                    var id = "msg-text-robot-"+ number
-                    document.getElementById(id).innerHTML = "";
+                    var id1 = "msg-text-subject-robot-" + number
+                    var id2 = "msg-text-content-robot-" + number
+                    document.getElementById(id1).innerHTML = "";
+                    document.getElementById(id2).innerHTML = "";
                     while (true) {
                         const { done, value } = await reader.read();
                         if (done) break;
-                        const text = new TextDecoder().decode(value);
-                        document.getElementById(id).innerHTML += text
-                        msgerChat.scrollTo(0, msgerChat.scrollHeight);
+                        const chunk = new TextDecoder("utf-8").decode(value);
+                        const lines = chunk.replace("\n\n", "<br><br>")
+                        const simple_lines = lines.replace("\n", "<br>")
+                        if (simple_lines.includes("Emne:")) {
+                                lines_split = simple_lines.split("<br><br>")
+                                document.getElementById(id1).innerHTML += lines_split[0]
+                                document.getElementById(id2).innerHTML += lines_split[1]
+                                continue
+                        }
+                        else {
+                            document.getElementById(id2).innerHTML += simple_lines
+                            msgerChat.scrollTo(0, msgerChat.scrollHeight)
+                        }
                     }
                 } catch (error) {
                     console.error(error);
@@ -137,7 +149,8 @@
             <div class="msg-info-time">${formatDate(new Date())}</div>
             </div>
 
-            <div class="msg-text" id="msg-text-${id}-${number}">${text}</div>
+            <div class="msg-text-1" id="msg-text-subject-${id}-${number}">${text}</div>
+            <div class="msg-text-2" id="msg-text-content-${id}-${number}"></div>
         </div>
         </div>
         `;

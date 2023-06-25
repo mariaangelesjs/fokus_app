@@ -1,110 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--# from https://github.com/josebenitezg/flaskGPT/blob/main/templates/index.html and own -->
 
 <head>
     <meta charset="UTF-8">
+    <title>Bas FokusGPT</title>
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0">
-    <meta content="7; url='{{url_for('gpt_email')}}'" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title style="font-weight: bold">FokusGPT Demo</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style_other.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/style.css') }}">
     <link rel="stylesheet" href="{{url_for('static', filename='styles/animate.min.css') }}" />
-    <link href="{{ url_for('static', filename='styles/select2.css') }}" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"
-        integrity="sha512-m7x59G4+NdYoUUKUscYq2qKkineVwmjXA/7WfXm8pukxYiFavrh9uFImpPtbmZGAnHR0rouVWWk+dgcHNurQ5g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
-<html>
 
 <body>
-    <br>
-    <br>
-    <div class="px-4 py-3 my-2 text-center">
-        <h1>Lag din e-post </h1>
-        <br>
-        <br>
-        <form class="tones" name="tone_voice" method="POST">
-            <br>
-            <br>
-            <label for="tone_of_voice">Tone of voice:</label>
-            <br>
-            <br>
-            <select name="tone_form" id="select_tone" class="select2">
-                <option value="null">Velg "tone of voice" </option>
+    <!-- partial:index.partial.html -->
+    <section class="msger">
+        <header class="msger-header">
+            <div class="msger-header-title">
+                <i>🤖 Powered by gpt3.5-turbo and Bas Fokus🤖</i>
+            </div>
+        </header>
+
+        <main class="msger-chat">
+            <div class="msg left-msg">
+                <div class="msg-img"
+                    style="background-image: url(https://img.icons8.com/dotty/160/futurama-bender.png)">
+                </div>
+
+                <div class="msg-bubble">
+                    <div class="msg-info">
+                        <div class="msg-info-name">Bas FokusGPT</div>
+                        <div class="msg-info-time"></div>
+                    </div>
+
+                    <div class="msg-text" id="msg-text">
+                        Hei, velkommen til chatGPT3.5 TURBO som drives av Azure Open AI og Bas Fokus!
+                        Du kan skrive eller trykke på her hvilket tone of voice passer best for deg😄
+                    </div>
+                </div>
+            </div>
+
+        </main>
+        <h3 id="charging_gpt"></h3>
+        <form class="msger-inputarea" method="get" name="complete_input">
+
+            <input type="text" class="msger-input" list="prompts" placeholder="Velg 'tone of voice'"
+                name="input_text"></input>
+            <datalist id="prompts">
                 <option value="entusiastisk">entusiastisk</option>
                 <option value="gøy">gøy</option>
                 <option value="trist">trist</option>
                 <option value="spennende">spennende</option>
                 <option value="profesjonell">profesjonell</option>
-            </select>
-            <input type="submit" id="small_button" class="small_button" value="Submit" onsubmit="getEmailResponse()">
+            </datalist>
+            <button type="submit" class="msger-send-btn">Send</button>
         </form>
-        <script>
-            $(function () {
-                $("select").select2({
-                    templateResult: formatOption
-                });
 
-                function formatOption(option) {
-                    var $option = $(
-                        '<div><strong>' + option.text + '</strong></div><div>' + option.title + '</div>'
-                    );
-                    return $option;
-                };
-            });
-        </script>
-        <br>
-        <br>
-        <main class="email_here">
-                <label for="subject">Emne:</label>
-                <div id="subject_done" name="subject"></div>
-                <br>
-                <br>
-                <label for="content">Innhold:</label>
-                <div id="content_done" name="content"></div>
-                <br>
-                <br>
-                <input type="submit" value="Submit">
-        </main>
-        <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
-        <script type="text/javascript">
-            const toneForm = get('.tones');
-            var counter = 0
-            function getEmailResponse(){
-                const toneSelected = get('.select2').value;
-                $.get("/get_email", { tone: toneSelected }).done(function(data){
-                   emailRobot()})}
+    </section>
 
-            function emailRobot(){
-                async function streamer() {
-                    try {
-                        const response = fetch('/get_email');
-                        const reader = response.body.getReader();
-                        document.getElementById('subject_done').innerHTML = ""
-                        document.getElementById('content_done').innerHTML = ""
-                        while (true) {
-                            const { done, value } = await reader.read()
-                            if (done) break; 
-                                const text = new TextDecoder().decode(value);
-                                if (text.startsWith("Emne:")) {
-                                    document.getElementById('subject_done').innerHTML += text
-                                } else if (text.startsWith("Innhold:")) {
-                                    document.getElementById('content_done').innerHTML += text
-                                }
-                        }
-                        emailChat.scrollTo(0, emailChat.scrollHeight)
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }
-                streamer();
-                subjectInput.innerHTML = subjectInput.innerHTML.replace("Emne:", "")
-                contentInput.innerHTML = contentInput.innerHTML.replace("Innhold:", "")
+    <!-- partial -->
+    <script src='https://use.fontawesome.com/releases/v5.0.13/js/all.js'></script>
+    <script>
+
+        const msgerForm = get(".msger-inputarea");
+        const msgerInput = get(".msger-input");
+        const msgerChat = get(".msger-chat");
+        const formData = new FormData(msgerForm);
+        formData.append('input_text', msgerForm.elements.input_text.value)
+        // Icons made by Freepik from www.flaticon.com
+        const BOT_IMG = "https://img.icons8.com/dotty/160/futurama-bender.png";
+        const PERSON_IMG = "https://img.icons8.com/?size=512&id=MlrRrS5AdUX9&format=png";
+        const BOT_NAME = "Bas FokusGPT";
+        const PERSON_NAME = "Du";
+        var hoverCount = 0
+        msgerForm.addEventListener("submit", event => {
+            hoverCount++;
+            if (hoverCount == 11) {
+                window.open("/end")
             }
-            
-        </script>
-    </div>
+            else {
+                event.preventDefault();
+                const msgText = msgerInput.value;
+                if (!msgText) return;
+                appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person", hoverCount);
+                msgerChat.scrollTop += 500
+                msgerInput.value = "";
+                $.get("/get_email", { msg: msgText }).done(function (data) {
+                    appendMessage(BOT_NAME, BOT_IMG, "left", "", "robot", hoverCount);
+                    msgerChat.scrollTop += 500
+                    botResponse(hoverCount)
+                })
+            }
+        })
+
+        function botResponse(number, msgText) {
+            async function streamer() {
+                try {
+                    const response = await fetch('/get_email', {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Content-Type': 'text/event-stream; charset=utf-8' }
+                    });
+                    const reader = response.body.getReader();
+                    var id1 = "msg-text-subject-robot-" + number
+                    var id2 = "msg-text-content-robot-" + number
+                    document.getElementById(id1).innerHTML = "";
+                    document.getElementById(id2).innerHTML = "";
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        const chunk = new TextDecoder("utf-8").decode(value);
+                        const lines = chunk.replace("\n\n", "<br><br>")
+                        const simple_lines = lines.replace("\n", "<br>")
+                        if (simple_lines.includes("Emne:")) {
+                                lines_split = simple_lines.split("<br><br>")
+                                document.getElementById(id1).innerHTML += lines_split[0]
+                                document.getElementById(id2).innerHTML += lines_split[1]
+                                continue
+                        }
+                        else {
+                            document.getElementById(id2).innerHTML += simple_lines
+                            msgerChat.scrollTo(0, msgerChat.scrollHeight)
+                        }
+                    }
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+            streamer();
+        }
+
+
+        function appendMessage(name, img, side, text, id, number) {
+            //   Simple solution for small apps
+            const msgHTML = `
+        <div class="msg ${side}-msg">
+        <div class="msg-img" style="background-image: url(${img})"></div>
+
+        <div class="msg-bubble">
+            <div class="msg-info"> 
+            <div class="msg-info-name">${name} ${number}/10 </div>
+            <div class="msg-info-time">${formatDate(new Date())}</div>
+            </div>
+
+            <div class="msg-text-1" id="msg-text-subject-${id}-${number}">${text}</div>
+            <div class="msg-text-2" id="msg-text-content-${id}-${number}"></div>
+        </div>
+        </div>
+        `;
+
+            msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+        }
+
+        function getAnimation() {
+            const element = document.getElementById("charging_gpt");
+            element.textContent = "Loading";
+            element.style.display = "block";
+            element.classList.add("animate__animated", "animate__lightSpeedInRight", "animate__infinite")
+        }
+
+        // Utils
+        function get(selector, root = document) {
+            return root.querySelector(selector);
+        }
+
+        function formatDate(date) {
+            const h = "0" + date.getHours();
+            const m = "0" + date.getMinutes();
+
+            return `${h.slice(-2)}:${m.slice(-2)}`;
+        }
+
+    </script>
+    <!-- need to add feedback widget and save -->
+
 </body>
 
 </html>

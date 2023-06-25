@@ -167,6 +167,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
     
 
                 Instructions:
+                * E-post struktur blir alltid Emne og Innhold.
                 * Jeg må skape alt på norsk.
                 * Skriv alt i HTML-format.
                 * Ikke gi lov til diskriminering.

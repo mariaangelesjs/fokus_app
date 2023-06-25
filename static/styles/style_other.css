@@ -140,6 +140,9 @@ input[type=submit] {
 
 
 }
+#small_button{
+  width:100px;
+}
 .picture2 {
   display: flex;
 }
@@ -149,9 +152,7 @@ input[type=submit] {
 #subject{
   background-color: white;
 }
-#small_button{
-  width:100px;
-}
+
 .email_here {
   flex: 1;
   overflow-y: auto;
