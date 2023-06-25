@@ -103,12 +103,14 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         
 
                     Instructions:
-                    * Do not mention the prompt in the text.
-                    * Adapt the text to the interests, but do not share what you know about the person and how.
+                    * You should never make the person know what you have found or seen.
+                    * Do not mention the prompt or what was asked.
+                    * Ikke skriv lav, middels eller høy.
                     * Jeg må svare på norsk.
                     * Do not mention the prompt or what was asked.
-                    * Find synonyms for the words used in the prompt, but do not write using any reference to the nivå: like høy, middels or lav.
-                    * Adapt the text to the interests and scores, but do not share what you know about the person or user.
+                    * When writing an article do: Title and Content.
+                    * The title should not include name of characteristic or level. Just adapt to context.
+                    * Make the title and the context to be precise and unbiased.
                     * Do not mention scores "grad", interest or "nivå" of a characteristic in the text,
                     but you must create the text adapted to the level without mentioning any words about the level.
                     * You must write all hyperlinks and websites as HTML <a> hyperlinks.
