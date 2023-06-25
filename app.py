@@ -193,7 +193,7 @@ def prompt():
             session['words'] +
             ' av ' +
             session['product'] +
-            ' til en person med ' +
+            ' tilpasset for en person med ' +
             str(value) + ' i ' +
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
