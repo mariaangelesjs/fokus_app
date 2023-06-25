@@ -105,7 +105,6 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Instructions:
                     * Do not mention the prompt in your answer.
                     * Jeg må svare på norsk.
-                    * Do not mention any word that is in the prompt, but adapt the text based on the prompt.
                     * Do not mention scores "grad" or "nivå" of a psychological characteristic in the e-post,
                     but you must create the text adapted to the level without mentioning any words about the level.
                     * You should write the text knowing they have an interest in an area, but adapting it to what it means
@@ -174,13 +173,12 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                     Instructions:
                     * You must add emoticons på Emne
-                    * Do not mention the prompt in the text and do not write 'we know' or 'vi har lagt merke'.
+                    * Do not mention the prompt in the text.
+                    * Do not say what you know about the user who will receive the e-post.
                     * Emne or "Subject" should be about the context of the prompt but not about the user or who the person is.
                     * You must write only in norwegian
-                    * Do not write what you know about the user or the specific level of interest. Adapt to the prompt.
                     * Ha en hyggelig "tone of voice".
                     * E-post struktur blir alltid Emne og Innhold.
-                    * Jeg må skape alt på norsk.
                     * Ikke gi lov til diskriminering og du kan ikke diskriminere.
                     * Rediger svar før du sender den ut, så du må vente.
                     * Vær forsiktig med tekstformat og fikse om du finner feil før du skriver svar.

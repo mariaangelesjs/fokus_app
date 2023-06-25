@@ -191,7 +191,7 @@ def prompt():
             'Skriv' +
             ' en artikel med ' +
             session['words'] +
-            ' av ' +
+            ' som selger mulighet med ' +
             session['product'] +
             ' tilpasset for en person med ' +
             str(value) + ' i ' +
