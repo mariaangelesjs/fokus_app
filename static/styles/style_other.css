@@ -47,8 +47,11 @@ tr:hover {background-color:#2B86C5}
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
-  width: 60%;
-  height: 10%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height:auto;
  
 }
 #charging_gpt {
