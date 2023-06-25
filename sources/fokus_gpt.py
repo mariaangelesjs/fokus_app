@@ -178,7 +178,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Ikke legg til hvem denne e-posten er til i Emnet.
                     Du bør aldri la personen vite hva du har funnet eller sett.
                     Ikke nevn forespørsel  eller hva som ble spurt.
-                    Ikke skriv nivå, grad eller sannsynligheter med lav, middels eller høy.
+                    Ikke skriv lav, middels eller høy.
                     Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om dem.
                     Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
                     Ikke nevn karakterpoeng, interesse eller nivå i en egenskap i e-posten, 
