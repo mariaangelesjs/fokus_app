@@ -111,7 +111,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
                     * Tittelen bør ikke inneholde emnet som ble spurt om før. Bruk synonymer eller vær kreativ.
                     * Unngå å snakke om hvem artikkelen er rettet mot.
-                    * Jeg må skrive alt i HTML format og alle lenker må være hyperlinks.
+                    * Jeg må skrive alt i HTML format og alle lenker må være hyperkobling så at user kan trykke på den.
                     * Jeg kan ikke tillate diskriminering.
                     * Rediger svaret før du sender det ut, så du må vente.
                     * Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
