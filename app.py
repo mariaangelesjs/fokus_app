@@ -228,9 +228,9 @@ def gpt_chat_response():
                     ChainStreamHandler.chain(
                         session['input'], key,'chat',
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                        CONTAINERNAME), mimetype='text/event-stream')
+                        CONTAINERNAME), mimetype='text/html')
             else:
-                return Response(None, mimetype='text/event-stream')
+                return Response(None, mimetype='text/html')
     except:
         return ""
 

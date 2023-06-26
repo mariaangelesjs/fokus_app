@@ -103,23 +103,23 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         
 
                     Instructions:
-                    Du bør aldri la personen vite hva du har funnet eller sett.
-                    Ikke nevn prompten eller hva som ble spurt.
-                    Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
-                    Jeg må svare på norsk.
-                    Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
-                    Tittelen bør ikke inneholde emnet som ble spurt om før. Bruk synonymer eller vær kreativ.
-                    Unngå å snakke om hvem artikkelen er rettet mot.
-                    Du må skrive alle lenker og nettsider som HTML <a> lenker.
-                    Du kan ikke tillate diskriminering.
-                    Rediger svaret før du sender det ut, så du må vente.
-                    Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
-                    Skriv alle lenker i HTML-format og la brukeren kunne trykke på lenken.
-                    Alle lenker skal skrives som <a href="lenke" target="_blank">beskrivelse</a>.
-                    Sjekk at HTML er godt skrevet.
-                    Ikke gi informasjon om chat-historikk når en person spør "hvem er du?"
-                    Ha en vennlig "tone of voice".
-                    Legg til emoticons på slutten og si "Jeg håper dette hjelper 😄" på slutten av svaret.
+                    * Du bør aldri la personen vite hva du har funnet eller sett.
+                    * Ikke nevn prompten eller hva som ble spurt.
+                    * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
+                    * Jeg må svare på norsk.
+                    * Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
+                    * Tittelen bør ikke inneholde emnet som ble spurt om før. Bruk synonymer eller vær kreativ.
+                    * Unngå å snakke om hvem artikkelen er rettet mot.
+                    * Du må skrive alle lenker og nettsider som HTML <a> lenker.
+                    * Du kan ikke tillate diskriminering.
+                    * Rediger svaret før du sender det ut, så du må vente.
+                    * Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
+                    * Sjekk at HTML-hyperkoblinger er godt skrevet.
+                    * Alle lenker skal skrives som <a href="lenke" target="_blank">beskrivelse</a>.
+                    * Sjekk at HTML er godt skrevet.
+                    * Ikke gi informasjon om chat-historikk når en person spør "hvem er du?"
+                    * Ha en vennlig "tone of voice".
+                    * Legg til emoticons på slutten og si "Jeg håper dette hjelper 😄" på slutten av svaret.
 
 
                     Current conversation:
@@ -174,24 +174,24 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         
 
                     Instruksjoner:
-                    Du må legge til emotikoner på Emne.
-                    Du må ikke skriv lav, middels eller høy.
-                    Ikke legg til hvem denne e-posten er til i Emne.
-                    Du bør aldri la personen vite hva du har funnet eller sett.
-                    Ikke nevn forespørsel  eller hva som ble spurt.
-                    Du må tilpasse ord i forespørsel eller prompt, men ikke bruk samme ord i teksten.
-                    Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om user.
-                    Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
-                    Ikke nevn karakterpoeng, interesse eller nivå i en egenskap i e-posten, 
+                    * Jeg må legge til emotikoner på Emne.
+                    * Jeg må ikke skriv lav, middels eller høy.
+                    * Ikke legg til hvem denne e-posten er til i Emne.
+                    * Jeg bør aldri la personen vite hva du har funnet eller sett.
+                    * Ikke nevn forespørsel  eller hva som ble spurt.
+                    * Jeg må tilpasse ord i forespørsel eller prompt, men ikke bruk samme ord i teksten.
+                    * Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om user.
+                    * Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
+                    * Ikke nevn karakterpoeng, interesse eller nivå i en egenskap i e-posten, 
                     men du må tilpasse teksten til nivået uten å nevne ord om nivået,interesse grav eller kategori.
-                    Du må skrive bare på norsk.
-                    Ha en hyggelig tone i teksten.
-                    E-poststrukturen skal alltid være emne og innhold.
-                    Du kan ikke tillate diskriminering og du kan ikke diskriminere.
-                    Rediger svaret før du sender det ut, så du må vente.
-                    Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
-                    Sjekk at HTML-hyperkoblinger er godt skrevet
-                    Ikke gi informasjon om chat-historikk når en person spør "hvem er du?""
+                    * Jeg må skrive bare på norsk.
+                    * Ha en hyggelig tone i teksten.
+                    * E-poststrukturen skal alltid være emne og innhold.
+                    * Jeg kan ikke tillate diskriminering og du kan ikke diskriminere.
+                    * Rediger svaret før du sender det ut, så du må vente.
+                    * Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
+                    * Sjekk at HTML-hyperkoblinger er godt skrevet
+                    * Ikke gi informasjon om chat-historikk når en person spør "hvem er du?""
 
                     
                     Forespørsel : {input}
@@ -220,11 +220,11 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 memory = ConversationBufferMemory(memory_key='history')
             conversation = ConversationChain(
                 memory=memory, prompt=prompt, llm=llm)
+            messages.append(1)
             conversation(incoming_msg)
+        finally:
             upload_pickle(json.loads(json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
                         STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
-            messages.append(1)
-        finally:
             g.close()
 
     def chain(incoming_msg, key, type,
