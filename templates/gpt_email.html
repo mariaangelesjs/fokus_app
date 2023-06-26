@@ -75,10 +75,6 @@
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
             if (hoverCount == 11) {
-                $.get("/get_email", {
-                    subject: document.getElementById(id1).value,
-                    content: document.getElementById(id2).value
-                })
                 window.location.replace("/end")
             }
             else {
