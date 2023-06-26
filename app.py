@@ -271,14 +271,6 @@ STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
 
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
-    try:
-        send_email(
-            username, mailpass, 
-            session['name'], session['email'],
-              session['subject'], session['content'])
-        del username, mailpass
-    except:
-        pass
     if request.method == 'POST':
         session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])
