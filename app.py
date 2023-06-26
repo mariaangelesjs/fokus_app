@@ -228,9 +228,9 @@ def gpt_chat_response():
                     ChainStreamHandler.chain(
                         session['input'], key,'chat',
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                        CONTAINERNAME), mimetype='text/html')
+                        CONTAINERNAME), mimetype='text/event-stream')
             else:
-                return Response(None, mimetype='text/html')
+                return Response(None, mimetype='text/event-stream')
     except:
         return ""
 
@@ -254,7 +254,7 @@ def gpt_email_response():
                             ChainStreamHandler.chain(
                                 session['full_prompt'] , key, 'email',
                                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                                CONTAINERNAME), mimetype='text/html')
+                                CONTAINERNAME), mimetype='text/event-stream')
             else:
                 return Response(None, mimetype='text/html')
     except:
