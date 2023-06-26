@@ -109,7 +109,7 @@
                         method: 'POST',
                         body: formData
                     });
-                    const reader = response.body.getReader();
+                    const reader = await response.body.getReader();
                     var id1 = "msg-text-subject-robot-" + number
                     var id2 = "msg-text-content-robot-" + number
                     document.getElementById(id1).innerHTML = "";
@@ -121,9 +121,9 @@
                         const lines =  await chunk.replace("\n\n", "<br><br>")
                         const simple_lines = await lines.replace("\n", "<br>")
                         if (simple_lines.includes("Emne:")) {
-                                lines_split = simple_lines.split("<br><br>")
-                                document.getElementById(id1).innerHTML += lines_split[0].trim()
-                                document.getElementById(id2).innerHTML += lines_split[1].trim()
+                                lines_split = await simple_lines.split("<br><br>")
+                                document.getElementById(id1).innerHTML += await lines_split[0].trim()
+                                document.getElementById(id2).innerHTML += await lines_split[1].trim()
                                 continue
                         }
                         else {

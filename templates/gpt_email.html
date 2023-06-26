@@ -76,9 +76,10 @@
             hoverCount++;
             if (hoverCount == 11) {
                 $.get("/get_email", {
-                     subject: document.getElementById(id1).value ,
-                     content: document.getElementById(id2).value})
-                     window.location.replace("/end")
+                    subject: document.getElementById(id1).value,
+                    content: document.getElementById(id2).value
+                })
+                window.location.replace("/end")
             }
             else {
                 event.preventDefault();
@@ -94,7 +95,7 @@
                 })
             }
         })
-
+        
         function botResponse(number, msgText) {
             async function streamer() {
                 try {
@@ -103,7 +104,7 @@
                         body: formData,
                         headers: { 'Content-Type': 'text/event-stream; charset=utf-8' }
                     });
-                    const reader = response.body.getReader();
+                    const reader = await response.body.getReader();
                     const id1 = "msg-text-subject-robot-" + number
                     const id2 = "msg-text-content-robot-" + number
                     document.getElementById(id1).innerHTML = "";
@@ -115,15 +116,15 @@
                         const lines = await chunk.replace("\n\n", "<br><br>")
                         const simple_lines = await lines.replace("\n", "<br>")
                         if (await simple_lines.includes("Emne")) {
-                                lines_split = simple_lines.split("<br><br>")
-                                document.getElementById(id1).innerHTML = '<label>'+'Emne'+'</label><br>'
-                                document.getElementById(id1).innerHTML += lines_split[0].replace("Emne:","").trim()
-                                document.getElementById(id2).innerHTML += lines_split[1].replace("Innhold:","").trim()
-                                msgerChat.scrollTo(0, msgerChat.scrollHeight)
-                                continue
+                            lines_split = await simple_lines.split("<br><br>")
+                            document.getElementById(id1).innerHTML = '<label>' + 'Emne' + '</label><br>'
+                            document.getElementById(id1).innerHTML += lines_split[0].replace("Emne:", "").trim()
+                            document.getElementById(id2).innerHTML += lines_split[1].replace("Innhold:", "").trim()
+                            msgerChat.scrollTo(0, msgerChat.scrollHeight)
+                            continue
                         }
                         else {
-                            document.getElementById(id2).innerHTML += simple_lines.replace("Innhold:","").trim()
+                            document.getElementById(id2).innerHTML += simple_lines.replace("Innhold:", "").trim()
                             msgerChat.scrollTo(0, msgerChat.scrollHeight)
                         }
                     }
