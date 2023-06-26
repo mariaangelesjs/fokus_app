@@ -15,7 +15,7 @@ import queue
 import json
 import pandas as pd
 from sources.blobs import upload_pickle, download_pickle
-from threading import Event 
+
 
 class ThreadedGenerator:
     def __init__(self):
