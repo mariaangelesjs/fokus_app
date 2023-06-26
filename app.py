@@ -241,7 +241,7 @@ def gpt_email():
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
     try:
-        with limiter.limit("20/hour"):
+        with limiter.limit("10/hour"):
             if request.method =='GET':
                 session['tone'] = request.args.get('msg')
                 tone_replace = str('Skriv en e-post fra Bas Analyse med en '+ session['tone'] + ' tone of voice')
@@ -256,7 +256,7 @@ def gpt_email_response():
                                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                                 CONTAINERNAME), mimetype='text/event-stream')
             else:
-                return Response(None, mimetype='text/html')
+                return Response(None, mimetype='text/event-stream')
     except:
             session['subject'] = request.args.get('subject')
             print(session['subject'])
