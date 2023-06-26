@@ -97,7 +97,7 @@
             })
             sleep(2000)
             if (hoverCount == 10) {
-                document.location.href="/end"
+                window.location.replace("/end")
             }
         })
 
@@ -128,9 +128,7 @@
             }
             streamer();
         }
-        function sleep(ms) {
-            return new Promise(resolve => setTimeout(resolve, ms));
-        }
+
 
         function appendMessage(name, img, side, text, id, number) {
             //   Simple solution for small apps
