@@ -122,12 +122,12 @@
                         const simple_lines = await lines.replace("\n", "<br>")
                         if (simple_lines.includes("Emne:")) {
                                 lines_split = await simple_lines.split("<br><br>")
-                                document.getElementById(id1).innerHTML += await lines_split[0].trim()
-                                document.getElementById(id2).innerHTML += await lines_split[1].trim()
+                                document.getElementById(id1).innerHTML += await lines_split[0]
+                                document.getElementById(id2).innerHTML += await lines_split[1]
                                 continue
                         }
                         else {
-                            document.getElementById(id2).innerHTML += await simple_lines.trim()
+                            document.getElementById(id2).innerHTML += await simple_lines
                             msgerChat.scrollTo(0, msgerChat.scrollHeight)
                         }
                     }
