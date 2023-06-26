@@ -115,12 +115,12 @@
                     document.getElementById(id1).innerHTML = "";
                     document.getElementById(id2).innerHTML = "";
                     while (true) {
-                        const { done, value } = reader.read();
-                        if ( await done) break;
+                        const { done, value } = await reader.read();
+                        if (done) break;
                         const chunk = await new TextDecoder().decode(value);
                         const lines =  await chunk.replace("\n\n", "<br><br>")
                         const simple_lines = await lines.replace("\n", "<br>")
-                        if (simple_lines.includes("Emne:")) {
+                        if (simple_lines.includes("<br><br>")) {
                                 lines_split = await simple_lines.split("<br><br>")
                                 document.getElementById(id1).innerHTML += await lines_split[0]
                                 document.getElementById(id2).innerHTML += await lines_split[1]

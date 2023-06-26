@@ -223,7 +223,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             messages.append(1)
             conversation(incoming_msg)
         finally:
-            upload_pickle(json.loads(json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
+            upload_pickle(json.loads(
+                json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
                         STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
             g.close()
 
