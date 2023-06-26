@@ -75,7 +75,7 @@
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
             if (hoverCount == 11) {
-                window.location.replace("/end")
+                window.location.href = "/end"
             }
             else {
                 event.preventDefault();
@@ -92,7 +92,7 @@
             
             }
         })
-        
+        window.onpopstate = function (e) { window.history.forward(1); }
         function botResponse(number, msgText) {
             async function streamer() {
                 try {

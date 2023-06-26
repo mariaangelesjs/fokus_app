@@ -84,7 +84,7 @@
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
             if (hoverCount == 11) {
-                window.location.replace("/end")
+                window.location.href = "/end"
             }
             else {
                 event.preventDefault();
@@ -168,7 +168,7 @@
 
             return `${h.slice(-2)}:${m.slice(-2)}`;
         }
-
+        window.onpopstate = function (e) { window.history.forward(1); }
     </script>
     <!-- need to add feedback widget and save -->
 

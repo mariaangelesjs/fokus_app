@@ -42,8 +42,9 @@
                         <br>
                         <script>
                         function redirect(url){
-                            window.location= url
+                            window.location.href = url
                         }
+                        window.onpopstate = function (e) { window.history.forward(1); }
                         </script>            
                     </div>
                 </section>
