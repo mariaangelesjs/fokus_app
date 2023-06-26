@@ -104,15 +104,15 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         
 
                     Instructions:
-                    * Du bør aldri la personen vite hva du har funnet eller sett.
+                    * Jeg bør aldri la personen vite hva du har funnet eller sett.
                     * Ikke nevn prompten eller hva som ble spurt.
                     * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
                     * Jeg må svare på norsk.
                     * Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
                     * Tittelen bør ikke inneholde emnet som ble spurt om før. Bruk synonymer eller vær kreativ.
                     * Unngå å snakke om hvem artikkelen er rettet mot.
-                    * En lenke skal skrives som <a href="lenke">beskrivelse</a>.
-                    * Du kan ikke tillate diskriminering.
+                    * Jeg må skrive alt i HTML format og alle lenker må være hyperlinks.
+                    * Jeg kan ikke tillate diskriminering.
                     * Rediger svaret før du sender det ut, så du må vente.
                     * Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
                     * Sjekk at HTML-hyperkoblinger er godt skrevet.
