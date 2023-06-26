@@ -24,6 +24,8 @@ html {
 #bas-logo {
       text-align: center;
       align-items: center;
+      margin-left: auto;
+      margin-right: auto;
   }
 table, th, td 
 {
@@ -71,9 +73,12 @@ body {
 }
 
 h1 {
-  font-weight: bold;
   text-align: center;
-  display:block;
+  font-weight: bold;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   } 
 
 #button-table {
@@ -148,28 +153,38 @@ input[type=submit] {
 .picture1 {
 display: flex;
 align-items: center;
-gap: 85px;
+text-align: center;
+font-weight: bold;
+position: relative;
+justify-content: center;
+align-items: center;
+gap: 30px;
 top: 30px;
-width: 670px;
+width: 50%;
 margin-right: auto;
 margin-left:auto ;
-
 }
 
 #small_button{
 width:100px;
 }
 .picture2 {
+text-align: center;
+font-weight: bold;
+position: relative;
 display: flex;
+justify-content: center;
 align-items: center;
-gap: 95px;
+gap: 50px;
 top: 30px;
-width: 645px;
+width: 90%;
 margin-right:auto;
 margin-left:auto ;
 }
 
 #form_pictures{
-  width: 690px;
+  display: block;
+  width: 580px;
   top: 40px;
+  height: calc(100% - 50px);
 }
