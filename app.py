@@ -232,7 +232,7 @@ def gpt_chat_response():
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
-        return ""
+        return "ratelimit 20 per 1 hour"
 
 @app.route('/unique_email', methods=['GET', 'POST'])
 def gpt_email():
@@ -262,7 +262,7 @@ def gpt_email_response():
             print(session['subject'])
             session['content'] = request.args.get('content')
             print(session['content'])
-            return ""
+            return "ratelimit 20 per 1 hour"
 
 
 username = client.get_secret('basAnalyseMail').value
