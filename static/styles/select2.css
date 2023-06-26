@@ -2,7 +2,6 @@
 .select2-container {
     box-sizing: border-box;
     display: inline-block;
-    position: relative;
     vertical-align: middle;
     justify-content: center;
     align-items: center;
@@ -84,7 +83,7 @@
     text-align: center !important;
     transform: translate(-50%, 0) !important;
     justify-content: center;
-    position: fixed;
+    position: relative;
 }
 
 .select2-results {

@@ -10,6 +10,7 @@ html {
   background-size:cover;
   background-attachment: fixed;
   height: 100%;
+  width: 100%;
 }
 
 *,
@@ -49,7 +50,7 @@ border-radius: 20px;
 text-align: center;
 margin-left: auto;
 margin-right: auto;
-width: auto;
+width: 50%;
 height:auto;
 
 }
@@ -63,7 +64,6 @@ body {
   text-align: center;
   display:block;
   color:white;
-  width: 50%;
   font-family: 'Open Sans', sans-serif;
   font-size: 18px;
   -webkit-text-stroke: 0.25px black;
@@ -73,6 +73,7 @@ body {
 h1 {
   font-weight: bold;
   text-align: center;
+  display:block;
   } 
 
 #button-table {
