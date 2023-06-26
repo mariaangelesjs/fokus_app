@@ -82,13 +82,18 @@ color:white;
 width: 180px;
 height: 30;
 }
-.form_table{
+section{
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-radius: 20px;
   width: 300px;
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   background-image: linear-gradient(112.1deg, rgb(32, 38, 57) 11.4%, rgb(63, 76, 119) 70.2%)}
+
+
 
 div {
 display: block;
@@ -115,6 +120,7 @@ height: 30px;
 padding-left: 10px;
 }
 
+  
 input[type=submit] {
   color: white;
   top: 200px;
@@ -122,6 +128,8 @@ input[type=submit] {
   z-index: 1000;
   width: 200px;
   height: 30px;
+  margin-right: auto;
+  margin-left:auto ;
   background-color:  #FF3CAC;
   text-align: center;
   cursor: wait;
@@ -139,17 +147,27 @@ input[type=submit] {
 .picture1 {
 display: flex;
 align-items: center;
-gap: 90px;
+gap: 80px;
 top: 30px;
-width: 690px;
+width: 670px;
 margin-right: auto;
-
+margin-left:auto ;
 
 }
+
 #small_button{
 width:100px;
 }
 .picture2 {
 display: flex;
+align-items: center;
+gap: 90px;
+top: 30px;
+width: 650px;
+margin-right:auto;
+margin-left:auto ;
 }
 
+#form_pictures{
+  width: 690px;
+}
