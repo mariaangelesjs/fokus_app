@@ -223,6 +223,9 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             messages.append(1)
             try:
                 conversation(incoming_msg)
+                upload_pickle(json.loads(
+                json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
+                        STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
             except openai.error.InvalidRequestError:
                 """This model's maximum context length is 8192 tokens.
                 However, your messages resulted in 8203 tokens.
@@ -230,9 +233,6 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 """
 
         finally:
-            upload_pickle(json.loads(
-                json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
-                        STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
             g.close()
 
     def chain(incoming_msg, key, type,
