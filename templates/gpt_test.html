@@ -103,21 +103,24 @@
 
         function botResponse(number, msgText) {
             async function streamer() {
-                var id1 = "msg-text-robot-" + number
-                document.getElementById(id1).innerHTML = "";
                 try {
                     const response = await fetch('/get', {
                         method: 'POST',
+                        body: formData,
                         headers: { 'Content-Type': 'text/event-stream; charset=utf-8' }
                     });
-                    for await (const chunk of response.body){
+                    const reader = response.body.getReader();
+                    var id1 = "msg-text-robot-" + number
+                    document.getElementById(id1).innerHTML = "";
                     while (true) {
-                        const chunkie = new TextDecoder().decode(value);
-                        const lines = chunkie.replace("\n\n", "<br><br>")
+                        const { done, value } = await reader.read();
+                        if (done) break;
+                        const chunk = new TextDecoder().decode(value, {stream: true});
+                        const lines = chunk.replace("\n\n", "<br><br>")
                         const simple_lines = lines.replace("\n", "<br>")
                         document.getElementById(id1).innerHTML += simple_lines
                         msgerChat.scrollTo(0, msgerChat.scrollHeight)
-                    }}
+                    }
                 } catch (error) {
                     console.error(error);
                 }
