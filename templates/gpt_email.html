@@ -78,7 +78,7 @@
                 $.get("/get_email", {
                      subject: document.getElementById(id1).value ,
                      content: document.getElementById(id2).value})
-                     window.open("/end")
+                     window.location.replace("/end")
             }
             else {
                 event.preventDefault();
