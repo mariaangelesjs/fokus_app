@@ -15,7 +15,7 @@ import queue
 import json
 import pandas as pd
 from sources.blobs import upload_pickle, download_pickle
-
+from threading import Event 
 
 class ThreadedGenerator:
     def __init__(self):
@@ -221,6 +221,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             conversation = ConversationChain(
                 memory=memory, prompt=prompt, llm=llm)
             conversation(incoming_msg)
+            Event.wait(0.03)
             upload_pickle(json.loads(json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
                         STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
             messages.append(1)
