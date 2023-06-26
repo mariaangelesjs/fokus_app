@@ -114,7 +114,7 @@
                         if (await simple_lines.includes("Emne")) {
                             lines_split = await simple_lines.split("<br><br>")
                             document.getElementById(id1).innerHTML = '<label>' + 'Emne' + '</label><br>'
-                            document.getElementById(id1).innerHTML += lines_split[0].replace("Emne:", "")
+                            document.getElementById(id1).innerHTML += lines_split[0].replace("Emne:", "").replace("AI:","")
                             document.getElementById(id2).innerHTML += lines_split[1].replace("Innhold:", "")
                             msgerChat.scrollTo(0, msgerChat.scrollHeight)
                             continue
