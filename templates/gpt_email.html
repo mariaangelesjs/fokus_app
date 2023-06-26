@@ -74,28 +74,31 @@
         var hoverCount = 0
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
-            if (hoverCount == 11) {
+
+            event.preventDefault();
+            const msgText = msgerInput.value;
+            if (!msgText) return;
+            appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person", hoverCount);
+            msgerChat.scrollTop += 500
+            msgerInput.value = "";
+            $.get("/get_email", { msg: msgText }).done(function (data) {
+                appendMessage(BOT_NAME, BOT_IMG, "left", "", "robot", hoverCount);
+                msgerChat.scrollTop += 500
+                botResponse(hoverCount)
+            })
+            sleep(2000)
+            if (hoverCount == 10) {
                 $.get("/get_email", {
                     subject: document.getElementById(id1).value,
                     content: document.getElementById(id2).value
                 })
-                window.location.replace("/end")
+                window.open("/end")
             }
-            else {
-                event.preventDefault();
-                const msgText = msgerInput.value;
-                if (!msgText) return;
-                appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person", hoverCount);
-                msgerChat.scrollTop += 500
-                msgerInput.value = "";
-                $.get("/get_email", { msg: msgText }).done(function (data) {
-                    appendMessage(BOT_NAME, BOT_IMG, "left", "", "robot", hoverCount);
-                    msgerChat.scrollTop += 500
-                    botResponse(hoverCount)
-                })
-            }
-        })
-        
+        }
+        )
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
         function botResponse(number, msgText) {
             async function streamer() {
                 try {

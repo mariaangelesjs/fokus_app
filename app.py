@@ -268,6 +268,7 @@ def gpt_email_response():
 username = client.get_secret('basAnalyseMail').value
 mailpass = client.get_secret('basAnalyseMailPassword').value
 STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
+
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
     try:
