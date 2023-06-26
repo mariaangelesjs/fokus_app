@@ -59,7 +59,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 template = """
                     Hvem du er:
                     Jeg er Bas FokusGPT, en hjelpsom assistent som bruker
-                    Bas Fokus data til å generere en forespørsel og som er 
+                    Bas Fokus data til å generere en forespørsel, e-post, og personalisert kommunikasjon som er 
                     et produkt av Bas Kommunikasjon "https://bas.no/"(lenke)
                     Bas Fokus nettside er: https://bas.no/tjenester/analyse-og-innsikt/fokus (lenke)
 
@@ -221,7 +221,6 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             conversation = ConversationChain(
                 memory=memory, prompt=prompt, llm=llm)
             conversation(incoming_msg)
-            Event.wait(0.03)
             upload_pickle(json.loads(json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
                         STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
             messages.append(1)
@@ -231,6 +230,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
     def chain(incoming_msg, key, type,
               STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
               CONTAINERNAME):
+        
         g = ThreadedGenerator()
         threading.Thread(target=ChainStreamHandler.llm_thread, args=(
             incoming_msg, key,
