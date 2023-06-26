@@ -147,7 +147,7 @@ input[type=submit] {
 .picture1 {
 display: flex;
 align-items: center;
-gap: 80px;
+gap: 85px;
 top: 30px;
 width: 670px;
 margin-right: auto;
@@ -161,13 +161,14 @@ width:100px;
 .picture2 {
 display: flex;
 align-items: center;
-gap: 90px;
+gap: 95px;
 top: 30px;
-width: 650px;
+width: 645px;
 margin-right:auto;
 margin-left:auto ;
 }
 
 #form_pictures{
   width: 690px;
+  top: 40px;
 }
