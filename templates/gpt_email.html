@@ -75,7 +75,7 @@
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
             if (hoverCount == 10) {
-                window.location.href = "/end"
+                window.open("/end") 
             }
             else {
                 event.preventDefault();
