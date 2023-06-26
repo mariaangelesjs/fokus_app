@@ -13,6 +13,7 @@ from langchain.schema import (messages_from_dict, messages_to_dict)
 import threading
 import queue
 import json
+import openai
 import pandas as pd
 from sources.blobs import upload_pickle, download_pickle
 
@@ -222,7 +223,14 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             conversation = ConversationChain(
                 memory=memory, prompt=prompt, llm=llm)
             messages.append(1)
-            conversation(incoming_msg)
+            try:
+                conversation(incoming_msg)
+            except openai.error.InvalidRequestError:
+                """This model's maximum context length is 8192 tokens.
+                However, your messages resulted in 8203 tokens.
+                Please reduce the length of the messages.
+                """
+
         finally:
             upload_pickle(json.loads(
                 json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
