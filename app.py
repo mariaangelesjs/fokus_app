@@ -311,6 +311,7 @@ def fokus_end():
             delete_blob(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                 CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
+            logging.info('Deleted blob')
             session.clear()
         except:
             try:
@@ -327,7 +328,8 @@ def fokus_end():
                           STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
                 delete_blob(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, f'output/fokus-test/conversation_{random_conversation}.pickle')
+                    CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
+                logging.info('Deleted blob')
                 session.clear()
             except:
                 session.clear()
