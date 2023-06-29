@@ -283,6 +283,7 @@ STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
 
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
+    # This is for saving feedback
     if request.method == 'POST':
         session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])
