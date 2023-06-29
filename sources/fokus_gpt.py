@@ -199,7 +199,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
                     * Sjekk at HTML-hyperkoblinger er godt skrevet
                     * Ikke gi informasjon om chat-historikk når en person spør "hvem er du?""
-                    * Slutt alltid med "Med vennlig hilser"
+                    * Slutt alltid med "Med vennlig hilsen"
 
                     
                     Forespørsel : {input}
