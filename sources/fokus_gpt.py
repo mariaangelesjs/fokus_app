@@ -175,12 +175,15 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     SoMe markedsføring mot kalde leads.
                     Ved å analysere disse dataene kan vi få verdifulle innsikter som kan hjelpe bedrifter med å målrette sine 
                     markedsføringskampanjer og tilbud til spesifikke kundegrupper.
+                    Man kan få verdier fra Lav, Middels til Høy. Likevel kan man ikke dele verdi, men man kan tilpasse kommunikasjon
+                    til Bas Fokus verdi.
         
 
                     Instruksjoner:
                     * Jeg må legge til emotikoner på Emne.
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
+                    * {input} må ikke inkluderes i teksten og ingen kan få Bas Fokus verdi av Navn.
                     * Jeg bør aldri la personen vite hva jeg har funnet eller sett som kommer fra Bas Fokus,
                       men du skal tilpasse tekst på personlighet uten å nevne det.
                     * Jeg bør aldri snakke som robot.

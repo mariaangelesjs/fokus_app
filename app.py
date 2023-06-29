@@ -254,10 +254,10 @@ def gpt_email_response():
             if request.method == 'GET':
                 session['tone'] = request.args.get('msg')
                 tone_replace = str(
-                    'Skriv en e-post fra Bas Analyse med en ' + session['tone'] + ' tone of voice')
+                    'Skriv en e-post fra Bas FokusGPT med en ' + session['tone'] + ' tone of voice')
                 print(tone_replace)
                 session['full_prompt'] = str(session['prompt_done']).replace(
-                    'Skriv en artikel', tone_replace).replace('en person', session['name'])
+                    'Skriv en artikel', tone_replace).replace('en person', session['name']) 
                 print(session['full_prompt'])
             if request.method == 'POST':
                 return Response(
