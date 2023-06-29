@@ -53,8 +53,10 @@ app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE='Lax',
+    SESSION_PERMANENT = False
 )
-app.permanent_session_lifetime = timedelta(minutes=20)
+app.config["SESSION_PERMANENT"] = False
+
 # Assign client
 
 global client

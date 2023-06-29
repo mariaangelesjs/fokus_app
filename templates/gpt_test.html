@@ -106,6 +106,7 @@
                 try {
                     const response = await fetch('/get', {
                         method: 'POST',
+                        mode: 'cors',
                         body: formData,
                         headers: { 'Content-Type': 'text/event-stream; charset=utf-8' }
                     });
