@@ -313,6 +313,7 @@ def fokus_end():
                 CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
             logging.info('Deleted blob')
             session.clear()
+            return redirect(url_for('welcome'))
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
@@ -331,6 +332,7 @@ def fokus_end():
                     CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
                 logging.info('Deleted blob')
                 session.clear()
+                return redirect(url_for('welcome'))
             except:
                 session.clear()
                 return "Ikke mulig å laste ned feedback"
