@@ -16,7 +16,7 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from flask_cors import CORS
 import numpy as np
-
+import random
 
 # Get app
 app = Flask(__name__)
@@ -240,6 +240,8 @@ def gpt_chat_response():
 def gpt_email():
     return render_template('gpt_email.html')
     
+random_conversation = random.randint(-10000000000000,10000000000000)
+
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
     try:
@@ -256,7 +258,7 @@ def gpt_email_response():
                             ChainStreamHandler.chain(
                                 session['full_prompt'] , key, 'email',
                                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                                CONTAINERNAME), mimetype='text/event-stream')
+                                CONTAINERNAME, random), mimetype='text/event-stream')
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
@@ -300,7 +302,7 @@ def fokus_end():
             del old_messages
             delete_blob(
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME,'output/fokus-test/conversation.pickle')
+              CONTAINERNAME,f'output/fokus-test/conversation-{random_conversation}.pickle')
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
@@ -316,7 +318,7 @@ def fokus_end():
                                  STORAGEACCOUNTURL,STORAGEACCOUNTKEY)
                 delete_blob(
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME,'output/fokus-test/conversation.pickle')
+              CONTAINERNAME,f'output/fokus-test/conversation-{random_conversation}.pickle')
             except:
                 return "Ikke mulig å laste ned feedback"
     
