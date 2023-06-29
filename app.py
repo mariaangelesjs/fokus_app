@@ -222,7 +222,7 @@ def fokus_gpt():
 def gpt_chat_response():
     try:
         # End bot with this message after 10 messages (before cut)
-        with limiter.limit("20/hour"):
+        with limiter.limit("20/day"):
             if request.method == 'GET':
                 session['input'] = request.args.get('msg')
             if request.method == 'POST':
@@ -234,7 +234,7 @@ def gpt_chat_response():
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
-        return ""
+        return "rate limit is 10 requests per day. You have requested too much"
 
 @app.route('/unique_email', methods=['GET', 'POST'])
 def gpt_email():
@@ -243,7 +243,7 @@ def gpt_email():
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
     try:
-        with limiter.limit("10/hour"):
+        with limiter.limit("10/day"):
             if request.method =='GET':
                 session['tone'] = request.args.get('msg')
                 tone_replace = str('Skriv en e-post fra Bas Analyse med en '+ session['tone'] + ' tone of voice')
@@ -264,7 +264,7 @@ def gpt_email_response():
             print(session['subject'])
             session['content'] = request.args.get('content')
             print(session['content'])
-            return ""
+            return "rate limit is 5 requests per day. You have requested too much"
 
 
 username = client.get_secret('basAnalyseMail').value
