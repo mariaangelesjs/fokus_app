@@ -213,7 +213,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             if messages:
                 old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, f'output/fokus-test/FokusGPT/conversationsconversation_{random}.pickle',  'No')
+                    CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random}.pickle',  'No')
                 print(old_messages)
                 retrieved_messages = messages_from_dict(old_messages)
                 retrieved_chat_history = ChatMessageHistory(
