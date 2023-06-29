@@ -116,7 +116,6 @@ input[type=text] {
 color: black;
 z-index: 1000;
 background-color: white;
-cursor: wait;
 -webkit-border-radius: 20px;
 -moz-border-radius: 20px;
 border-radius: 20px;
@@ -138,7 +137,6 @@ input[type=submit] {
   margin-left:auto ;
   background-color:  #FF3CAC;
   text-align: center;
-  cursor: wait;
   }
 
 

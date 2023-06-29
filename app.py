@@ -230,7 +230,7 @@ def gpt_chat_response():
                     ChainStreamHandler.chain(
                         session['input'], key,'chat',
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                        CONTAINERNAME), mimetype='text/event-stream')
+                        CONTAINERNAME, random_conversation), mimetype='text/event-stream')
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
@@ -280,7 +280,7 @@ def fokus_end():
         print(session['feedback'])
         old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, f'output/fokus-test/conversation-{random_conversation}.pickle',  'No')
+                    CONTAINERNAME, f'output/fokus-test/conversation_{random_conversation}.pickle',  'No')
         try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
@@ -302,7 +302,7 @@ def fokus_end():
             del old_messages
             delete_blob(
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME,f'output/fokus-test/conversation-{random_conversation}.pickle')
+              CONTAINERNAME,f'output/fokus-test/conversation_{random_conversation}.pickle')
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
@@ -318,7 +318,7 @@ def fokus_end():
                                  STORAGEACCOUNTURL,STORAGEACCOUNTKEY)
                 delete_blob(
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME,f'output/fokus-test/conversation-{random_conversation}.pickle')
+              CONTAINERNAME,f'output/fokus-test/conversation_{random_conversation}.pickle')
             except:
                 return "Ikke mulig å laste ned feedback"
     
