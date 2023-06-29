@@ -180,7 +180,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må legge til emotikoner på Emne.
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
-                    * Jeg bør aldri skrive noe om personlighet, men jeg kan tilpasse tekst basert på det.
+                    * Jeg bør aldri la personen vite hva du har funnet eller sett som kommer fra Bas Fokus,
+                      men du skal tilpasse tekst på personlighet uten å nevne det.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
                     * Jeg må tilpasse ord i forespørsel eller prompt, men ikke bruk samme ord i teksten.
                     * Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om user.
