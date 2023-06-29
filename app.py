@@ -335,7 +335,7 @@ def fokus_end():
                 return redirect(url_for('welcome'))
             except:
                 session.clear()
-                return "Ikke mulig å laste ned feedback"
+                return "Ikke mulig å laste ned tilbakemelding"
 
     return render_template('fokus_gpt_end.html')
 
