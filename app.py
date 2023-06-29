@@ -235,6 +235,7 @@ def gpt_chat_response():
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
+        session.clear()
         return "rate limit is 10 requests per day. You have requested too much"
 
 
@@ -271,6 +272,7 @@ def gpt_email_response():
         print(session['subject'])
         session['content'] = request.args.get('content')
         print(session['content'])
+        session.clear()
         return "rate limit is 5 requests per day. You have requested too much"
 
 
