@@ -107,6 +107,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg bør aldri la personen vite hva du har funnet eller sett som kommer fra Bas Fokus,
                       men du skal tilpasse tekst på personlighet uten å nevne det.
                     * Ikke nevn prompten eller hva som ble spurt.
+                    * Jeg bør aldri snakke om "funner" eller som robot.
                     * Jeg bør aldri skrive noe om personlighet, men jeg kan tilpasse tekst basert på det.
                     * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
                     * Jeg må skrive bare på bra norsk.
@@ -180,6 +181,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må legge til emotikoner på Emne.
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
+                    * Jeg bør aldri snakke om "funner" eller som robot.
                     * Jeg bør aldri la personen vite hva du har funnet eller sett som kommer fra Bas Fokus,
                       men du skal tilpasse tekst på personlighet uten å nevne det.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
