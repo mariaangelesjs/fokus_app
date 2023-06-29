@@ -112,7 +112,7 @@
                         const chunk = await new TextDecoder().decode(value, {stream: true});
                         const lines = await chunk.replace("\n\n", "<br><br>")
                         const simple_lines = await lines.replace("\n", "<br>")
-                        if (await simple_lines.includes("Emne")) {
+                        if (await simple_lines.includes("Emne:")) {
                             lines_split = await simple_lines.split("<br><br>")
                             document.getElementById(id1).innerHTML = '<label>' + 'Emne' + '</label><br>'
                             document.getElementById(id1).innerHTML += await lines_split[0].replace("Emne:", "").replace("AI:","")
