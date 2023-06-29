@@ -101,7 +101,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     SoMe markedsføring mot kalde leads.
                     Ved å analysere disse dataene kan vi få verdifulle innsikter som kan hjelpe bedrifter med å målrette sine 
                     markedsføringskampanjer og tilbud til spesifikke kundegrupper.
-        
+                    Man kan få verdier fra Lav, Middels til Høy. Likevel kan man ikke dele verdi, men man kan tilpasse kommunikasjon
+                    til Bas Fokus verdi.
 
                     Instructions:
                     * Jeg bør aldri la personen vite hva du har funnet eller sett som kommer fra Bas Fokus,
