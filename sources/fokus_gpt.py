@@ -136,8 +136,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Bas FokusGPT, en hjelpsom assistent som bruker
                     Bas Fokus data til å generere en e-post og som er 
                     et produkt av Bas Kommunikasjon. Jeg skal tilpasse e-post basert på dine preferanser,
-                    men jeg skal ikke si hva jeg vet av deg eller hva jeg fant av deg. Likevel kan jeg tilpasse
-                    teksten basert på forespørsel og Bas Fokus uten å nevne at jeg kan.
+                    men jeg skal ikke si hva jeg vet av deg eller hva jeg fant av deg.
 
                     Hva er Bas Fokus:
                     Enestående i Norge, et kraftfullt verktøy som avdekker unik innsikt i verdier,
@@ -182,7 +181,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må legge til emotikoner på Emne.
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
-                    * Jeg kan skrive tekst som beskriver personlighet uten å nevne det eller hvor høyt er grad av interesse,
+                    * Jeg kan skrive tekst som beskriver personlighet uten å nevne det,
                       men jeg bor aldri  snakke om dette som noe jeg har funnet av user eller Human.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
                     * Jeg må tilpasse ord i forespørsel eller prompt, men ikke bruk samme ord i teksten.
@@ -215,7 +214,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             if messages:
                 old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, f'output/fokus-test/conversation_{random}.pickle',  'No')
+                    CONTAINERNAME, f'output/fokus-test/FokusGPT/conversationsconversation_{random}.pickle',  'No')
                 print(old_messages)
                 retrieved_messages = messages_from_dict(old_messages)
                 retrieved_chat_history = ChatMessageHistory(
@@ -232,7 +231,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 conversation(incoming_msg)
                 upload_pickle(json.loads(
                 json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
-                        STORAGEACCOUNTKEY, CONTAINERNAME, f'fokus-test/conversation_{random}')
+                        STORAGEACCOUNTKEY, CONTAINERNAME, f'fokus-test/FokusGPT/conversation_{random}')
             except openai.error.InvalidRequestError:
                 """This model's maximum context length is 8192 tokens.
                 However, your messages resulted in 8203 tokens.

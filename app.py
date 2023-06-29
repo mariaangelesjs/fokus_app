@@ -280,11 +280,11 @@ def fokus_end():
         print(session['feedback'])
         old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, f'output/fokus-test/conversation_{random_conversation}.pickle',  'No')
+                    CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle',  'No')
         try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                CONTAINERNAME, 'output/fokus-test/fokusGPT_leads.parquet'))
+                CONTAINERNAME, 'output/fokus-test/FokusGPT/FokusGPT_leads.parquet'))
             feedback_new = pd.DataFrame(
                 index=[0], data={
                 'Navn': str(session['name']),
@@ -297,12 +297,12 @@ def fokus_end():
             feedback = pd.concat([feedback_old, feedback_new],
                                  axis=0).reset_index(drop=True)
             upload_df(feedback, CONTAINERNAME,
-                             'output/fokus-test/fokusGPT_leads.parquet',
+                             'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
                              STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
             del old_messages
             delete_blob(
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME,f'output/fokus-test/conversation_{random_conversation}.pickle')
+              CONTAINERNAME,f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
@@ -314,7 +314,7 @@ def fokus_end():
                     'Tilbakemelding': str(session['feedback'])})
                 feedback['Samtale'] = str(old_messages)
                 upload_df(feedback, CONTAINERNAME,
-                                 'output/fokus-test/fokusGPT_leads.parquet',
+                                 'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
                                  STORAGEACCOUNTURL,STORAGEACCOUNTKEY)
                 delete_blob(
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
