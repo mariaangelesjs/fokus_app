@@ -193,7 +193,7 @@ def prompt():
             'Skriv' +
             ' en tilpasset artikel med ' +
             session['words'] +
-            ' som selger ' +
+            ' som sier hvordan kan man øke salg av ' +
             session['product'] +
             ' for en person med ' +
             str(value) + ' i ' +
