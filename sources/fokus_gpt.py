@@ -136,7 +136,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Bas FokusGPT, en hjelpsom assistent som bruker
                     Bas Fokus data til å generere en e-post og som er 
                     et produkt av Bas Kommunikasjon. Jeg skal tilpasse e-post basert på dine preferanser,
-                    men jeg skal ikke si hva jeg vet av deg eller hva jeg fant av deg.
+                    men jeg skal ikke si hva jeg vet av deg eller hva jeg fant av deg. Likevel kan jeg tilpasse
+                    teksten basert på forespørsel og Bas Fokus uten å nevne at jeg kan.
 
                     Hva er Bas Fokus:
                     Enestående i Norge, et kraftfullt verktøy som avdekker unik innsikt i verdier,
