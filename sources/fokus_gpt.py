@@ -54,7 +54,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         ingest_to_db = messages_to_dict(extracted_messages)
         return ingest_to_db
 
-    def llm_thread(incoming_msg, key, g, STORAGEACCOUNTURL, STORAGEACCOUNTKEY, CONTAINERNAME, type):
+    def llm_thread(incoming_msg, key, g, STORAGEACCOUNTURL, STORAGEACCOUNTKEY, CONTAINERNAME, type, random):
         try:
             if type == 'chat':
                 template = """
@@ -210,7 +210,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             if messages:
                 old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, 'output/fokus-test/conversation.pickle',  'No')
+                    CONTAINERNAME, f'output/fokus-test/conversation-{random}.pickle',  'No')
                 print(old_messages)
                 retrieved_messages = messages_from_dict(old_messages)
                 retrieved_chat_history = ChatMessageHistory(
@@ -227,7 +227,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                 conversation(incoming_msg)
                 upload_pickle(json.loads(
                 json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
-                        STORAGEACCOUNTKEY, CONTAINERNAME, 'fokus-test/conversation')
+                        STORAGEACCOUNTKEY, CONTAINERNAME, f'fokus-test/conversation-{random}')
             except openai.error.InvalidRequestError:
                 """This model's maximum context length is 8192 tokens.
                 However, your messages resulted in 8203 tokens.
@@ -239,12 +239,12 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
     def chain(incoming_msg, key, type,
               STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME):
+              CONTAINERNAME, random):
         
         g = ThreadedGenerator()
         threading.Thread(target=ChainStreamHandler.llm_thread, args=(
             incoming_msg, key,
             g,
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-            CONTAINERNAME,type)).start()
+            CONTAINERNAME,type, random)).start()
         return g
