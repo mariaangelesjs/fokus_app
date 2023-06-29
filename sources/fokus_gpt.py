@@ -107,6 +107,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg bør aldri la personen vite hva du har funnet eller sett som kommer fra Bas Fokus,
                       men du skal tilpasse tekst på personlighet uten å nevne det.
                     * Ikke nevn prompten eller hva som ble spurt.
+                    * Jeg kan skrive tekst som beskriver personlighet uten å nevne det,
+                      men jeg bor ikke snakke om dette som noe jeg har funnet.
                     * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
                     * Jeg må skrive bare på bra norsk.
                     * Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
@@ -120,6 +122,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Sjekk at HTML er godt skrevet.
                     * Ikke gi informasjon om chat-historikk når en person spør "hvem er du?"
                     * Ha en vennlig "tone of voice".
+                    * Jeg må ikke si mye "Vi".
                     * Legg til emoticons på slutten og si "Jeg håper dette hjelper 😄" på slutten av svaret.
 
 
@@ -176,9 +179,10 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                     Instruksjoner:
                     * Jeg må legge til emotikoner på Emne.
+                    * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
-                    * Jeg bør aldri la personen vite hva du har funnet eller sett som kommer fra Bas Fokus,
-                      men du skal tilpasse tekst på personlighet uten å nevne det.
+                    * Jeg kan skrive tekst som beskriver personlighet uten å nevne det eller hvor høyt er grad av interesse,
+                      men jeg bor aldri  snakke om dette som noe jeg har funnet av user eller Human.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
                     * Jeg må tilpasse ord i forespørsel eller prompt, men ikke bruk samme ord i teksten.
                     * Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om user.
