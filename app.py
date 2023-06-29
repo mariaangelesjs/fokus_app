@@ -55,7 +55,7 @@ app.config.update(
     SESSION_COOKIE_SAMESITE='Lax',
     SESSION_PERMANENT = False
 )
-app.config["SESSION_PERMANENT"] = False
+
 
 # Assign client
 
