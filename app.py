@@ -53,7 +53,7 @@ app.config.update(
     SESSION_COOKIE_SECURE=True,
     SESSION_COOKIE_HTTPONLY=True,
     SESSION_COOKIE_SAMESITE='Lax',
-    SESSION_PERMANENT = False
+    SESSION_PERMANENT=False
 )
 
 
@@ -116,7 +116,7 @@ def welcome():
         else:
             person = fokus.sample(1, random_state=42)[fokus_segments]
         session['data-person'] = person.to_json()
-                    
+
         return redirect(url_for('prompt'))
     return render_template('form.html')
 
@@ -212,6 +212,7 @@ def choose_gpt():
     # run the bot
     return render_template('choose_gpt.html')
 
+
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
     # run the bot
@@ -228,7 +229,7 @@ def gpt_chat_response():
             if request.method == 'POST':
                 return Response(
                     ChainStreamHandler.chain(
-                        session['input'], key,'chat',
+                        session['input'], key, 'chat',
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME, random_conversation), mimetype='text/event-stream')
             else:
@@ -236,42 +237,47 @@ def gpt_chat_response():
     except:
         return "rate limit is 10 requests per day. You have requested too much"
 
+
 @app.route('/unique_email', methods=['GET', 'POST'])
 def gpt_email():
     return render_template('gpt_email.html')
-    
-random_conversation = random.randint(-10000000000000,10000000000000)
+
+
+random_conversation = random.randint(-10000000000000, 10000000000000)
+
 
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
     try:
         with limiter.limit("10/day"):
-            if request.method =='GET':
+            if request.method == 'GET':
                 session['tone'] = request.args.get('msg')
-                tone_replace = str('Skriv en e-post fra Bas Analyse med en '+ session['tone'] + ' tone of voice')
+                tone_replace = str(
+                    'Skriv en e-post fra Bas Analyse med en ' + session['tone'] + ' tone of voice')
                 print(tone_replace)
                 session['full_prompt'] = str(session['prompt_done']).replace(
                     'Skriv en artikel', tone_replace).replace('en person', session['name'])
                 print(session['full_prompt'])
-            if request.method=='POST':
-                return  Response(
-                            ChainStreamHandler.chain(
-                                session['full_prompt'] , key, 'email',
-                                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                                CONTAINERNAME, random_conversation), mimetype='text/event-stream')
+            if request.method == 'POST':
+                return Response(
+                    ChainStreamHandler.chain(
+                        session['full_prompt'], key, 'email',
+                        STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                        CONTAINERNAME, random_conversation), mimetype='text/event-stream')
             else:
                 return Response(None, mimetype='text/event-stream')
     except:
-            session['subject'] = request.args.get('subject')
-            print(session['subject'])
-            session['content'] = request.args.get('content')
-            print(session['content'])
-            return "rate limit is 5 requests per day. You have requested too much"
+        session['subject'] = request.args.get('subject')
+        print(session['subject'])
+        session['content'] = request.args.get('content')
+        print(session['content'])
+        return "rate limit is 5 requests per day. You have requested too much"
 
 
 username = client.get_secret('basAnalyseMail').value
 mailpass = client.get_secret('basAnalyseMailPassword').value
 STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
+
 
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
@@ -279,30 +285,31 @@ def fokus_end():
         session['feedback'] = request.form.get('feedback_done')
         print(session['feedback'])
         old_messages = download_pickle(
-                    STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                    CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle',  'No')
+            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+            CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle',  'No')
         try:
             feedback_old = pd.read_parquet(get_data(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                 CONTAINERNAME, 'output/fokus-test/FokusGPT/FokusGPT_leads.parquet'))
             feedback_new = pd.DataFrame(
                 index=[0], data={
-                'Navn': str(session['name']),
-                'Phone': str(session['phone']),
-                'E-post': str(session['email']),
-                'Stilling': str(session['work-position']),
-                'Industri': str(session['industry']),
-                'Tilbakemelding': str(session['feedback'])})
+                    'Navn': str(session['name']),
+                    'Phone': str(session['phone']),
+                    'E-post': str(session['email']),
+                    'Stilling': str(session['work-position']),
+                    'Industri': str(session['industry']),
+                    'Tilbakemelding': str(session['feedback'])})
             feedback_new['Samtale'] = str(old_messages)
             feedback = pd.concat([feedback_old, feedback_new],
                                  axis=0).reset_index(drop=True)
             upload_df(feedback, CONTAINERNAME,
-                             'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
-                             STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
+                      'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
+                      STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
             del old_messages
             delete_blob(
-            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME,f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
+                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
+            session.clear()
         except:
             try:
                 feedback = pd.DataFrame(index=[0], data={
@@ -314,17 +321,17 @@ def fokus_end():
                     'Tilbakemelding': str(session['feedback'])})
                 feedback['Samtale'] = str(old_messages)
                 upload_df(feedback, CONTAINERNAME,
-                                 'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
-                                 STORAGEACCOUNTURL,STORAGEACCOUNTKEY)
+                          'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
+                          STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
                 delete_blob(
-            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-              CONTAINERNAME,f'output/fokus-test/conversation_{random_conversation}.pickle')
+                    STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                    CONTAINERNAME, f'output/fokus-test/conversation_{random_conversation}.pickle')
+                session.clear()
             except:
+                session.clear()
                 return "Ikke mulig å laste ned feedback"
-    
-    return render_template('fokus_gpt_end.html')
 
-           
+    return render_template('fokus_gpt_end.html')
 
 
 if __name__ == '__main__':
