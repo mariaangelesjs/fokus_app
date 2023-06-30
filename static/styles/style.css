@@ -2,7 +2,7 @@
   --msger-bg: #fff;
   --border: 2px solid #191c24;
   --left-msg-bg: #f2f2f2;
-  --right-msg-bg: #45c2b1;
+  --right-msg-bg:#CF1A85;
 }
 
 html {
@@ -160,7 +160,7 @@ div[class="col-md-6 mx-auto text-center"] {
 }
 
 .msger-send-btn:hover {
-  background: #45c2b1;
+  background: #CF1A85;
 }
 
 .msger-chat {
