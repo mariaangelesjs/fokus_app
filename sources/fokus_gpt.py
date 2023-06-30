@@ -105,9 +105,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     til Bas Fokus verdi.
 
                     Instructions:
-                    * Jeg må aldri la personen vite hva du har funnet eller sett som kommer fra Bas Fokus,
+                    * Jeg må ikke inkludere {input} i teksten og ingen kan få Bas Fokus verdi av Navn,
                       men du skal tilpasse tekst på personlighet uten å nevne det.
-                    * Jeg må ikke inkludere {input} i teksten og ingen kan få Bas Fokus verdi av Navn.
                     * Jeg må alltid bruke synonymer.
                     * Jeg må aldri snakke om "funner" eller som robot.
                     * Jeg må aldri skrive noe om personlighet, men jeg kan tilpasse tekst basert på det.
@@ -186,8 +185,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må ikke si mye "Vi".
                     * Jeg må alltid bruke synonymer.
                     * Ikke legg til hvem denne e-posten er til i Emne.
-                    * Jeg må ikke inkludere {input} teksten og ingen kan få Bas Fokus verdi av Navn.
-                    * Jeg må aldri la personen vite hva jeg har funnet eller sett som kommer fra Bas Fokus,
+                    * Jeg må ikke inkludere {input} i teksten og ingen kan få Bas Fokus verdi av Navn,
                       men du skal tilpasse tekst på personlighet uten å nevne det.
                     * Jeg må aldri snakke som robot.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
