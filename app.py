@@ -234,11 +234,10 @@ def gpt_chat_response():
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME, random_conversation), mimetype='text/event-stream')
             else:
-                if session['lead'] == 'Nei':
-                    session.clear()
                 return Response(None, mimetype='text/event-stream')
     except:
-        session.clear()
+        if session['lead'] == 'Nei':
+                    session.clear()
         return "rate limit is 10 requests per day. You have requested too much"
 
 
@@ -270,15 +269,14 @@ def gpt_email_response():
                         CONTAINERNAME, random_conversation), mimetype='text/event-stream')
             else:
                 # This is for saving feedback
-                if session['lead'] == 'Nei':
-                    session.clear()
                 return Response(None, mimetype='text/event-stream')
     except:
+        if session['lead'] == 'Nei':
+                    session.clear()
         session['subject'] = request.args.get('subject')
         print(session['subject'])
         session['content'] = request.args.get('content')
         print(session['content'])
-        session.clear()
         return "rate limit is 5 requests per day. You have requested too much"
 
 
