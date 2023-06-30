@@ -5,7 +5,7 @@
 html {
   box-sizing: border-box;
   background-repeat:no-repeat;
-  background-color:  #CF1A85;
+  background-color:  #8F99DD;
   background-size:cover;
   background-attachment: fixed;
   height: 100%;
@@ -38,7 +38,7 @@ table, th, td
 th { 
   font-weight:bold;
 }
-tr:hover {background-color:#45c2b1}
+tr:hover {background-color:#CF1A85}
 
 
 .boxed {
