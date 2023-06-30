@@ -111,7 +111,7 @@ def welcome():
         else:
             session['phone'] = session['phone'].replace(' ', '')
 
-        if int(session['phone']) in fokus['KR_Phone_Mobile']:
+        if session['phone'] in fokus['KR_Phone_Mobile']:
             person = fokus[fokus['KR_Phone_Mobile'] ==
                            int(session['phone'])][fokus_segments]
         else:
