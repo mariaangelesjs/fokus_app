@@ -195,7 +195,7 @@ def prompt():
             session['words'] +
             ' som sier hvordan kan man øke salg av ' +
             session['product'] +
-            ' personer med ' +
+            ' til personer med ' +
             str(value) + ' i ' +
             session['variable'] + ' som er ' +
             session['work-position'] + ' i ' +
