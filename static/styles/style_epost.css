@@ -1,5 +1,5 @@
 :root {
-    --body-bg: linear-gradient(225deg, #CF1A85 0%, #7C104F 50%, #1226aa 100%);
+
     --msger-bg: #fff;
     --border: 2px solid #191c24;
     --left-msg-bg: #f2f2f2;
@@ -21,9 +21,9 @@ html {
 body {
     display: flex;
     justify-content: center;
+    background-color: #CF1A85;
     align-items: center;
     height: 100vh;
-    background-image: var(--body-bg);
     font-family: 'Open Sans', sans-serif;
 }
 

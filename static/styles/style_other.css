@@ -1,12 +1,11 @@
 :root {
-  --body-bg: linear-gradient(225deg, #CF1A85 0%, #7C104F 50%, #1226aa 100%);
   --border: 2px solid #191c24;
 }
 
 html {
   box-sizing: border-box;
   background-repeat:no-repeat;
-  background-image: var(--body-bg);
+  background-color:  #CF1A85;
   background-size:cover;
   background-attachment: fixed;
   height: 100%;
@@ -44,7 +43,7 @@ tr:hover {background-color:#45c2b1}
 
 .boxed {
 border: 3px solid  #f2f2f2 ; 
-background-color: #CF1A85 ;
+background-color: #1226aa;
 font-size: 16px;
 -webkit-border-radius: 20px;
 -moz-border-radius: 20px;
