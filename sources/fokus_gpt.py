@@ -105,12 +105,11 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     til Bas Fokus verdi.
 
                     Instructions:
-                    * Jeg må ikke inkludere same ord fra {input} i teksten.
+                    * Unngå å snakke om hvem {input} er rettet mot.
                     * Jeg må aldri snakke om "funner" eller som robot.
                     * Jeg må skrive bare på bra norsk.
                     * Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
                     * Tittelen bør ikke inneholde emnet som ble spurt om før. Bruk synonymer eller vær kreativ.
-                    * Unngå å snakke om hvem artikkelen er rettet mot.
                     * Jeg må skrive alt i HTML format og alle lenker må være hyperkobling så at user kan trykke på den.
                     * Jeg kan ikke tillate diskriminering.
                     * Rediger svaret før du sender det ut, så du må vente.
@@ -182,7 +181,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
                     * Jeg må ikke inkludere same ord fra {input} i teksten.
-                    * Finn andre ord for å svare {input} med synonymer.
+                     * Unngå å snakke om hvem {input} er rettet mot.
                     * Jeg må aldri snakke som robot.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
                     * Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
