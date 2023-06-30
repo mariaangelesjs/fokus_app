@@ -48,7 +48,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
     def on_llm_new_token(self, token: str, **kwargs):
         self.gen.send(token)
-    
+
     def get_conversation(conversation):
         extracted_messages = conversation.memory.chat_memory.messages
         ingest_to_db = messages_to_dict(extracted_messages)
@@ -68,27 +68,27 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Enestående i Norge, et kraftfullt verktøy som avdekker unik innsikt i verdier,
                     beslutningsprosesser, økonomi og atferd blant ikke bare dine kunder, men hele Norges befolkning!
                     Bas Fokus er et produkt av Bas Kommunikasjon som inneholder disse variablene:
-                    {{'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
-                    'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
-                    'Nivå av kultur': 'Grad av verdsattelse og verdsetting av kultur og kunst',
+                    {{'Miljøbevisste': 'De er opptatt av å redusere sitt miljøavtrykk. Økologiske eller bærekraftige produkter vil være mer attraktive for denne gruppen',
+                    'Impulsive': 'De handler ofte uten å tenke seg godt om, noe som betyr at de kan være mottakelige for tidsbegrensede tilbud eller flash-salg',
+                    'Kulturnivå': 'Grad av verdsattelse og verdsetting av kultur og kunst',
                     'Gi til veldedighet': 'Frekvensen med hvilken personen donerer til ulike typer veldedige formål',
                     'Gi til barneveldedighet': 'Frekvensen med hvilken personen donerer til veldedige organisasjoner som gagner barn',
                     'Gi til katastrofe': 'Frekvensen med hvilken personen donerer til veldedige organisasjoner som responderer på naturkatastrofer og andre katastrofer',
-                    'Prisbevisst': 'Grad av prisbevissthet når personen gjør kjøp',
-                    'Prisjeger': 'Grad av aktiv søken etter lavest mulig pris når personen gjør kjøp',
+                    'Prisjegere': 'Grad av prisbevissthet når personen gjør kjøp',
+                    'Lavprisjegere': 'Grad av aktiv søken etter lavest mulig pris når personen gjør kjøp',
                     'Tilbudsjeger': 'Grad av aktiv søken etter rabatter og kampanjer når personen gjør kjøp',
-                    'Nivå av følelsesdrevet atferd': 'Grad av beslutninger som tas basert på følelser i stedet for logikk',
-                    'Sannsynlighet for å flytte': 'Sannsynligheten for at personen vil flytte til et nytt sted i nær fremtid',"
-                    'Kjøp bil de neste 6 månedene': 'Sannsynligheten for at personen vil kjøpe en bil innen de neste 6 månedene',
-                    'Nivå av mobilitet': 'Grad av aktiv atferd',
-                    'Nivå av åpenhet': 'Grad av åpenhet for nye erfaringer og ideer',
-                    'Nivå av sosial konformitet': 'Grad av overholdelse av sosiale normer og forventninger',
-                    'Sannsynlighet for å ha hund': 'Sannsynligheten for at personen eier eller vil eie en hund',
-                    'Sannsynlighet for å ha katt': 'Sannsynligheten for at personen eier eller vil eie en katt',
-                    'Internasjonal reise': 'Grad av verdsattelse og verdsetting av internasjonal reise',
-                    'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
-                    'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
-                    'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
+                    'Følelsesdrevne': 'De handler ofte basert på følelser og impulser, noe som gjør dem mottakelige for markedsføring som appellerer til følelser, enten det er glede, nostalgi, spenning, eller noe annet',
+                    'Flyttesannsynlighet': 'Sannsynligheten for at personen vil flytte til et nytt sted i nær fremtid',
+                    'Sannsynlighet for å kjøpe ny bil': 'Sannsynligheten for at personen vil kjøpe en bil innen de neste 6 månedene',
+                    'Aktive': 'De har en aktiv livsstil og liker å være i bevegelse. De kan derfor være mer interessert i produkter og tjenester som støtter en aktiv livsstil',
+                    'Liberale': 'De verdsetter frihet og selvstendighet, så produkter og tjenester som fremmer disse verdiene kan være attraktive for dem',
+                    'Sosialt påvirkede': 'De lar andres meninger og handlinger styre deres egne. Dette betyr at omtaler, anbefalinger og sosiale bevis kan være effektive markedsføringsstrategier.',
+                    'Hundeelskere': 'Sannsynligheten for at personen eier eller vil eie en hund',
+                    'Katteelskere': 'Sannsynligheten for at personen eier eller vil eie en katt',
+                    'Utenlandsreisende': 'De liker å reise utenlands og oppleve nye kulturer. Reise-relaterte produkter og tjenester, samt kulturelt mangfold, kan appellere til dem',
+                    'Introverte': ' De foretrekker å være alene eller i små grupper fremfor store sosiale situasjoner. Produkter og tjenester som fremmer selvstendighet, personlig utvikling eller hjemmekos kan være tiltrekkende for denne gruppen',
+                    'Kjøpekraft per individ': 'Mengden disponibel inntekt tilgjengelig for individet',
+                    'Kjøpekraft per familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
                     Vår arbeidsmetode til å skape Bas Fokus ble gjort med maskinlæring og blander to tilnærminger. 
                     Først vi selv velger hvem vi vil nå ut til basert på vår forståelse, erfaring og tilgjengelig kundedata,
                     det vil si vår målgruppe.
@@ -141,27 +141,27 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Enestående i Norge, et kraftfullt verktøy som avdekker unik innsikt i verdier,
                     beslutningsprosesser, økonomi og atferd blant ikke bare dine kunder, men hele Norges befolkning!
                     Bas Fokus er et produkt av Bas Kommunikasjon som inneholder disse variablene:
-                    {{'Miljøvennlig': 'Grad av miljøvennlighet som personen prioriterer',
-                    'Nivå av impulsivitet': 'Grad av impulsivitet som personen handler med uten å vurdere konsekvenser',
-                    'Nivå av kultur': 'Grad av verdsattelse og verdsetting av kultur og kunst',
+                    {{'Miljøbevisste': 'De er opptatt av å redusere sitt miljøavtrykk. Økologiske eller bærekraftige produkter vil være mer attraktive for denne gruppen',
+                    'Impulsive': 'De handler ofte uten å tenke seg godt om, noe som betyr at de kan være mottakelige for tidsbegrensede tilbud eller flash-salg',
+                    'Kulturnivå': 'Grad av verdsattelse og verdsetting av kultur og kunst',
                     'Gi til veldedighet': 'Frekvensen med hvilken personen donerer til ulike typer veldedige formål',
                     'Gi til barneveldedighet': 'Frekvensen med hvilken personen donerer til veldedige organisasjoner som gagner barn',
                     'Gi til katastrofe': 'Frekvensen med hvilken personen donerer til veldedige organisasjoner som responderer på naturkatastrofer og andre katastrofer',
-                    'Prisbevisst': 'Grad av prisbevissthet når personen gjør kjøp',
-                    'Prisjeger': 'Grad av aktiv søken etter lavest mulig pris når personen gjør kjøp',
+                    'Prisjegere': 'Grad av prisbevissthet når personen gjør kjøp',
+                    'Lavprisjegere': 'Grad av aktiv søken etter lavest mulig pris når personen gjør kjøp',
                     'Tilbudsjeger': 'Grad av aktiv søken etter rabatter og kampanjer når personen gjør kjøp',
-                    'Nivå av følelsesdrevet atferd': 'Grad av beslutninger som tas basert på følelser i stedet for logikk',
-                    'Sannsynlighet for å flytte': 'Sannsynligheten for at personen vil flytte til et nytt sted i nær fremtid',"
-                    'Kjøp bil de neste 6 månedene': 'Sannsynligheten for at personen vil kjøpe en bil innen de neste 6 månedene',
-                    'Nivå av mobilitet': 'Grad av aktiv atferd',
-                    'Nivå av åpenhet': 'Grad av åpenhet for nye erfaringer og ideer',
-                    'Nivå av sosial konformitet': 'Grad av overholdelse av sosiale normer og forventninger',
-                    'Sannsynlighet for å ha hund': 'Sannsynligheten for at personen eier eller vil eie en hund',
-                    'Sannsynlighet for å ha katt': 'Sannsynligheten for at personen eier eller vil eie en katt',
-                    'Internasjonal reise': 'Grad av verdsattelse og verdsetting av internasjonal reise',
-                    'Sannsynlighet for å være introvert': 'Grad av identifisering som introvert',
-                    'Disponibel inntekt for enkeltpersoner': 'Mengden disponibel inntekt tilgjengelig for individet',
-                    'Disponibel inntekt for familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
+                    'Følelsesdrevne': 'De handler ofte basert på følelser og impulser, noe som gjør dem mottakelige for markedsføring som appellerer til følelser, enten det er glede, nostalgi, spenning, eller noe annet',
+                    'Flyttesannsynlighet': 'Sannsynligheten for at personen vil flytte til et nytt sted i nær fremtid',
+                    'Sannsynlighet for å kjøpe ny bil': 'Sannsynligheten for at personen vil kjøpe en bil innen de neste 6 månedene',
+                    'Aktive': 'De har en aktiv livsstil og liker å være i bevegelse. De kan derfor være mer interessert i produkter og tjenester som støtter en aktiv livsstil',
+                    'Liberale': 'De verdsetter frihet og selvstendighet, så produkter og tjenester som fremmer disse verdiene kan være attraktive for dem',
+                    'Sosialt påvirkede': 'De lar andres meninger og handlinger styre deres egne. Dette betyr at omtaler, anbefalinger og sosiale bevis kan være effektive markedsføringsstrategier.',
+                    'Hundeelskere': 'Sannsynligheten for at personen eier eller vil eie en hund',
+                    'Katteelskere': 'Sannsynligheten for at personen eier eller vil eie en katt',
+                    'Utenlandsreisende': 'De liker å reise utenlands og oppleve nye kulturer. Reise-relaterte produkter og tjenester, samt kulturelt mangfold, kan appellere til dem',
+                    'Introverte': ' De foretrekker å være alene eller i små grupper fremfor store sosiale situasjoner. Produkter og tjenester som fremmer selvstendighet, personlig utvikling eller hjemmekos kan være tiltrekkende for denne gruppen',
+                    'Kjøpekraft per individ': 'Mengden disponibel inntekt tilgjengelig for individet',
+                    'Kjøpekraft per familier': 'Mengden disponibel inntekt tilgjengelig for personens familie'}}.
                     Vår arbeidsmetode til å skape Bas Fokus ble gjort med maskinlæring og blander to tilnærminger. 
                     Først vi selv velger hvem vi vil nå ut til basert på vår forståelse, erfaring og tilgjengelig kundedata,
                     det vil si vår målgruppe.
@@ -209,10 +209,10 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Innhold:
                     """
             prompt = PromptTemplate(
-                    input_variables=['history', 'input'], template=template)
+                input_variables=['history', 'input'], template=template)
             llm = ChatOpenAI(temperature=0.8, engine="gpt-test",
-                            openai_api_key=key, streaming=True,
-                            callback_manager=CallbackManager([ChainStreamHandler(g)]))
+                             openai_api_key=key, streaming=True,
+                             callback_manager=CallbackManager([ChainStreamHandler(g)]))
             if messages:
                 old_messages = download_pickle(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
@@ -232,8 +232,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
             try:
                 conversation(incoming_msg)
                 upload_pickle(json.loads(
-                json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
-                        STORAGEACCOUNTKEY, CONTAINERNAME, f'fokus-test/FokusGPT/conversation_{random}')
+                    json.dumps(ChainStreamHandler.get_conversation(conversation))),  STORAGEACCOUNTURL,
+                    STORAGEACCOUNTKEY, CONTAINERNAME, f'fokus-test/FokusGPT/conversation_{random}')
             except openai.error.InvalidRequestError:
                 """This model's maximum context length is 8192 tokens.
                 However, your messages resulted in 8203 tokens.
@@ -246,11 +246,11 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
     def chain(incoming_msg, key, type,
               STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
               CONTAINERNAME, random):
-        
+
         g = ThreadedGenerator()
         threading.Thread(target=ChainStreamHandler.llm_thread, args=(
             incoming_msg, key,
             g,
             STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-            CONTAINERNAME,type, random)).start()
+            CONTAINERNAME, type, random)).start()
         return g
