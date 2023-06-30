@@ -106,10 +106,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                     Instructions:
                     * Jeg må ikke inkludere {input} i teksten.
-                    * Finn andre ord for å svare {input} med synonymer.
                     * Jeg må aldri snakke om "funner" eller som robot.
-                    * Jeg må aldri skrive noe om personlighet, men jeg kan tilpasse tekst basert på det.
-                    * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
                     * Jeg må skrive bare på bra norsk.
                     * Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
                     * Tittelen bør ikke inneholde emnet som ble spurt om før. Bruk synonymer eller vær kreativ.
@@ -188,8 +185,6 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Finn andre ord for å svare {input} med synonymer.
                     * Jeg må aldri snakke som robot.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
-                    * Jeg må tilpasse ord i forespørsel eller prompt, men ikke bruk samme ord i teksten.
-                    * Tilpass teksten til nivået av interesse, men ikke avslør hva du vet om user.
                     * Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
                     * Ikke nevn karakterpoeng, interesse eller nivå i en egenskap i e-posten, 
                     men du må tilpasse teksten til nivået uten å nevne ord om nivået,interesse grav eller kategori.
