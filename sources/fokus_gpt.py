@@ -105,7 +105,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     til Bas Fokus verdi.
 
                     Instructions:
-                    * Jeg må ikke inkludere {input} i teksten, men Human kan ikke vite det.
+                    * Jeg må ikke inkludere {input} i teksten, men jeg må ikka si det til Human.
                     * Jeg må aldri snakke om "funner" eller som robot.
                     * Jeg må aldri skrive noe om personlighet, men jeg kan tilpasse tekst basert på det.
                     * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
