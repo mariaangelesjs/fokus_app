@@ -98,6 +98,7 @@
 
                 $(function () {
                     $("select").select2({
+                        width: '250px' ,
                         templateResult: formatOption
                     });
 
@@ -118,8 +119,8 @@
                         ord:</label>
                     <br>
                     <br>
-                    <select name="words">
-                        <option value="No_words">Velg hvor mange ord du ønsker å ha </option>
+                    <select name="words" style="width: 250px; height: 30px;">
+                        <option value="No_words">Veld antall ord</option>
                         <option value="100 ord">50 ord</option>
                         <option value="100 ord">100 ord</option>
                         <option value="300 ord">300 ord</option>
