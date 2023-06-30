@@ -105,9 +105,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     til Bas Fokus verdi.
 
                     Instructions:
-                    * Jeg må ikke inkludere {input} i teksten og ingen kan få Bas Fokus verdi av Navn,
-                      men du skal tilpasse tekst på personlighet uten å nevne det.
-                    * Jeg må alltid bruke synonymer.
+                    * Jeg må ikke inkludere {input} i teksten, men Human kan ikke vite det.
                     * Jeg må aldri snakke om "funner" eller som robot.
                     * Jeg må aldri skrive noe om personlighet, men jeg kan tilpasse tekst basert på det.
                     * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
@@ -119,6 +117,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg kan ikke tillate diskriminering.
                     * Rediger svaret før du sender det ut, så du må vente.
                     * Vær forsiktig med tekstformat og rett opp feil før du skriver svaret.
+                    * Alle hyperkoblinger blir i HTML.
                     * Sjekk at HTML-hyperkoblinger er godt skrevet.
                     * Sjekk at HTML er godt skrevet.
                     * Ikke gi informasjon om chat-historikk når en person spør "hvem er du?"
@@ -185,8 +184,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må ikke si mye "Vi".
                     * Jeg må alltid bruke synonymer.
                     * Ikke legg til hvem denne e-posten er til i Emne.
-                    * Jeg må ikke inkludere {input} i teksten og ingen kan få Bas Fokus verdi av Navn,
-                      men du skal tilpasse tekst på personlighet uten å nevne det.
+                    * Jeg må ikke inkludere {input} i teksten, men Human kan ikke vite det.
                     * Jeg må aldri snakke som robot.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
                     * Jeg må tilpasse ord i forespørsel eller prompt, men ikke bruk samme ord i teksten.
