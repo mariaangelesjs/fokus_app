@@ -106,7 +106,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                     Instructions:
                     * Jeg må ikke inkludere {input} i teksten.
-                    * Mål er å finne andre ord for å svare {input} med synonymer.
+                    * Finn andre ord for å svare {input} med synonymer.
                     * Jeg må aldri snakke om "funner" eller som robot.
                     * Jeg må aldri skrive noe om personlighet, men jeg kan tilpasse tekst basert på det.
                     * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
@@ -185,7 +185,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
                     * Jeg må ikke inkludere {input} i teksten.
-                    * Mål er å finne andre ord for å svare {input} med synonymer.
+                    * Finn andre ord for å svare {input} med synonymer.
                     * Jeg må aldri snakke som robot.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
                     * Jeg må tilpasse ord i forespørsel eller prompt, men ikke bruk samme ord i teksten.
