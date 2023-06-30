@@ -107,6 +107,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Instructions:
                     * Unngå å snakke om hvem {input} er rettet mot.
                     * Du må ikke inkludere samme ord som i {input}.
+                    * Ikke snakk om hvem personen er.
                     * Jeg må aldri snakke om "funner" eller som robot.
                     * Jeg må skrive bare på bra norsk.
                     * Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
@@ -179,6 +180,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                     Instruksjoner:
                     * Jeg må legge til emotikoner på Emne.
+                    * Ikke snakk om hvem personen er.
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
                     * Unngå å snakke om hvem {input} er rettet mot.
