@@ -30,6 +30,7 @@
         <br>
         <form method="post" action="{{url_for('welcome')}}">
           <div class="col-md-6 mx-auto text-center">
+              <br>
             <label for="name" class="form-label fw-bold fs-5">Navn:</label>
             <!-- <p class="lead mb-2">Could you please tell me your name?</p> -->
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-1">
@@ -56,6 +57,14 @@
               <input type="text" class="form-control" id="industry" name="industry" style="max-width: 256px;">
             </div>
             <br>
+            <label for="lead" style="text-align: left" >Er du enig i at vi lagrer deg som en mulig kunde for vår beta-versjon?</label>  
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center align-items-center my-6">
+            <br>
+                <input type="radio" name="lead" value="Ja" id="ja">
+                <label for="ja">Ja</label>  
+                <input type="radio" name="lead" value="Nei" id="nei">
+                <label for="nei">Nei</label>  
+              </div>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
 
               <form>
@@ -66,6 +75,7 @@
                 element.style.display = "block"
                 element.classList.add("animate__animated", "animate__heartBeat","animate__infinite");}
                 </script>
+                 <br>
                 <input type="submit" id="button" value="Submit" onclick="thunderGif()"/>
                 <br>
                 <br>

@@ -85,6 +85,7 @@ openai.api_version = client.get_secret('gptversion').value
 def welcome():
     if request.method == 'POST':
         # getting input with name = fname in HTML form
+        session['lead'] = request.form.get('lead')
         session['name'] = request.form.get('name')
         session['email'] = request.form.get('e-post')
         # getting input with name = lname in HTML form
@@ -233,6 +234,8 @@ def gpt_chat_response():
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME, random_conversation), mimetype='text/event-stream')
             else:
+                if session['lead'] == 'Nei':
+                    session.clear()
                 return Response(None, mimetype='text/event-stream')
     except:
         session.clear()
@@ -266,6 +269,9 @@ def gpt_email_response():
                         STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                         CONTAINERNAME, random_conversation), mimetype='text/event-stream')
             else:
+                # This is for saving feedback
+                if session['lead'] == 'Nei':
+                    session.clear()
                 return Response(None, mimetype='text/event-stream')
     except:
         session['subject'] = request.args.get('subject')
@@ -284,50 +290,38 @@ STORAGEACCOUNTKEY = client.get_secret('storageFokusString').value
 @app.route('/end', methods=['GET', 'POST'])
 def fokus_end():
     # This is for saving feedback
-    if request.method == 'POST':
-        session['feedback'] = request.form.get('feedback_done')
-        print(session['feedback'])
-        old_messages = download_pickle(
-            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-            CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle',  'No')
-        try:
-            feedback_old = pd.read_parquet(get_data(
-                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                CONTAINERNAME, 'output/fokus-test/FokusGPT/FokusGPT_leads.parquet'))
-            feedback_new = pd.DataFrame(
-                index=[0], data={
-                    'Navn': str(session['name']),
-                    'Phone': str(session['phone']),
-                    'E-post': str(session['email']),
-                    'Stilling': str(session['work-position']),
-                    'Industri': str(session['industry']),
-                    'Tilbakemelding': str(session['feedback'])})
-            feedback_new['Samtale'] = str(old_messages)
-            feedback = pd.concat([feedback_old, feedback_new],
-                                 axis=0).reset_index(drop=True)
-            upload_df(feedback, CONTAINERNAME,
-                      'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
-                      STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
-            del old_messages
-            delete_blob(
+    if session['lead'] == 'Nei':
+        session.clear()
+        delete_blob(
                 STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                 CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
-            logging.info('Deleted blob')
-            session.clear()
-            return redirect(url_for('welcome'))
-        except:
+        return redirect(url_for('welcome'))
+    else:
+        if request.method == 'POST':
+            session['feedback'] = request.form.get('feedback_done')
+            print(session['feedback'])
+            old_messages = download_pickle(
+                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle',  'No')
             try:
-                feedback = pd.DataFrame(index=[0], data={
-                    'Navn': str(session['name']),
-                    'Phone': str(session['phone']),
-                    'E-post': str(session['email']),
-                    'Stilling': str(session['work-position']),
-                    'Industri': str(session['industry']),
-                    'Tilbakemelding': str(session['feedback'])})
-                feedback['Samtale'] = str(old_messages)
+                feedback_old = pd.read_parquet(get_data(
+                    STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                    CONTAINERNAME, 'output/fokus-test/FokusGPT/FokusGPT_leads.parquet'))
+                feedback_new = pd.DataFrame(
+                    index=[0], data={
+                        'Navn': str(session['name']),
+                        'Phone': str(session['phone']),
+                        'E-post': str(session['email']),
+                        'Stilling': str(session['work-position']),
+                        'Industri': str(session['industry']),
+                        'Tilbakemelding': str(session['feedback'])})
+                feedback_new['Samtale'] = str(old_messages)
+                feedback = pd.concat([feedback_old, feedback_new],
+                                    axis=0).reset_index(drop=True)
                 upload_df(feedback, CONTAINERNAME,
-                          'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
-                          STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
+                        'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
+                        STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
+                del old_messages
                 delete_blob(
                     STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
                     CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
@@ -335,8 +329,27 @@ def fokus_end():
                 session.clear()
                 return redirect(url_for('welcome'))
             except:
-                session.clear()
-                return "Ikke mulig å laste ned tilbakemelding"
+                try:
+                    feedback = pd.DataFrame(index=[0], data={
+                        'Navn': str(session['name']),
+                        'Phone': str(session['phone']),
+                        'E-post': str(session['email']),
+                        'Stilling': str(session['work-position']),
+                        'Industri': str(session['industry']),
+                        'Tilbakemelding': str(session['feedback'])})
+                    feedback['Samtale'] = str(old_messages)
+                    upload_df(feedback, CONTAINERNAME,
+                            'output/fokus-test/FokusGPT/FokusGPT_leads.parquet',
+                            STORAGEACCOUNTURL, STORAGEACCOUNTKEY)
+                    delete_blob(
+                        STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                        CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
+                    logging.info('Deleted blob')
+                    session.clear()
+                    return redirect(url_for('welcome'))
+                except:
+                    session.clear()
+                    return "Ikke mulig å laste ned tilbakemelding"
 
     return render_template('fokus_gpt_end.html')
 
