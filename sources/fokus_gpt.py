@@ -105,7 +105,8 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     til Bas Fokus verdi.
 
                     Instructions:
-                    * Jeg må ikke inkludere {input} i teksten, men jeg må ikka si det til Human.
+                    * Jeg må ikke inkludere {input} i teksten.
+                    * Mål er å tilpasse {input} med synonymer.
                     * Jeg må aldri snakke om "funner" eller som robot.
                     * Jeg må aldri skrive noe om personlighet, men jeg kan tilpasse tekst basert på det.
                     * Ikke skriv om et nivå eller grad av interesse, men tilpass deg til det.
@@ -182,7 +183,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Instruksjoner:
                     * Jeg må legge til emotikoner på Emne.
                     * Jeg må ikke si mye "Vi".
-                    * Jeg må alltid bruke synonymer.
+                    * Mål er å tilpasse {input} med synonymer.
                     * Ikke legg til hvem denne e-posten er til i Emne.
                     * Jeg må ikke inkludere {input} i teksten, men Human kan ikke vite det.
                     * Jeg må aldri snakke som robot.
