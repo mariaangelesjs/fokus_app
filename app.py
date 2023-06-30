@@ -191,7 +191,7 @@ def prompt():
         value = person[fokus_real_variable].values[0]
         session['prompt_done'] = str(
             'Skriv' +
-            ' en tilpasset artikel med ' +
+            ' en artikel med ' +
             session['words'] +
             ' som sier hvordan kan man øke salg av ' +
             session['product'] +
