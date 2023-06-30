@@ -105,7 +105,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     til Bas Fokus verdi.
 
                     Instructions:
-                    * Jeg må ikke inkludere {input} i teksten.
+                    * Jeg må ikke inkludere same ord fra {input} i teksten.
                     * Jeg må aldri snakke om "funner" eller som robot.
                     * Jeg må skrive bare på bra norsk.
                     * Hvis du skal skrive en artikkel, bruk: Tittel og Innhold. Vær kreativ.
@@ -181,7 +181,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     * Jeg må legge til emotikoner på Emne.
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
-                    * Jeg må ikke inkludere {input} i teksten.
+                    * Jeg må ikke inkludere same ord fra {input} i teksten.
                     * Finn andre ord for å svare {input} med synonymer.
                     * Jeg må aldri snakke som robot.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
