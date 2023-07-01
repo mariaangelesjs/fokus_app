@@ -111,7 +111,7 @@ def welcome():
         else:
             session['phone'] = session['phone'].replace(' ', '')
 
-        if session['phone'] in fokus['KR_Phone_Mobile']:
+        if int(session['phone']) in fokus['KR_Phone_Mobile']:
             person = fokus[fokus['KR_Phone_Mobile'] ==
                            int(session['phone'])][fokus_segments]
         else:
@@ -128,7 +128,6 @@ def welcome():
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
     person = pd.read_json(session['data-person'])
-    session.pop('data-person')
     # Pretty variables and description
 
     fokus_variables_norwegian = {'Miljøbevisste': 'De er opptatt av å redusere sitt miljøavtrykk. Økologiske eller bærekraftige produkter vil være mer attraktive for denne gruppen',
@@ -217,6 +216,7 @@ def choose_gpt():
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
+    session.pop('data-person')
     # run the bot
     return render_template('gpt_test.html', prompt=session['prompt_done'])
 
