@@ -299,9 +299,6 @@ def fokus_end():
     # This is for saving feedback
     if session['lead'] == 'Nei':
         session.clear()
-        delete_blob(
-                STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                CONTAINERNAME, f'output/fokus-test/FokusGPT/conversation_{random_conversation}.pickle')
         return redirect(url_for('welcome'))
     else:
         if request.method == 'POST':
