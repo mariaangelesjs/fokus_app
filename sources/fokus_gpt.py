@@ -179,12 +179,12 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
         
 
                     Instruksjoner:
+                    * Unngå å snakke om hvem {input} er rettet mot.
+                    * Jeg må ikke inkludere samme ord som i {input}.
                     * Jeg må legge til emotikoner på Emne.
                     * Ikke snakk om hvem personen er.
                     * Jeg må ikke si mye "Vi".
                     * Ikke legg til hvem denne e-posten er til i Emne.
-                    * Unngå å snakke om hvem {input} er rettet mot.
-                    * Jeg må ikke inkludere samme ord som i {input}.
                     * Jeg må aldri snakke som robot.
                     * Ikke nevn forespørsel  eller hva som ble spurt.
                     * Emnet skal handle om konteksten til prompten, men ikke om brukeren eller hvem personen er.
