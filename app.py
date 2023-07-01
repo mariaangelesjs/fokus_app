@@ -193,7 +193,7 @@ def prompt():
         value = person[fokus_real_variable].values[0]
         session['prompt_done'] = str(
             'Skriv' +
-            ' en artikel med ' +
+            ' en artikkel med ' +
             session['words'] +
             ' som sier hvordan kan man øke salg av ' +
             session['product'] +
@@ -260,7 +260,7 @@ def gpt_email_response():
                     'Skriv en e-post fra Bas Analyse med en ' + session['tone'] + ' tone of voice')
                 print(tone_replace)
                 session['full_prompt'] = str(session['prompt_done']).replace(
-                    'Skriv en artikel', tone_replace).replace('personer', session['name']) 
+                    'Skriv en artikkel', tone_replace).replace('personer', session['name']) 
                 print(session['full_prompt'])
             if request.method == 'POST':
                 return Response(
