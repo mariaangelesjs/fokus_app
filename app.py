@@ -228,7 +228,7 @@ random_conversation = random.randint(-10000000000000, 10000000000000)
 def gpt_chat_response():
     try:
             # End bot with this message after 10 messages (before cut)
-            with limiter.limit("20/day"):
+            with limiter.limit("19/day"):
                 if request.method == 'GET':
                     session['input'] = request.args.get('msg')
                 if request.method == 'POST':
@@ -261,7 +261,7 @@ count_emails = []
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
     try:
-        with limiter.limit("10/day"):
+        with limiter.limit("9/day"):
             if request.method == 'GET':
                 session['tone'] = request.args.get('msg')
                 tone_replace = str(
