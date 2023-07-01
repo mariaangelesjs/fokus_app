@@ -222,22 +222,24 @@ def fokus_gpt():
         # run the bot
     return render_template('gpt_test.html', prompt=session['prompt_done'])
 
-
+count_conversations = []
+random_conversation = random.randint(-10000000000000, 10000000000000)
 @app.route('/get', methods=['GET', 'POST'])
 def gpt_chat_response():
     try:
-        # End bot with this message after 10 messages (before cut)
-        with limiter.limit("20/day"):
-            if request.method == 'GET':
-                session['input'] = request.args.get('msg')
-            if request.method == 'POST':
-                return Response(
-                    ChainStreamHandler.chain(
-                        session['input'], key, 'chat',
-                        STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
-                        CONTAINERNAME, random_conversation), mimetype='text/event-stream')
-            else:
-                return Response(None, mimetype='text/event-stream')
+            # End bot with this message after 10 messages (before cut)
+            with limiter.limit("20/day"):
+                if request.method == 'GET':
+                    session['input'] = request.args.get('msg')
+                if request.method == 'POST':
+                    count_conversations.append(1)
+                    return Response(
+                        ChainStreamHandler.chain(
+                            session['input'], key, 'chat',
+                            STORAGEACCOUNTURL, STORAGEACCOUNTKEY,
+                            CONTAINERNAME, random_conversation), mimetype='text/event-stream')
+                else:
+                    return Response(None, mimetype='text/event-stream')
     except:
         if session['lead'] == 'Nei':
                     session.clear()
@@ -253,9 +255,9 @@ def gpt_email():
     return render_template('gpt_email.html')
 
 
-random_conversation = random.randint(-10000000000000, 10000000000000)
 
 
+count_emails = []
 @app.route('/get_email', methods=['GET', 'POST'])
 def gpt_email_response():
     try:

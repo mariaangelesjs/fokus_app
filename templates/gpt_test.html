@@ -83,22 +83,19 @@
         var hoverCount = 0
         msgerForm.addEventListener("submit", event => {
             hoverCount++;
-            if (hoverCount == 11) {
-                window.open("/end") 
-            }
-            else {
-                event.preventDefault();
-                const msgText = msgerInput.value;
-                if (!msgText) return;
-                appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person", hoverCount);
+            event.preventDefault();
+            const msgText = msgerInput.value;
+            if (!msgText) return;
+            appendMessage(PERSON_NAME, PERSON_IMG, "right", msgText, "person", hoverCount);
+            msgerChat.scrollTop += 500
+            msgerInput.value = "";
+            $.get("/get", { msg: msgText }).done(function (data) {
+                appendMessage(BOT_NAME, BOT_IMG, "left", "", "robot", hoverCount);
                 msgerChat.scrollTop += 500
-                msgerInput.value = "";
-                $.get("/get", { msg: msgText }).done(function (data) {
-                    appendMessage(BOT_NAME, BOT_IMG, "left", "", "robot", hoverCount);
-                    msgerChat.scrollTop += 500
-                    botResponse(hoverCount)
+                botResponse(hoverCount)
                 })
-            }
+            if (hoverCount == 10) {
+                msgerInput.value = url("static/templates/fokus_gpt_end.html")} 
         })
 
         function botResponse(number, msgText) {
