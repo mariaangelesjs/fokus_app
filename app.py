@@ -246,6 +246,10 @@ def gpt_chat_response():
 
 @app.route('/unique_email', methods=['GET', 'POST'])
 def gpt_email():
+    try:
+        session.pop('data-person')
+    except:
+        pass
     return render_template('gpt_email.html')
 
 
