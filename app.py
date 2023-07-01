@@ -117,7 +117,6 @@ def welcome():
         else:
             person = fokus.sample(1, random_state=42)[fokus_segments]
         session['data-person'] = person.to_json()
-        del person
 
         return redirect(url_for('prompt'))
     return render_template('form.html')
@@ -216,8 +215,11 @@ def choose_gpt():
 
 @app.route('/unique_ad', methods=['GET', 'POST'])
 def fokus_gpt():
-    session.pop('data-person')
-    # run the bot
+    try:
+        session.pop('data-person')
+    except:
+        pass
+        # run the bot
     return render_template('gpt_test.html', prompt=session['prompt_done'])
 
 
