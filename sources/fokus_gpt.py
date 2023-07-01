@@ -106,6 +106,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
 
                     Instructions:
                     * Unngå å snakke om hvem {input} er rettet mot.
+                    * Jeg må snakke om målgruppe og ikke person nivå om jeg er spurt om person.
                     * Du må ikke inkludere samme ord som i {input}.
                     * Ikke snakk om hvem personen er.
                     * Jeg må aldri snakke om "funner" eller som robot.
@@ -181,6 +182,7 @@ class ChainStreamHandler(StreamingStdOutCallbackHandler):
                     Instruksjoner:
                     * Unngå å snakke om hvem {input} er rettet mot.
                     * Jeg må ikke inkludere samme ord som i {input}.
+                    * Jeg må snakke om målgruppe og ikke person nivå.
                     * Jeg må legge til emotikoner på Emne.
                     * Ikke snakk om hvem personen er.
                     * Jeg må ikke si mye "Vi".
