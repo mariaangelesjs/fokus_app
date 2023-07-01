@@ -243,7 +243,7 @@ def gpt_chat_response():
     except:
         if session['lead'] == 'Nei':
                     session.clear()
-        return redirect(url_for('fokus_end'))
+        return "rate limit is 10 requests per day. You have requested too much"
 
 
 @app.route('/unique_email', methods=['GET', 'POST'])
@@ -286,7 +286,7 @@ def gpt_email_response():
         print(session['subject'])
         session['content'] = request.args.get('content')
         print(session['content'])
-        return redirect(url_for('fokus_end'))
+        return "rate limit is 5 requests per day. You have requested too much"
 
 
 username = client.get_secret('basAnalyseMail').value
