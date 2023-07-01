@@ -117,6 +117,7 @@ def welcome():
         else:
             person = fokus.sample(1, random_state=42)[fokus_segments]
         session['data-person'] = person.to_json()
+        del person
 
         return redirect(url_for('prompt'))
     return render_template('form.html')
@@ -127,7 +128,7 @@ def welcome():
 @app.route('/prompt_generation', methods=['GET', 'POST'])
 def prompt():
     person = pd.read_json(session['data-person'])
-
+    session.pop('data-person')
     # Pretty variables and description
 
     fokus_variables_norwegian = {'Miljøbevisste': 'De er opptatt av å redusere sitt miljøavtrykk. Økologiske eller bærekraftige produkter vil være mer attraktive for denne gruppen',
