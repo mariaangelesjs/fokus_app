@@ -7,7 +7,7 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .select2-container .select2-selection--single {
@@ -61,7 +61,7 @@
 .select2-container .select2-search--inline .select2-search__field {
     box-sizing: border-box;
     border: none;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 5px;
     padding: 0
 }
